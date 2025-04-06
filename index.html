@@ -1,182 +1,432 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" type="image/png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Андрій Міхневич | Керівник команди розробки</title>
+  <title>Андрій Міхневич | Розробник програмного забезпечення</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">function toggleDetails(clicked) {
+  document.querySelectorAll('details').forEach((el) => {
+    if (el !== clicked) el.removeAttribute('open');
+  });
+}
+
+  document.querySelectorAll('details').forEach((detail) => {
+    detail.addEventListener('toggle', () => {
+      if (detail.open) {
+        document.querySelectorAll('details').forEach((other) => {
+          if (other !== detail) other.removeAttribute('open');
+        });
+        detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #f9fafb;
-      color: #1f2937;
-      line-height: 1.6;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    body.dark {
-      background-color: #111827;
-      color: #f9fafb;
-    }
-    header {
-      background-color: #111827;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-      position: relative;
-    }
-    header img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #3b82f6;
-      margin-bottom: 1rem;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    header p {
-      margin: 0.5rem 0 0;
-      font-size: 1.25rem;
-    }
-    .controls {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      display: flex;
-      gap: 0.5rem;
-    }
-    .controls button, .controls a {
-      background: #3b82f6;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    section {
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-      animation: fadeIn 1s ease-in;
-    }
-    h2 {
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 0.5rem;
-      margin-top: 2rem;
-      color: inherit;
-    }
-    .job, .project, .education {
-      margin-bottom: 1.5rem;
-    }
-    .job h3, .project h3, .education h3 {
-      margin: 0;
-      font-size: 1.1rem;
-      color: inherit;
-    }
-    .job span, .project span, .education span {
-      display: block;
-      font-size: 0.9rem;
-      color: #6b7280;
-    }
-    .skills, .languages {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .tag {
-      background-color: #e0f2fe;
-      color: #0369a1;
-      padding: 0.4rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.9rem;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f9fafb;
+  color: #1f2937;
+  line-height: 1.6;
+  transition: background-color 0.3s, color 0.3s;
+}
+body.dark {
+  background-color: #111827;
+  color: #f9fafb;
+}
+header {
+  background-color: #111827;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+}
+header img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3b82f6;
+  margin-bottom: 1rem;
+}
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+header p {
+  margin: 0.5rem 0 0;
+  font-size: 1.25rem;
+}
+.controls {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+.controls button, .controls a {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+section {
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: fadeIn 0.6s ease-in;
+}
+h2 {
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+  margin-top: 2rem;
+  color: inherit;
+}
+$1
+  padding: 1rem;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  transition: background-color 0.3s ease;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+$1color: #111827;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+$1color: #4b5563;
+}
+.skills, .languages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+$1
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  line-height: 1;
+  min-width: 60px;
+  text-align: center;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+  details {
+  padding: 1rem 1.25rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border-left: 4px solid #3b82f6;
+  transition: transform 0.2s ease;
+  color: #1f2937;
+}
+body.dark details {
+  background-color: #1f2937;
+  color: #f9fafb;
+  border-color: #374151;
+}
+details[open] {
+  background-color: #f3f4f6;
+  
+}
+body.dark details[open] {
+  background-color: #111827;
+}
+details summary {
+  background-color: transparent;
+  color: #1e3a8a;
+  font-size: 1.25rem;
+  font-weight: 700;
+  list-style: none;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  margin: 0;
+}
+body.dark details summary {
+  background-color: #1e3a8a;
+  color: #bfdbfe;
+}
+details summary:hover {
+  background-color: #f0f9ff;
+}
+details summary::-webkit-details-marker {
+  display: none;
+}
+details h2 {
+  margin: 0;
+  display: inline;
+}
+details[open] summary::after {
+  content: "▾";
+  transform: rotate(90deg);
+}
+details summary::after {
+  content: "▸";
+  font-size: 1rem;
+  margin-left: 1rem;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease-in-out;
+}
+details[open] summary::after {
+  transform: rotate(180deg);
+}
+.language-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.language {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed #d1d5db;
+  padding-bottom: 0.5rem;
+}
+.language div:first-child {
+  font-size: 1rem;
+  color: #111827;
+}
+.language span {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+.dots {
+  display: flex;
+  gap: 0.25rem;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #d1d5db;
+}
+.tag {
+  background-color: #e0f2fe; /* світло-блакитний фон */
+  color: #0369a1; /* синій текст */
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 4px;
+}
+.dot.full {
+  background-color: #3b82f6;
+}
+.dot.empty {
+  background-color: #e5e7eb;
+}
+</style>
 </head>
 <body>
   <header>
     <div class="controls">
       <button onclick="toggleDarkMode()">🌗</button>
       <a href="en.html">EN</a>
-      <a href="cv.pdf" download>📄 CV</a>
+      <button onclick="generatePDF()">📄 CV</button>
     </div>
     <img src="photo.jpg" alt="Фото Андрія Міхневича" />
-    <h1>Андрій Міхневич</h1>
-    <p>Керівник команди розробки</p>
+    <p style="font-style: italic; max-width: 700px; margin: 0.5rem auto 1rem; font-size: 1.1rem;">Понад 9 років досвіду у розробці складних алгоритмічних рішень, аналітики даних і автоматизації.
+</p>
+    <p>Розробник програмного забезпечення</p>
     <p><a href="mailto:andrijmix@gmail.com" style="color: #60a5fa">andrijmix@gmail.com</a> | Україна</p>
   </header>
-  <section>
-    <h2>Досвід</h2>
-    <div class="job">
-      <h3>Керівник команди розробки – Algo Equities Technology Ltd</h3>
-      <span>Липень 2023 – дотепер · Київ</span>
-      <p>Розробка програмного забезпечення для керування активами та аналізу ринку.</p>
-    </div>
-    <div class="job">
-      <h3>Фрілансер MQL</h3>
-      <span>Лютий 2018 – Вересень 2023</span>
-      <p>Співпраця з трейдерами, розробка рішень, консультування.</p>
-    </div>
-    <div class="job">
-      <h3>Бізнес-аналітик – AM Lingwista</h3>
-      <span>Жовтень 2017 – Березень 2020 · Рівне</span>
-      <p>Управління HR та збір статистики.</p>
-    </div>
-    <div class="job">
-      <h3>Фельдшер – Лікарня Дубно</h3>
-      <span>Січень 2020 – Лютий 2022</span>
-    </div>
+  <section id="content">
+    <details onclick="toggleDetails(this)">
+      <summary><h2>Досвід</h2></summary>
+      <div class="job">
+  <h3>Керівник команди розробки</h3>
+  <p>Algo Equities Technology Ltd</p>
+  <p>📅 07/2023 – 04/2024 &nbsp;&nbsp; 📍 Київ</p>
+  <p>Розробка програмного забезпечення для керування активами та аналізу ринку.</p>
+  <ul>
+    <li>Розробка програмних рішень у сфері трейдингу</li>
+  </ul>
+</div>
+      <div class="job">
+  <h3>Фрілансер C++</h3>
+  <p>Фріланс</p>
+  <p>📅 02/2018 – 09/2023 &nbsp;&nbsp; 📍 віддалено</p>
+  <p>Робота над C++ рішеннями для фінансових систем.</p>
+  <ul>
+    <li>Довгострокова співпраця з клієнтами як консультант</li>
+  </ul>
+</div>
+      <div class="job">
+  <h3>Бізнес-аналітик</h3>
+  <p>AM Lingwista</p>
+  <p>📅 10/2017 – 03/2020 &nbsp;&nbsp; 📍 Рівне</p>
+  <p>Рекрутингова компанія, що припинила діяльність після початку пандемії COVID-19.</p>
+  <ul>
+    <li>Збір статистичних даних</li>
+    <li>HR-менеджмент</li>
+  </ul>
+</div>
+      <div class="job">
+  <h3>Фельдшер</h3>
+  <p>Лікарня Дубно</p>
+  <p>📅 01/2020 – 02/2022 &nbsp;&nbsp; 📍 Дубно</p>
+</div>
+    </details>
 
-    <h2>Проєкти</h2>
-    <div class="project">
-      <h3>The Setup</h3>
-      <span>Січень 2021 – Лютий 2022</span>
-      <p>Розробка форекс-радників у команді трейдерів, що працювали з інвесторськими фондами.</p>
-    </div>
+    <details>
+  <summary><h2>Проєкти</h2></summary>
+  <div class="project">
+    <h3>Програма для аналізу результатів олімпіади</h3>
+    <p>Застосування штучного інтелекту для автоматизованого аналізу результатів змагань з програмування та виявлення шаблонів у відповідях учасників.</p>
+  </div>
+  <div class="project">
+    <h3>Алгоритмічна торгова стратегія на основі показників</h3>
+<p>Розробка алгоритмічного модуля, який здійснював автоматизований моніторинг ринкових індикаторів та виконував фінансові операції на їх основі.</p>
+  </div>
+  <div class="project">
+    <h3>Сайт для лікарні</h3>
+    <p>Розробка офіційного вебсайту лікарні <a href="http://dubnohospital.com.ua/" target="_blank">dubnohospital.com.ua</a> з інформаційним наповненням, контактами та зручним інтерфейсом для пацієнтів.</p>
+  </div>
+  <div class="project">
+    <h3>Візуальний аналізатор фото на основі ШІ</h3>
+    <p>AI-система, що аналізує зображення та виконує дії на їх основі — наприклад, автономна гра в покер із прийняттям рішень на основі обробки скріншотів.</p>
+  </div>
+</details>
 
-    <h2>Навички</h2>
-    <div class="skills">
-      <div class="tag">MQL</div>
-      <div class="tag">C++</div>
-      <div class="tag">Java</div>
-      <div class="tag">Pine</div>
-      <div class="tag">Python</div>
-      <div class="tag">C#</div>
-      <div class="tag">Quantower API</div>
-      <div class="tag">Binance API</div>
-      <div class="tag">Telegram API</div>
-    </div>
+    <details>
+  <summary><h2>Навички</h2></summary>
+  <div class="skills">
+    <h4>Мови програмування</h4>
+    <div class="tag">MQL</div>
+    <div class="tag">C++</div>
+    <div class="tag">Java</div>
+    <div class="tag">Python</div>
+    <div class="tag">C#</div>
 
-    <h2>Освіта</h2>
-    <div class="education">
-      <h3>Комп’ютерний інженер – НУВГП</h3>
-      <span>2018 – 2021</span>
-    </div>
-    <div class="education">
-      <h3>Медична справа – Дубенський медичний коледж</h3>
-      <span>2015 – 2018</span>
-    </div>
+    <h4>Скриптові мови</h4>
+    <div class="tag">Pine Script</div>
 
-    <h2>Мови</h2>
-    <div class="languages">
-      <div class="tag">Українська (рідна)</div>
-      <div class="tag">Російська (рідна)</div>
-      <div class="tag">Англійська (просунутий)</div>
-      <div class="tag">Французька (початковий)</div>
+    <h4>API та інтеграції</h4>
+    <div class="tag">Quantower API</div>
+    <div class="tag">Binance API</div>
+    <div class="tag">Telegram API</div>
+  </div>
+</details>
+
+    <details>
+  <summary><h2>Освіта</h2></summary>
+  <div class="education">
+    <h3>Магістр Комп’ютерна інженерія – НУВГП</h3>
+    <span>2021 – 2023</span>
+  </div>
+  <div class="education">
+    <h3>Бакалавр Комп’ютерна інженерія – НУВГП</h3>
+    <span>2018 – 2021</span>
+  </div>
+  <div class="education">
+    <h3>Медична справа – Дубенський медичний коледж</h3>
+    <span>2015 – 2018</span>
+  </div>
+</details>
+
+    <details>
+  <summary><h2>Мови</h2></summary>
+  <div class="language-chart">
+    <div class="language">
+      <div><strong>Українська</strong><br><span>Рідна</span></div>
+      <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
     </div>
-  </section>
-  <script>
+    <div class="language">
+      <div><strong>Російська</strong><br><span>Вільне володіння</span></div>
+      <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
+    </div>
+    <div class="language">
+      <div><strong>Англійська</strong><br><span>Впевнене користування</span></div>
+      <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot empty"></span><span class="dot empty"></span></div>
+    </div>
+    <div class="language">
+      <div><strong>Французька</strong><br><span>Початковий рівень</span></div>
+      <div class="dots"><span class="dot full"></span><span class="dot empty"></span><span class="dot empty"></span><span class="dot empty"></span><span class="dot empty"></span></div>
+    </div>
+  </div>
+</details>
+
+    <details>
+  <summary><h2>Хобі</h2></summary>
+  <ul>
+    <li>Гра в шахи — друге місце на обласному рівні, розвиток стратегічного мислення</li>
+    <li>ШІ-проєкти — розробка інтелектуальних рішень у вільний час, зокрема автоматизованих систем</li>
+    <li>Подорожі — пізнання культур, адаптивність і розширення світогляду</li>
+    <li>Активний відпочинок — піші прогулянки, природа, мандрівки</li>
+    <li>Спортзал — підтримання фізичної форми та дисципліни</li>
+    <li>Нумізматика — колекціонування монет, інтерес до історії та культур</li>
+    <li>Волонтерство — участь у благодійних ініціативах і допомога громадам</li>
+  </ul>
+</details>
+
+<script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
     }
+
+    async function generatePDF() {
+      const { jsPDF } = window.jspdf;
+      const content = document.getElementById('content');
+      const canvas = await html2canvas(content, { scale: 2, useCORS: true });
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const ratio = Math.min(pageWidth / canvas.width, pageHeight / canvas.height);
+      const imgWidth = canvas.width * ratio;
+      const imgHeight = canvas.height * ratio;
+      const marginX = (pageWidth - imgWidth) / 2;
+      const marginY = 10;
+
+      pdf.addImage(imgData, 'PNG', marginX, marginY, imgWidth, imgHeight);
+      pdf.save('andrii_mikhnevych_cv.pdf');
+    }
   </script>
+<footer style="
+text-align: center; 
+padding: 2rem; 
+background-color: #1f2937; 
+font-size: 0.9rem; 
+color: #f9fafb; 
+width: 100vw; 
+box-sizing: border-box; 
+margin-left: calc(-50vw + 50%);
+">
+<p>© 2024 Андрій Міхневич</p>
+<p>Зв’язок: <a href="mailto:andrijmix@gmail.com" style="color: #93c5fd; text-decoration: none;">andrijmix@gmail.com</a></p>
+<p>
+  <a href="https://github.com/andrijmix" target="_blank" style="color: #93c5fd;">GitHub</a>
+  |
+  <a href="https://t.me/amenws" target="_blank" style="color: #93c5fd;">Telegram</a>
+</p>
+</footer>
+
+
+
 </body>
 </html>

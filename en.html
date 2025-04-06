@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" type="image/png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Andrii Mikhnevych | Dev Team Lead</title>
+  <title>Andrii Mikhnevych | Software Developer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+    function toggleDetails(clicked) {
+      document.querySelectorAll('details').forEach((el) => {
+        if (el !== clicked) el.removeAttribute('open');
+      });
+    }
+
+    document.querySelectorAll('details').forEach((detail) => {
+      detail.addEventListener('toggle', () => {
+        if (detail.open) {
+          document.querySelectorAll('details').forEach((other) => {
+            if (other !== detail) other.removeAttribute('open');
+          });
+          detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -60,9 +80,12 @@
     }
     section {
       padding: 2rem;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
-      animation: fadeIn 1s ease-in;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      animation: fadeIn 0.6s ease-in;
     }
     h2 {
       border-bottom: 2px solid #e5e7eb;
@@ -71,33 +94,144 @@
       color: inherit;
     }
     .job, .project, .education {
-      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background-color: #f3f4f6;
+      border-radius: 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      transition: background-color 0.3s ease;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
     }
     .job h3, .project h3, .education h3 {
-      margin: 0;
+      color: #111827;
+      font-weight: 700;
       font-size: 1.1rem;
-      color: inherit;
     }
-    .job span, .project span, .education span {
-      display: block;
-      font-size: 0.9rem;
-      color: #6b7280;
+    .job p, .project p, .education span {
+      color: #4b5563;
     }
     .skills, .languages {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
     }
     .tag {
       background-color: #e0f2fe;
       color: #0369a1;
-      padding: 0.4rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.9rem;
+      padding: 8px 16px;
+      border-radius: 20px;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 4px;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    details {
+      padding: 1rem 1.25rem;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border-left: 4px solid #3b82f6;
+      transition: transform 0.2s ease;
+      color: #1f2937;
+    }
+    body.dark details {
+      background-color: #1f2937;
+      color: #f9fafb;
+      border-color: #374151;
+    }
+    details[open] {
+      background-color: #f3f4f6;
+    }
+    body.dark details[open] {
+      background-color: #111827;
+    }
+    details summary {
+      background-color: transparent;
+      color: #1e3a8a;
+      font-size: 1.25rem;
+      font-weight: 700;
+      list-style: none;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+      margin: 0;
+    }
+    body.dark details summary {
+      background-color: #1e3a8a;
+      color: #bfdbfe;
+    }
+    details summary:hover {
+      background-color: #f0f9ff;
+    }
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+    details h2 {
+      margin: 0;
+      display: inline;
+    }
+    details[open] summary::after {
+      content: "▾";
+      transform: rotate(90deg);
+    }
+    details summary::after {
+      content: "▸";
+      font-size: 1rem;
+      margin-left: 1rem;
+      transform: rotate(0deg);
+      transition: transform 0.3s ease-in-out;
+    }
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+    .language-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .language {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed #d1d5db;
+      padding-bottom: 0.5rem;
+    }
+    .language div:first-child {
+      font-size: 1rem;
+      color: #111827;
+    }
+    .language span {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+    .dots {
+      display: flex;
+      gap: 0.25rem;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #d1d5db;
+    }
+    .dot.full {
+      background-color: #3b82f6;
+    }
+    .dot.empty {
+      background-color: #e5e7eb;
     }
   </style>
 </head>
@@ -106,77 +240,233 @@
     <div class="controls">
       <button onclick="toggleDarkMode()">🌗</button>
       <a href="index.html">UA</a>
-      <a href="cv.pdf" download>📄 CV</a>
+      <button onclick="generatePDF()">📄 CV</button>
     </div>
-    <img src="photo.jpg" alt="Andrii Mikhnevych photo" />
-    <h1>Andrii Mikhnevych</h1>
-    <p>Dev Team Lead</p>
+    <img src="photo.jpg" alt="Photo of Andrii Mikhnevych" />
+    <p style="font-style: italic; max-width: 700px; margin: 0.5rem auto 1rem; font-size: 1.1rem;">
+      Over 9 years of experience in developing complex algorithmic solutions, data analytics, and automation.
+    </p>
+    <p>Software Developer</p>
     <p><a href="mailto:andrijmix@gmail.com" style="color: #60a5fa">andrijmix@gmail.com</a> | Ukraine</p>
   </header>
-  <section>
-    <h2>Experience</h2>
-    <div class="job">
-      <h3>Dev Team Lead – Algo Equities Technology Ltd</h3>
-      <span>July 2023 – Present · Kyiv</span>
-      <p>Development of software for asset management and market analysis.</p>
-    </div>
-    <div class="job">
-      <h3>MQL Freelancer</h3>
-      <span>February 2018 – September 2023</span>
-      <p>Worked with traders, developed solutions, consulting.</p>
-    </div>
-    <div class="job">
-      <h3>Business Analyst – AM Lingwista</h3>
-      <span>October 2017 – March 2020 · Rivne</span>
-      <p>HR management and data collection.</p>
-    </div>
-    <div class="job">
-      <h3>Physician’s Assistant – Dubno Hospital</h3>
-      <span>January 2020 – February 2022</span>
-    </div>
+  <section id="content">
+    <details onclick="toggleDetails(this)">
+      <summary><h2>Experience</h2></summary>
+      <div class="job">
+        <h3>Development Team Lead</h3>
+        <p>Algo Equities Technology Ltd</p>
+        <p>📅 07/2023 – 04/2024 &nbsp;&nbsp; 📍 Kyiv</p>
+        <p>Developing software for asset management and market analysis.</p>
+        <ul>
+          <li>Development of trading software solutions</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3>C++ Freelancer</h3>
+        <p>Freelance</p>
+        <p>📅 02/2018 – 09/2023 &nbsp;&nbsp; 📍 Remote</p>
+        <p>Working on C++ solutions for financial systems.</p>
+        <ul>
+          <li>Long-term collaboration with clients as a consultant</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3>Business Analyst</h3>
+        <p>AM Lingwista</p>
+        <p>📅 10/2017 – 03/2020 &nbsp;&nbsp; 📍 Rivne</p>
+        <p>A recruitment company that ceased operations after the onset of the COVID-19 pandemic.</p>
+        <ul>
+          <li>Data collection</li>
+          <li>HR management</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3>Paramedic</h3>
+        <p>Dubno Hospital</p>
+        <p>📅 01/2020 – 02/2022 &nbsp;&nbsp; 📍 Dubno</p>
+      </div>
+    </details>
 
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>The Setup</h3>
-      <span>January 2021 – February 2022</span>
-      <p>Developed profitable Forex advisors in a trading team working with investor funds.</p>
-    </div>
+    <details>
+      <summary><h2>Projects</h2></summary>
+      <div class="project">
+        <h3>Olympiad Results Analysis Program</h3>
+        <p>
+          Using artificial intelligence for automated analysis of programming competition results and identifying patterns in participants' responses.
+        </p>
+      </div>
+      <div class="project">
+        <h3>Indicator-Based Algorithmic Trading Strategy</h3>
+        <p>
+          Development of an algorithmic module that performed automated monitoring of market indicators and executed financial operations based on them.
+        </p>
+      </div>
+      <div class="project">
+        <h3>Hospital Website</h3>
+        <p>
+          Development of the official website for the hospital <a href="http://dubnohospital.com.ua/" target="_blank">dubnohospital.com.ua</a> with informative content, contact details, and a user-friendly interface for patients.
+        </p>
+      </div>
+      <div class="project">
+        <h3>AI-Based Visual Photo Analyzer</h3>
+        <p>
+          An AI system that analyzes images and performs actions based on them — for example, autonomous poker playing with decision-making based on screenshot processing.
+        </p>
+      </div>
+    </details>
 
-    <h2>Skills</h2>
-    <div class="skills">
-      <div class="tag">MQL</div>
-      <div class="tag">C++</div>
-      <div class="tag">Java</div>
-      <div class="tag">Pine</div>
-      <div class="tag">Python</div>
-      <div class="tag">C#</div>
-      <div class="tag">Quantower API</div>
-      <div class="tag">Binance API</div>
-      <div class="tag">Telegram API</div>
-    </div>
+    <details>
+      <summary><h2>Skills</h2></summary>
+      <div class="skills">
+        <h4>Programming Languages</h4>
+        <div class="tag">MQL</div>
+        <div class="tag">C++</div>
+        <div class="tag">Java</div>
+        <div class="tag">Python</div>
+        <div class="tag">C#</div>
 
-    <h2>Education</h2>
-    <div class="education">
-      <h3>Computer Engineering – NUWM</h3>
-      <span>2018 – 2021</span>
-    </div>
-    <div class="education">
-      <h3>Medical Case – Dubno Medical College</h3>
-      <span>2015 – 2018</span>
-    </div>
+        <h4>Scripting Languages</h4>
+        <div class="tag">Pine Script</div>
 
-    <h2>Languages</h2>
-    <div class="languages">
-      <div class="tag">Ukrainian (Native)</div>
-      <div class="tag">Russian (Native)</div>
-      <div class="tag">English (Advanced)</div>
-      <div class="tag">French (Beginner)</div>
-    </div>
+        <h4>APIs and Integrations</h4>
+        <div class="tag">Quantower API</div>
+        <div class="tag">Binance API</div>
+        <div class="tag">Telegram API</div>
+      </div>
+    </details>
+
+    <details>
+      <summary><h2>Education</h2></summary>
+      <div class="education">
+        <h3>Master’s in Computer Engineering – NUVGP</h3>
+        <span>2021 – 2023</span>
+      </div>
+      <div class="education">
+        <h3>Bachelor’s in Computer Engineering – NUVGP</h3>
+        <span>2018 – 2021</span>
+      </div>
+      <div class="education">
+        <h3>Medical Studies – Dubno Medical College</h3>
+        <span>2015 – 2018</span>
+      </div>
+    </details>
+
+    <details>
+      <summary><h2>Languages</h2></summary>
+      <div class="language-chart">
+        <div class="language">
+          <div>
+            <strong>Ukrainian</strong><br>
+            <span>Native</span>
+          </div>
+          <div class="dots">
+            <span class="dot full"></span>
+            <span class="dot full"></span>
+            <span class="dot full"></span>
+            <span class="dot full"></span>
+            <span class="dot full"></span>
+          </div>
+        </div>
+        <div class="language">
+          <div>
+            <strong>Russian</strong><br>
+            <span>Fluent</span>
+          </div>
+          <div class="dots">
+            <span class="dot full"></span>
+            <span class="dot full"></span>
+            <span class="dot full"></span>
+            <span class="dot full"></span>
+            <span class="dot full"></span>
+          </div>
+        </div>
+        <div class="language">
+          <div>
+            <strong>English</strong><br>
+            <span>Proficient</span>
+          </div>
+          <div class="dots">
+            <span class="dot full"></span>
+            <span class="dot full"></span>
+            <span class="dot full"></span>
+            <span class="dot empty"></span>
+            <span class="dot empty"></span>
+          </div>
+        </div>
+        <div class="language">
+          <div>
+            <strong>French</strong><br>
+            <span>Beginner</span>
+          </div>
+          <div class="dots">
+            <span class="dot full"></span>
+            <span class="dot empty"></span>
+            <span class="dot empty"></span>
+            <span class="dot empty"></span>
+            <span class="dot empty"></span>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary><h2>Hobbies</h2></summary>
+      <ul>
+        <li>Playing chess — second place at the regional level, developing strategic thinking</li>
+        <li>AI projects — developing intelligent solutions in my free time, including automated systems</li>
+        <li>Travel — exploring cultures, adaptability, and broadening perspectives</li>
+        <li>Outdoor activities — hiking, enjoying nature, and traveling</li>
+        <li>Gym — maintaining physical fitness and discipline</li>
+        <li>Numismatics — coin collecting, interest in history and cultures</li>
+        <li>Volunteering — participating in charitable initiatives and community support</li>
+      </ul>
+    </details>
+
+    <script>
+      async function generatePDF() {
+        // Імпортуємо jsPDF з бібліотеки jspdf
+        const { jsPDF } = window.jspdf;
+        // Отримуємо елемент, з якого буде створено знімок (у нашому випадку це контейнер з id "content")
+        const content = document.getElementById('content');
+        // Використовуємо html2canvas для створення знімку екрана з елемента
+        const canvas = await html2canvas(content, { scale: 2, useCORS: true });
+        const imgData = canvas.toDataURL('image/png');
+        
+        // Створюємо новий PDF документ формату A4 (практично 210x297 мм)
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        
+        // Обчислюємо масштаб, щоб зображення вміщувалося на сторінці
+        const ratio = Math.min(pageWidth / canvas.width, pageHeight / canvas.height);
+        const imgWidth = canvas.width * ratio;
+        const imgHeight = canvas.height * ratio;
+        const marginX = (pageWidth - imgWidth) / 2;
+        const marginY = 10;
+        
+        // Додаємо зображення до PDF та зберігаємо файл
+        pdf.addImage(imgData, 'PNG', marginX, marginY, imgWidth, imgHeight);
+        pdf.save('andrii_mikhnevych_cv.pdf');
+      }
+    </script>
   </section>
-  <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark');
-    }
-  </script>
+  <footer style="
+    text-align: center; 
+    padding: 2rem; 
+    background-color: #1f2937; 
+    font-size: 0.9rem; 
+    color: #f9fafb; 
+    width: 100vw; 
+    box-sizing: border-box; 
+    margin-left: calc(-50vw + 50%);
+  ">
+    <p>© 2024 Andrii Mikhnevych</p>
+    <p>Contact: <a href="mailto:andrijmix@gmail.com" style="color: #93c5fd; text-decoration: none;">andrijmix@gmail.com</a></p>
+    <p>
+      <a href="https://github.com/andrijmix" target="_blank" style="color: #93c5fd;">GitHub</a>
+      |
+      <a href="https://t.me/amenws" target="_blank" style="color: #93c5fd;">Telegram</a>
+    </p>
+  </footer>
 </body>
 </html>
