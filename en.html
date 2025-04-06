@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andrii Mikhnevych | Dev Team Lead</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      color: #1f2937;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.dark {
+      background-color: #111827;
+      color: #f9fafb;
+    }
+    header {
+      background-color: #111827;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #3b82f6;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin: 0.5rem 0 0;
+      font-size: 1.25rem;
+    }
+    .controls {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .controls button, .controls a {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    section {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      animation: fadeIn 1s ease-in;
+    }
+    h2 {
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 0.5rem;
+      margin-top: 2rem;
+      color: inherit;
+    }
+    .job, .project, .education {
+      margin-bottom: 1.5rem;
+    }
+    .job h3, .project h3, .education h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: inherit;
+    }
+    .job span, .project span, .education span {
+      display: block;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+    .skills, .languages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .tag {
+      background-color: #e0f2fe;
+      color: #0369a1;
+      padding: 0.4rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="controls">
+      <button onclick="toggleDarkMode()">🌗</button>
+      <a href="index.html">UA</a>
+      <a href="cv.pdf" download>📄 CV</a>
+    </div>
+    <img src="photo.jpg" alt="Andrii Mikhnevych photo" />
+    <h1>Andrii Mikhnevych</h1>
+    <p>Dev Team Lead</p>
+    <p><a href="mailto:andrijmix@gmail.com" style="color: #60a5fa">andrijmix@gmail.com</a> | Ukraine</p>
+  </header>
+  <section>
+    <h2>Experience</h2>
+    <div class="job">
+      <h3>Dev Team Lead – Algo Equities Technology Ltd</h3>
+      <span>July 2023 – Present · Kyiv</span>
+      <p>Development of software for asset management and market analysis.</p>
+    </div>
+    <div class="job">
+      <h3>MQL Freelancer</h3>
+      <span>February 2018 – September 2023</span>
+      <p>Worked with traders, developed solutions, consulting.</p>
+    </div>
+    <div class="job">
+      <h3>Business Analyst – AM Lingwista</h3>
+      <span>October 2017 – March 2020 · Rivne</span>
+      <p>HR management and data collection.</p>
+    </div>
+    <div class="job">
+      <h3>Physician’s Assistant – Dubno Hospital</h3>
+      <span>January 2020 – February 2022</span>
+    </div>
+
+    <h2>Projects</h2>
+    <div class="project">
+      <h3>The Setup</h3>
+      <span>January 2021 – February 2022</span>
+      <p>Developed profitable Forex advisors in a trading team working with investor funds.</p>
+    </div>
+
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="tag">MQL</div>
+      <div class="tag">C++</div>
+      <div class="tag">Java</div>
+      <div class="tag">Pine</div>
+      <div class="tag">Python</div>
+      <div class="tag">C#</div>
+      <div class="tag">Quantower API</div>
+      <div class="tag">Binance API</div>
+      <div class="tag">Telegram API</div>
+    </div>
+
+    <h2>Education</h2>
+    <div class="education">
+      <h3>Computer Engineering – NUWM</h3>
+      <span>2018 – 2021</span>
+    </div>
+    <div class="education">
+      <h3>Medical Case – Dubno Medical College</h3>
+      <span>2015 – 2018</span>
+    </div>
+
+    <h2>Languages</h2>
+    <div class="languages">
+      <div class="tag">Ukrainian (Native)</div>
+      <div class="tag">Russian (Native)</div>
+      <div class="tag">English (Advanced)</div>
+      <div class="tag">French (Beginner)</div>
+    </div>
+  </section>
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>
