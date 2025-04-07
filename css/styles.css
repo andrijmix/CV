@@ -181,6 +181,7 @@
     flex-wrap: wrap;
     gap: 0.5rem;
   }
+  
   .tag {
     background-color: #e0f2fe;
     color: #0369a1;
@@ -189,6 +190,21 @@
     font-size: 0.85rem;
     font-weight: 500;
   }
+  .skills {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .skill-group h4 {
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
   body.dark .tag {
     background-color: #1e40af;
     color: #bfdbfe;

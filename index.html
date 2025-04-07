@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+  
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" type="image/png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Open Graph (для соцмереж) -->
+<meta property="og:title" content="Андрій Міхневич | Розробник програмного забезпечення">
+<meta property="og:description" content="Мій персональний сайт-візитка: досвід, проєкти, PDF-резюме, контакти та більше.">
+<meta property="og:image" content="https://andrijmix.github.io/photo.jpg">
+<meta property="og:url" content="https://andrijmix.github.io">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Андрій Міхневич | Розробник ПЗ">
+<meta name="twitter:description" content="Сайт-візитка з досвідом, проєктами, навичками та PDF-резюме.">
+<meta name="twitter:image" content="https://andrijmix.github.io/photo.jpg">
+
   <title>Андрій Міхневич | Розробник програмного забезпечення</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <script src="js/toggleDetails.js"></script>
@@ -18,9 +32,10 @@
       <button onclick="generatePDF()">PDF</button>
     </div>
     <img src="photo.jpg" alt="Фото Андрія Міхневича" />
-    <p style="font-style: italic; max-width: 700px; margin: 0.5rem auto 1rem; font-size: 1.1rem;">Понад 9 років досвіду у розробці складних алгоритмічних рішень, аналітики даних і автоматизації.
-</p>
+    <p>Андрій Міхневич</p>
     <p>Розробник програмного забезпечення</p>
+    <p style="font-style: italic; max-width: 700px; margin: 0.5rem auto 1rem; font-size: 1.1rem;">Понад 9 років досвіду у розробці складних алгоритмічних рішень, аналітики даних і автоматизації.
+    </p>
     <p><a href="mailto:andrijmix@gmail.com" style="color: #60a5fa">andrijmix@gmail.com</a> | Україна</p>
   </header>
   <section id="content">
@@ -84,21 +99,34 @@
     <details>
   <summary><h2>Навички</h2></summary>
   <div class="skills">
-    <h4>Мови програмування</h4>
-    <div class="tag">MQL</div>
-    <div class="tag">C++</div>
-    <div class="tag">Java</div>
-    <div class="tag">Python</div>
-    <div class="tag">C#</div>
-
-    <h4>Скриптові мови</h4>
-    <div class="tag">Pine Script</div>
-
-    <h4>API та інтеграції</h4>
-    <div class="tag">Quantower API</div>
-    <div class="tag">Binance API</div>
-    <div class="tag">Telegram API</div>
+    <div class="skill-group">
+      <h4>Мови програмування</h4>
+      <div class="tags">
+        <div class="tag">MQL</div>
+        <div class="tag">C++</div>
+        <div class="tag">Java</div>
+        <div class="tag">Python</div>
+        <div class="tag">C#</div>
+      </div>
+    </div>
+  
+    <div class="skill-group">
+      <h4>Скриптові мови</h4>
+      <div class="tags">
+        <div class="tag">Pine Script</div>
+      </div>
+    </div>
+  
+    <div class="skill-group">
+      <h4>API та інтеграції</h4>
+      <div class="tags">
+        <div class="tag">Quantower API</div>
+        <div class="tag">Binance API</div>
+        <div class="tag">Telegram API</div>
+      </div>
+    </div>
   </div>
+  
 </details>
 
     <details>

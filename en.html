@@ -4,6 +4,20 @@
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" type="image/png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Open Graph (for social platforms) -->
+<meta property="og:title" content="Andrii Mikhnevych | Software Developer">
+<meta property="og:description" content="My personal portfolio site: experience, projects, PDF résumé, and contact.">
+<meta property="og:image" content="https://andrijmix.github.io/photo.jpg">
+<meta property="og:url" content="https://andrijmix.github.io/en.html">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Andrii Mikhnevych | Software Developer">
+<meta name="twitter:description" content="Portfolio with experience, projects, skills and downloadable PDF résumé.">
+<meta name="twitter:image" content="https://andrijmix.github.io/photo.jpg">
+
+
   <title>Andrii Mikhnevych | Software Developer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
@@ -16,10 +30,12 @@
       <button onclick="generatePDF()">PDF</button>
     </div>
     <img src="photo.jpg" alt="Photo of Andrii Mikhnevych" />
+    <p>Andrii Mikhnevych</p>
+    <p>Software Developer</p>
     <p style="font-style: italic; max-width: 700px; margin: 0.5rem auto 1rem; font-size: 1.1rem;">
       Over 9 years of experience in developing complex algorithmic solutions, data analytics, and automation.
     </p>
-    <p>Software Developer</p>
+    
     <p><a href="mailto:andrijmix@gmail.com" style="color: #60a5fa">andrijmix@gmail.com</a> | Ukraine</p>
   </header>
   <section id="content">
@@ -91,20 +107,32 @@
     <details>
       <summary><h2>Skills</h2></summary>
       <div class="skills">
-        <h4>Programming Languages</h4>
-        <div class="tag">MQL</div>
-        <div class="tag">C++</div>
-        <div class="tag">Java</div>
-        <div class="tag">Python</div>
-        <div class="tag">C#</div>
-
-        <h4>Scripting Languages</h4>
-        <div class="tag">Pine Script</div>
-
-        <h4>APIs and Integrations</h4>
-        <div class="tag">Quantower API</div>
-        <div class="tag">Binance API</div>
-        <div class="tag">Telegram API</div>
+        <div class="skill-group">
+          <h4>Programming Languages</h4>
+          <div class="tags">
+            <div class="tag">MQL</div>
+            <div class="tag">C++</div>
+            <div class="tag">Java</div>
+            <div class="tag">Python</div>
+            <div class="tag">C#</div>
+          </div>
+        </div>
+      
+        <div class="skill-group">
+          <h4>Scripting Languages</h4>
+          <div class="tags">
+            <div class="tag">Pine Script</div>
+          </div>
+        </div>
+      
+        <div class="skill-group">
+          <h4>APIs and Integrations</h4>
+          <div class="tags">
+            <div class="tag">Quantower API</div>
+            <div class="tag">Binance API</div>
+            <div class="tag">Telegram API</div>
+          </div>
+        </div>
       </div>
     </details>
 
