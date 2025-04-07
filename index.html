@@ -6,248 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Андрій Міхневич | Розробник програмного забезпечення</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">function toggleDetails(clicked) {
-  document.querySelectorAll('details').forEach((el) => {
-    if (el !== clicked) el.removeAttribute('open');
-  });
-}
-
-  document.querySelectorAll('details').forEach((detail) => {
-    detail.addEventListener('toggle', () => {
-      if (detail.open) {
-        document.querySelectorAll('details').forEach((other) => {
-          if (other !== detail) other.removeAttribute('open');
-        });
-        detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-</script>
+  <script src="js/toggleDetails.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #f9fafb;
-  color: #1f2937;
-  line-height: 1.6;
-  transition: background-color 0.3s, color 0.3s;
-}
-body.dark {
-  background-color: #111827;
-  color: #f9fafb;
-}
-header {
-  background-color: #111827;
-  color: white;
-  padding: 2rem;
-  text-align: center;
-  position: relative;
-}
-header img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #3b82f6;
-  margin-bottom: 1rem;
-}
-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-}
-header p {
-  margin: 0.5rem 0 0;
-  font-size: 1.25rem;
-}
-.controls {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  gap: 0.5rem;
-}
-.controls button, .controls a {
-  background: #3b82f6;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-section {
-  padding: 2rem;
-  max-width: 900px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  animation: fadeIn 0.6s ease-in;
-}
-h2 {
-  border-bottom: 2px solid #e5e7eb;
-  padding-bottom: 0.5rem;
-  margin-top: 2rem;
-  color: inherit;
-}
-$1
-  padding: 1rem;
-  background-color: #f3f4f6;
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  transition: background-color 0.3s ease;
-  border: 1px solid #e5e7eb;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-$1color: #111827;
-  font-weight: 700;
-  font-size: 1.1rem;
-}
-$1color: #4b5563;
-}
-.skills, .languages {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-$1
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 32px;
-  line-height: 1;
-  min-width: 60px;
-  text-align: center;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-  details {
-  padding: 1rem 1.25rem;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  border-left: 4px solid #3b82f6;
-  transition: transform 0.2s ease;
-  color: #1f2937;
-}
-body.dark details {
-  background-color: #1f2937;
-  color: #f9fafb;
-  border-color: #374151;
-}
-details[open] {
-  background-color: #f3f4f6;
-  
-}
-body.dark details[open] {
-  background-color: #111827;
-}
-details summary {
-  background-color: transparent;
-  color: #1e3a8a;
-  font-size: 1.25rem;
-  font-weight: 700;
-  list-style: none;
-  padding: 0.75rem 1rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.3s ease;
-  margin: 0;
-}
-body.dark details summary {
-  background-color: #1e3a8a;
-  color: #bfdbfe;
-}
-details summary:hover {
-  background-color: #f0f9ff;
-}
-details summary::-webkit-details-marker {
-  display: none;
-}
-details h2 {
-  margin: 0;
-  display: inline;
-}
-details[open] summary::after {
-  content: "▾";
-  transform: rotate(90deg);
-}
-details summary::after {
-  content: "▸";
-  font-size: 1rem;
-  margin-left: 1rem;
-  transform: rotate(0deg);
-  transition: transform 0.3s ease-in-out;
-}
-details[open] summary::after {
-  transform: rotate(180deg);
-}
-.language-chart {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-.language {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px dashed #d1d5db;
-  padding-bottom: 0.5rem;
-}
-.language div:first-child {
-  font-size: 1rem;
-  color: #111827;
-}
-.language span {
-  font-size: 0.875rem;
-  color: #6b7280;
-}
-.dots {
-  display: flex;
-  gap: 0.25rem;
-}
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #d1d5db;
-}
-.tag {
-  background-color: #e0f2fe; /* світло-блакитний фон */
-  color: #0369a1; /* синій текст */
-  padding: 8px 16px;
-  border-radius: 20px;
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 500;
-  margin: 4px;
-}
-.dot.full {
-  background-color: #3b82f6;
-}
-.dot.empty {
-  background-color: #e5e7eb;
-}
-</style>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
     <div class="controls">
       <button onclick="toggleDarkMode()">🌗</button>
       <a href="en.html">EN</a>
-      <button onclick="generatePDF()">📄 CV</button>
+      <button onclick="generatePDF()">PDF</button>
     </div>
     <img src="photo.jpg" alt="Фото Андрія Міхневича" />
     <p style="font-style: italic; max-width: 700px; margin: 0.5rem auto 1rem; font-size: 1.1rem;">Понад 9 років досвіду у розробці складних алгоритмічних рішень, аналітики даних і автоматизації.
@@ -384,45 +152,17 @@ details[open] summary::after {
   </ul>
 </details>
 
-<script>
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark');
-    }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="js/toggleDarkMode.js"></script>
+<script src="js/generatePDF.js"></script>
 
-    async function generatePDF() {
-      const { jsPDF } = window.jspdf;
-      const content = document.getElementById('content');
-      const canvas = await html2canvas(content, { scale: 2, useCORS: true });
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
-      const ratio = Math.min(pageWidth / canvas.width, pageHeight / canvas.height);
-      const imgWidth = canvas.width * ratio;
-      const imgHeight = canvas.height * ratio;
-      const marginX = (pageWidth - imgWidth) / 2;
-      const marginY = 10;
-
-      pdf.addImage(imgData, 'PNG', marginX, marginY, imgWidth, imgHeight);
-      pdf.save('andrii_mikhnevych_cv.pdf');
-    }
-  </script>
-<footer style="
-text-align: center; 
-padding: 2rem; 
-background-color: #1f2937; 
-font-size: 0.9rem; 
-color: #f9fafb; 
-width: 100vw; 
-box-sizing: border-box; 
-margin-left: calc(-50vw + 50%);
-">
-<p>© 2024 Андрій Міхневич</p>
-<p>Зв’язок: <a href="mailto:andrijmix@gmail.com" style="color: #93c5fd; text-decoration: none;">andrijmix@gmail.com</a></p>
+<footer>
+<p>© 2025 Андрій Міхневич</p>
+<p>Зв’язок: <a href="mailto:andrijmix@gmail.com">andrijmix@gmail.com</a></p>
 <p>
-  <a href="https://github.com/andrijmix" target="_blank" style="color: #93c5fd;">GitHub</a>
+  <a href="https://github.com/andrijmix" >GitHub</a>
   |
-  <a href="https://t.me/amenws" target="_blank" style="color: #93c5fd;">Telegram</a>
+  <a href="https://t.me/amenws" >Telegram</a>
 </p>
 </footer>
 
