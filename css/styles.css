@@ -103,6 +103,7 @@
   body.dark details[open] {
     background-color: #1e293b;
   }
+  
   details summary {
     background-color: transparent;
     color: #1e3a8a;
@@ -139,6 +140,34 @@
     max-width: 800px;
     margin: auto;
   }
+  .social-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  width: 100%;
+  padding: 15px 0;
+}
+
+.social-links a {
+  color: #60a5fa;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.2s;
+}
+
+.social-links a:hover {
+  text-decoration: underline;
+  color: #3b82f6;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
   /* === Cards === */
   .job, .project, .education {
     padding: 1rem;
