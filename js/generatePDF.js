@@ -2,7 +2,7 @@ function getBase64ImageFromURL(url, callback) {
   const img = new Image();
   img.crossOrigin = 'Anonymous';
   img.onload = function () {
-    // Сохраняем пропорции изображения
+    // Preserve image proportions
     const canvas = document.createElement('canvas');
     const originalRatio = this.naturalWidth / this.naturalHeight;
     canvas.width = this.naturalWidth;
@@ -497,22 +497,22 @@ function generatePDF(openInNewTab = false) {
       const details = document.querySelectorAll('section details');
       
       let certificatesDetail = null;
-details.forEach(d => {
-  const heading = d.querySelector('summary h2')?.innerText.toLowerCase() || '';
-  if (heading.includes('certificate')) {
-    certificatesDetail = d;
-  }
-});
+      details.forEach(d => {
+        const heading = d.querySelector('summary h2')?.innerText.toLowerCase() || '';
+        if (heading.includes('certificate')) {
+          certificatesDetail = d;
+        }
+      });
 
-const certificatesTitle = certificatesDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Сертифікати та курси' : 'Certificates and Courses');
-const certificateEntries = createCertificateEntries(certificatesDetail);
+      
       // Get section titles
       const experienceTitle = details[0]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Досвід' : 'Experience');
       const projectsTitle = details[1]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Проєкти' : 'Projects');
       const skillsTitle = details[2]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Навички' : 'Skills');
       const educationTitle = details[3]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Освіта' : 'Education');
       const languagesTitle = details[4]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Мови' : 'Languages');
-      const hobbiesTitle = details[5]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Хобі' : 'Hobbies');
+      const hobbiesTitle = details[5]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Хобі' : 'Interests');
+      const certificatesTitle = details[6]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Сертифікати та курси' : 'Certificates and Courses');
 
       // Create content sections
       const jobEntries = createJobEntries(details[0]);
@@ -521,7 +521,8 @@ const certificateEntries = createCertificateEntries(certificatesDetail);
       const educationEntries = createEducationEntries(details[3]);
       const languageEntries = createLanguageEntries(details[4]);
       const hobbyEntries = extractHobbies(details[5]);
-      
+      const certificateEntries = createCertificateEntries(details[6]);
+
       // Set colors based on theme
       const themeColors = isDarkTheme ? {
         primary: '#3b82f6',
@@ -547,25 +548,42 @@ const certificateEntries = createCertificateEntries(certificatesDetail);
         dotEmpty: '#e5e7eb'
       };
 
-      // Рассчитаем правильные размеры фото с сохранением пропорций
+      // Photo dimensions
       const photoWidth = 70;
       const photoHeight = photoWidth / photoRatio;
       
-      // Create social links section
-      const socialLinksSection = socialLinks.length > 0 ? {
-        stack: socialLinks.map(link => ({
-          text: link.text,
-          link: link.url,
-          color: themeColors.primary,
-          fontSize: 8,
-          margin: [0, 1, 0, 0]
-        })),
-        margin: [0, 3, 0, 0]
-      } : null;
+      // Create clickable social links array
+      const socialLinksArray = [];
+      
+let socialLinksTextArray = [];
 
+if (socialLinks.length > 0) {
+  socialLinksTextArray.push({
+    text: socialLinks[0].text,
+    link: socialLinks[0].url,
+    color: themeColors.primary,
+    fontSize: 9
+  });
+  
+  for (let i = 1; i < socialLinks.length; i++) {
+    socialLinksTextArray.push({
+      text: ' | ',  
+      color: themeColors.muted,
+      fontSize: 9
+    });
+    
+    socialLinksTextArray.push({
+      text: socialLinks[i].text,
+      link: socialLinks[i].url,
+      color: themeColors.primary,
+      fontSize: 9
+    });
+  }
+}
+      // ULTRA-COMPACT PDF LAYOUT WITHOUT EMPTY PAGES
       const docDefinition = {
         pageSize: 'A4',
-        pageMargins: [30, 30, 30, 40], // Increased bottom margin for footer
+        pageMargins: [30, 15, 30, 30], // Reduced margins
         background: function() {
           return {
             canvas: [
@@ -579,34 +597,82 @@ const certificateEntries = createCertificateEntries(certificatesDetail);
           };
         },
         content: [
-          // Compact header with photo and contact info
+          // Ultra-compact header
           {
             columns: [
-              { 
-                image: photoData, 
-                width: photoWidth,
-                height: photoHeight,
-                margin: [0, 0, 15, 0] 
-              },
+              // Photo with frame
               {
-                width: '*',
                 stack: [
-                  { text: name, style: 'name' },
-                  { text: title, style: 'role' },
-                  { text: summary, style: 'summary' },
-                  { text: contact, style: 'contact', link: 'mailto:andrijmix@gmail.com' },
-                  socialLinksSection
-                ].filter(Boolean) // Remove null items
+                  {
+                    canvas: [
+                      {
+                        type: 'rect',
+                        x: 0, y: 0,
+                        w: photoWidth + 4,
+                        h: photoHeight + 4,
+                        r: 3,
+                        lineWidth: 1.5,
+                        lineColor: themeColors.primary
+                      }
+                    ]
+                  },
+                  {
+                    image: photoData,
+                    width: photoWidth,
+                    height: photoHeight,
+                    margin: [2, -photoHeight - 2, 0, 0]
+                  }
+                ],
+                width: photoWidth + 10,
+                margin: [0, 0, 10, 0]
               },
-              { 
-                image: qrCodeData, 
-                width: 40, 
-                alignment: 'right' 
+              // Main information
+              {
+                stack: [
+                  {
+                    text: name,
+                    fontSize: 16, // Reduced font size
+                    bold: true,
+                    color: themeColors.text
+                  },
+                  {
+                    text: title,
+                    fontSize: 12, // Reduced font size
+                    color: themeColors.secondary,
+                    margin: [0, 2, 0, 3] // Reduced margins
+                  },
+                  {
+                    text: summary,
+                    fontSize: 9, // Reduced font size
+                    italics: true,
+                    color: themeColors.muted
+                  },
+                  {
+                    text: contact,
+                    fontSize: 8, // Reduced font size
+                    color: themeColors.primary,
+                    link: 'mailto:andrijmix@gmail.com',
+                    margin: [0, 4, 0, 4]
+                  },
+                  {
+                    text: socialLinksTextArray,  // Используем массив с разными стилями в одном тексте
+  margin: [0, 2, 0, 0]
+                  }
+                ],
+                width: '*'
+              },
+              // QR code (reduced size)
+              {
+                image: qrCodeData,
+                width: 40, // Reduced size
+                alignment: 'right',
+                margin: [0, 0, 0, 0]
               }
             ],
-            margin: [0, 0, 0, 10]
+            margin: [0, 0, 0, 3] // Ultra-minimal margin after header
           },
-          // Separator line - blue line like on website
+          
+          // Divider line - very thin
           {
             canvas: [{ 
               type: 'line', 
@@ -615,102 +681,137 @@ const certificateEntries = createCertificateEntries(certificatesDetail);
               lineWidth: 1, 
               color: themeColors.primary 
             }],
-            margin: [0, 0, 0, 8]
+            margin: [0, 3, 0, 5] // Minimal margins
           },
-          // Main content in columns - MODIFIED to fix overflow issue
+          
+          // MAIN RESUME CONTENT - NO PAGEBREAK!
+          
+          // Experience
+          { 
+            text: experienceTitle, 
+            style: 'sectionHeader', 
+            margin: [0, 0, 0, 5] // Removed pageBreak!
+          },
+          
+          // Wrapper container for all experience items
+          {
+            stack: jobEntries.map((job, index) => ({
+              stack: [job],
+              pageBreakInside: 'avoid',
+              margin: [0, 0, 0, (index === jobEntries.length - 1) ? 10 : 3]
+            })),
+            margin: [0, 0, 0, 10]
+          },
+          
+          // Projects
+          { text: projectsTitle, style: 'sectionHeader', margin: [0, 0, 0, 5] },
+          
+          // Wrapper container for all projects
+          {
+            stack: projectEntries.map((project, index) => ({
+              stack: [project],
+              pageBreakInside: 'avoid',
+              margin: [0, 0, 0, (index === projectEntries.length - 1) ? 10 : 3]
+            })),
+            margin: [0, 0, 0, 10]
+          },
+          
+          // Two-column block - Skills and Education
           {
             columns: [
-    {
-      width: '48%',
-      stack: [
-        { text: experienceTitle, style: 'sectionHeader', margin: [0, 0, 0, 5] },
-        ...jobEntries.slice(0, 2),
-      ],
-    },
-    {
-      width: 1,
-      canvas: [{ type: 'line', x1:0, y1:0, x2:0, y2:750, lineWidth:0.5, color: themeColors.border }]
-    },
-    {
-      width: '48%',
-      stack: [
-        ...(jobEntries.length > 2 ? jobEntries.slice(2) : []),
-        { text: projectsTitle, style: 'sectionHeader', margin: [0, 8, 0, 5] },
-        ...projectEntries,
-      ],
-    }
-  ],
-  columnGap: 8
-},
-
-// Новая страница, первая колонка — Skills, Education, Languages
-{
-  pageBreak: 'before', // новая страница
-  columns: [
-    {
-      width: '48%',
-      stack: [
-        { text: skillsTitle, style: 'sectionHeader', margin: [0, 0, 0, 3] },
-        ...skillItems,
-        { text: educationTitle, style: 'sectionHeader', margin: [0, 8, 0, 5] },
-        ...educationEntries,
-        { text: languagesTitle, style: 'sectionHeader', margin: [0, 8, 0, 5] },
-        ...languageEntries,
-      ],
-    },
-    {
-      width: 1,
-      canvas: [{ type: 'line', x1:0, y1:0, x2:0, y2:750, lineWidth:0.5, color: themeColors.border }]
-    },
-    {
-      width: '48%',
-      stack: [
-        { text: certificatesTitle, style: 'sectionHeader', margin: [0, 0, 0, 5] },
-        ...certificateEntries,
-        { text: hobbiesTitle, style: 'sectionHeader', margin: [0, 8, 0, 5] },
-        ...hobbyEntries,
-      ],
-    }
-  ],
-  columnGap: 8
+              {
+                width: '48%',
+                stack: [
+                  { text: skillsTitle, style: 'sectionHeader', margin: [0, 0, 0, 5] },
+                  // Wrapper container for skills
+                  {
+                    stack: skillItems,
+                    pageBreakInside: 'avoid'
+                  }
+                ]
+              },
+              {
+                width: '48%',
+                stack: [
+                  { text: educationTitle, style: 'sectionHeader', margin: [0, 0, 0, 5] },
+                  // Wrapper container for education
+                  {
+                    stack: educationEntries.map(entry => ({
+                      stack: [entry],
+                      pageBreakInside: 'avoid'
+                    }))
+                  }
+                ],
+                margin: [15, 0, 0, 0]
+              }
+            ],
+            columnGap: 10,
+            margin: [0, 0, 0, 10]
+          },
+          
+          // Two-column block - Languages and Certificates/Hobbies
+          {
+            columns: [
+              {
+                width: '48%',
+                stack: [
+                  { text: languagesTitle, style: 'sectionHeader', margin: [0, 0, 0, 5] },
+                  // Wrapper container for languages
+                  {
+                    stack: languageEntries,
+                    pageBreakInside: 'avoid'
+                  }
+                ]
+              },
+              {
+                width: '48%',
+                stack: [
+                  { text: certificatesTitle, style: 'sectionHeader', margin: [0, 0, 0, 5] },
+                  // Wrapper container for certificates
+                  {
+                    stack: certificateEntries,
+                    pageBreakInside: 'avoid'
+                  },
+                  { text: hobbiesTitle, style: 'sectionHeader', margin: [0, 10, 0, 5] },
+                  // Wrapper container for hobbies
+                  {
+                    stack: hobbyEntries,
+                    pageBreakInside: 'avoid'
+                  }
+                ],
+                margin: [15, 0, 0, 0]
+              }
+            ],
+            columnGap: 10
           }
         ],
-        // Centered footer
-        footer: function() {
+        
+        // Footer
+        footer: function(currentPage, pageCount) {
           return {
-            text: `© ${new Date().getFullYear()} Andrii Mikhnevych`,
-            alignment: 'center',
-            fontSize: 8,
-            margin: [0, 0, 0, 10],
-            color: themeColors.muted
+            columns: [
+              { 
+                text: `© ${new Date().getFullYear()} Andrii Mikhnevych`, 
+                alignment: 'left',
+                margin: [30, 0, 0, 0],
+                fontSize: 8,
+                color: themeColors.muted
+              },
+              { 
+                text: `${currentPage} / ${pageCount}`, 
+                alignment: 'right',
+                margin: [0, 0, 30, 0],
+                fontSize: 8,
+                color: themeColors.muted
+              }
+            ]
           };
         },
+        
+        // Reduced styles
         styles: {
-          // Уменьшены размеры всех элементов
-          name: { 
-            fontSize: 18, 
-            bold: true, 
-            margin: [0, 0, 0, 3],
-            color: themeColors.text
-          },
-          role: { 
-            fontSize: 12, 
-            margin: [0, 0, 0, 2], 
-            color: themeColors.muted
-          },
-          contact: { 
-            fontSize: 9, 
-            color: themeColors.primary, 
-            margin: [0, 3, 0, 0] 
-          },
-          summary: { 
-            fontSize: 9, 
-            italics: true,
-            margin: [0, 3, 0, 3], 
-            color: themeColors.muted
-          },
           sectionHeader: { 
-            fontSize: 14, 
+            fontSize: 13, // Reduced font size
             bold: true, 
             color: themeColors.secondary, 
             decoration: 'underline',
@@ -720,12 +821,12 @@ const certificateEntries = createCertificateEntries(certificatesDetail);
           compactCard: {
             fillColor: themeColors.cardBg,
             borderRadius: 3,
-            padding: [8, 6, 8, 6],
+            padding: [6, 5, 6, 5], // Reduced internal padding
             border: [1, 1, 1, 1],
             borderColor: themeColors.border,
-            // Left blue border like on website
             borderLeft: [3, 1, 1, 1],
-            borderLeftColor: themeColors.primary
+            borderLeftColor: themeColors.primary,
+            pageBreakInside: 'avoid' // Prevent breaks
           },
           jobTitle: {
             fontSize: 10,
@@ -753,7 +854,7 @@ const certificateEntries = createCertificateEntries(certificatesDetail);
             margin: [0, 0, 0, 1]
           },
           skillGroupTitle: {
-            fontSize: 10,
+            fontSize: 9, // Reduced font size
             bold: false,
             color: themeColors.text
           },
@@ -762,12 +863,12 @@ const certificateEntries = createCertificateEntries(certificatesDetail);
             color: themeColors.tagText,
             fillColor: themeColors.tagBg,
             borderRadius: 3,
-            padding: [4, 2, 4, 2],
+            padding: [3, 2, 3, 2], // Reduced internal padding
             alignment: 'center'
           },
           compactLanguageRow: {
             borderBottom: [0.5, 'dashed', themeColors.border],
-            paddingBottom: 3
+            paddingBottom: 2 // Reduced padding
           },
           languageName: {
             fontSize: 9,
@@ -782,7 +883,7 @@ const certificateEntries = createCertificateEntries(certificatesDetail);
           hobbyItem: {
             fontSize: 8,
             color: themeColors.text,
-            lineHeight: 1.2
+            lineHeight: 1.1 // Reduced line height
           }
         }
       };
