@@ -122,6 +122,54 @@
     <details>
       <summary><h2>Projects</h2></summary>
       <div class="project">
+        <h3>SuperAgent — Intelligent RAG-based Chat Agent</h3>
+      
+        <h4>Project Overview</h4>
+        <p>
+          SuperAgent is an intelligent chatbot that leverages Large Language Models (LLMs) with
+          Retrieval-Augmented Generation (RAG) and Elasticsearch to provide accurate, context-aware answers.
+          The system routes user queries to specialized agents (FAQ Agent, Clarification Agent, Web Search Agent)
+          to ensure high-quality responses.
+        </p>
+      
+        <h4>Project Goals</h4>
+        <ul>
+          <li>Provide reliable answers to frequently asked questions (FAQ).</li>
+          <li>Enhance responses with RAG using Elasticsearch for semantic retrieval.</li>
+          <li>Route messages to the appropriate specialized agents.</li>
+          <li>Build a modular and scalable architecture for AI assistants.</li>
+        </ul>
+      
+        <h4>Architecture</h4>
+        <ul>
+          <li><strong>Backend:</strong> FastAPI for web routing and service orchestration.</li>
+          <li><strong>LLM Integration:</strong> LangChain / LangGraph for agent design and orchestration.</li>
+          <li><strong>Knowledge Base:</strong> Elasticsearch (vector search) for semantic retrieval.</li>
+          <li><strong>Agents:</strong> FAQ Agent, Clarification Agent, Web Search Agent, and a Message Router.</li>
+          <li><strong>Core Components:</strong> <code>superAgent.py</code>, <code>qa_agent.py</code>, <code>rag_utils.py</code>, <code>elastic_utils/</code>.</li>
+        </ul>
+      
+        <h4>Technologies</h4>
+        <p>Python 3.10+, FastAPI, LangChain / LangGraph, Elasticsearch (Cloud), OpenAI API</p>
+      
+        <h4>My Contribution</h4>
+        <ul>
+          <li>Designed the overall project architecture (<code>architecture.txt</code>).</li>
+          <li>Developed specialized agents (FAQ Agent, Message Router) and RAG utilities.</li>
+          <li>Integrated Elasticsearch for semantic search and chat session storage.</li>
+          <li>Built a lightweight web interface/routers for FAQ queries.</li>
+          <li>Authored project documentation (<code>README.md</code>).</li>
+        </ul>
+      
+        <h4>Result</h4>
+        <p>
+          A fully functional MVP chatbot with FAQ and RAG support capable of handling user queries in a modular
+          and scalable way. The project demonstrates practical experience with LLM orchestration, vector search,
+          and modern AI application design.
+        </p>
+      </div>
+      
+      <div class="project">
         <h3>Olympics Results Analysis Program</h3>
         <p>
           Using artificial intelligence for automated analysis of programming competition results and identifying patterns in participants' responses.
