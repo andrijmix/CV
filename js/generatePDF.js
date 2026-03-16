@@ -1,35 +1,51 @@
 function getBase64ImageFromURL(url, callback) {
-  const img = new Image();
-  img.crossOrigin = 'Anonymous';
-  img.onload = function () {
-    // Preserve image proportions
-    const canvas = document.createElement('canvas');
-    const originalRatio = this.naturalWidth / this.naturalHeight;
-    canvas.width = this.naturalWidth;
-    canvas.height = this.naturalHeight;
-    
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(this, 0, 0);
-    
-    const dataURL = canvas.toDataURL('image/jpeg');
-    callback(dataURL, originalRatio);
-  };
-  img.onerror = function() {
-    console.error('Failed to load image:', url);
-    callback('', 1); // Empty string fallback
-  };
-  img.src = url;
+  // Use fetch + FileReader — works for both local files and remote URLs
+  // without triggering canvas CORS taint issues.
+  fetch(url)
+    .then(res => {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.blob();
+    })
+    .then(blob => {
+      const reader = new FileReader();
+      reader.onloadend = function () {
+        const dataURL = reader.result;
+        // Determine image ratio via a temporary Image element.
+        const img = new Image();
+        img.onload = function () {
+          const ratio = this.naturalWidth / (this.naturalHeight || 1);
+          callback(dataURL, ratio);
+        };
+        img.onerror = function () { callback(dataURL, 1); };
+        img.src = dataURL;
+      };
+      reader.onerror = function () { callback('', 1); };
+      reader.readAsDataURL(blob);
+    })
+    .catch(err => {
+      console.warn('getBase64ImageFromURL fetch failed, skipping image:', url, err);
+      callback('', 1);
+    });
 }
 
 function getQRCodeImage(url, callback) {
-  const api = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(url)}`;
-  getBase64ImageFromURL(api, callback);
+  // External QR image requests can fail in restrictive networks/CORS environments.
+  // Keep PDF generation reliable by gracefully skipping QR image.
+  callback('', 1);
 }
 
 function getLangSuffix() {
   const lang = document.documentElement.lang || 'en';
   return lang === 'uk' ? '_ua' : '_en';
 }
+
+function findDetailsSection(detailsList, keywords) {
+  return Array.from(detailsList).find(detail => {
+    const heading = detail.querySelector('summary h2')?.innerText.toLowerCase() || '';
+    return keywords.some(keyword => heading.includes(keyword));
+  }) || null;
+}
+
 function createCertificateEntries(detailsElement) {
   if (!detailsElement) return [];
 
@@ -326,6 +342,23 @@ function extractSkillGroups(detailsElement) {
       result.push(tagLayout);
     }
   });
+
+  // Fallback for paragraph-based technologies format.
+  if (result.length === 0) {
+    const paragraphs = Array.from(detailsElement.querySelectorAll('p'));
+    paragraphs.forEach(paragraph => {
+      const label = paragraph.querySelector('strong')?.innerText || '';
+      const fullText = paragraph.innerText || '';
+
+      if (fullText.trim()) {
+        result.push({
+          text: label ? fullText.replace(label, '').trim() ? `${label} ${fullText.replace(label, '').trim()}` : label : fullText,
+          style: 'description',
+          margin: [0, 0, 0, 4]
+        });
+      }
+    });
+  }
   
   return result;
 }
@@ -495,33 +528,32 @@ function generatePDF(openInNewTab = false) {
 
       // Get section details
       const details = document.querySelectorAll('section details');
-      
-      let certificatesDetail = null;
-      details.forEach(d => {
-        const heading = d.querySelector('summary h2')?.innerText.toLowerCase() || '';
-        if (heading.includes('certificate')) {
-          certificatesDetail = d;
-        }
-      });
 
-      
+      const skillsDetail = findDetailsSection(details, ['skills', 'навички', 'ключові технології', 'key technologies']);
+      const experienceDetail = findDetailsSection(details, ['experience', 'досвід']);
+      const projectsDetail = findDetailsSection(details, ['projects', 'проєкти', 'проекти']);
+      const educationDetail = findDetailsSection(details, ['education', 'освіта']);
+      const languagesDetail = findDetailsSection(details, ['languages', 'мови']);
+      const hobbiesDetail = findDetailsSection(details, ['interests', 'hobbies', 'захоплення', 'хобі']);
+      const certificatesDetail = findDetailsSection(details, ['certificates', 'courses', 'сертифікати', 'курси']);
+
       // Get section titles
-      const experienceTitle = details[0]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Досвід' : 'Experience');
-      const projectsTitle = details[1]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Проєкти' : 'Projects');
-      const skillsTitle = details[2]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Навички' : 'Skills');
-      const educationTitle = details[3]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Освіта' : 'Education');
-      const languagesTitle = details[4]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Мови' : 'Languages');
-      const hobbiesTitle = details[5]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Хобі' : 'Interests');
-      const certificatesTitle = details[6]?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Сертифікати та курси' : 'Certificates and Courses');
+      const experienceTitle = experienceDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Досвід' : 'Experience');
+      const projectsTitle = projectsDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Проєкти' : 'Projects');
+      const skillsTitle = skillsDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Ключові технології' : 'Key Technologies');
+      const educationTitle = educationDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Освіта' : 'Education');
+      const languagesTitle = languagesDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Мови' : 'Languages');
+      const hobbiesTitle = hobbiesDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Хобі' : 'Interests');
+      const certificatesTitle = certificatesDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Сертифікати та курси' : 'Certificates and Courses');
 
       // Create content sections
-      const jobEntries = createJobEntries(details[0]);
-      const projectEntries = createProjectEntries(details[1]);
-      const skillItems = extractSkillGroups(details[2]);
-      const educationEntries = createEducationEntries(details[3]);
-      const languageEntries = createLanguageEntries(details[4]);
-      const hobbyEntries = extractHobbies(details[5]);
-      const certificateEntries = createCertificateEntries(details[6]);
+      const jobEntries = createJobEntries(experienceDetail);
+      const projectEntries = createProjectEntries(projectsDetail);
+      const skillItems = extractSkillGroups(skillsDetail);
+      const educationEntries = createEducationEntries(educationDetail);
+      const languageEntries = createLanguageEntries(languagesDetail);
+      const hobbyEntries = extractHobbies(hobbiesDetail);
+      const certificateEntries = createCertificateEntries(certificatesDetail);
 
       // Set colors based on theme
       const themeColors = isDarkTheme ? {
@@ -580,6 +612,72 @@ if (socialLinks.length > 0) {
     });
   }
 }
+      const photoColumn = photoData
+        ? {
+            stack: [
+              {
+                canvas: [
+                  {
+                    type: 'rect',
+                    x: 0, y: 0,
+                    w: photoWidth + 4,
+                    h: photoHeight + 4,
+                    r: 3,
+                    lineWidth: 1.5,
+                    lineColor: themeColors.primary
+                  }
+                ]
+              },
+              {
+                image: photoData,
+                width: photoWidth,
+                height: photoHeight,
+                margin: [2, -photoHeight - 2, 0, 0]
+              }
+            ],
+            width: photoWidth + 10,
+            margin: [0, 0, 10, 0]
+          }
+        : {
+            width: photoWidth + 10,
+            stack: [
+              {
+                canvas: [
+                  {
+                    type: 'rect',
+                    x: 0, y: 0,
+                    w: photoWidth + 4,
+                    h: photoHeight + 4,
+                    r: 3,
+                    lineWidth: 1.5,
+                    lineColor: themeColors.border
+                  }
+                ]
+              },
+              {
+                text: isUkrainian ? 'Фото недоступне' : 'Photo unavailable',
+                fontSize: 8,
+                color: themeColors.muted,
+                alignment: 'center',
+                margin: [0, -photoHeight / 2, 0, 0]
+              }
+            ],
+            margin: [0, 0, 10, 0]
+          };
+
+      const qrColumn = qrCodeData
+        ? {
+            image: qrCodeData,
+            width: 40,
+            alignment: 'right',
+            margin: [0, 0, 0, 0]
+          }
+        : {
+            width: 40,
+            text: '',
+            alignment: 'right'
+          };
+
       // ULTRA-COMPACT PDF LAYOUT WITHOUT EMPTY PAGES
       const docDefinition = {
         pageSize: 'A4',
@@ -600,32 +698,7 @@ if (socialLinks.length > 0) {
           // Ultra-compact header
           {
             columns: [
-              // Photo with frame
-              {
-                stack: [
-                  {
-                    canvas: [
-                      {
-                        type: 'rect',
-                        x: 0, y: 0,
-                        w: photoWidth + 4,
-                        h: photoHeight + 4,
-                        r: 3,
-                        lineWidth: 1.5,
-                        lineColor: themeColors.primary
-                      }
-                    ]
-                  },
-                  {
-                    image: photoData,
-                    width: photoWidth,
-                    height: photoHeight,
-                    margin: [2, -photoHeight - 2, 0, 0]
-                  }
-                ],
-                width: photoWidth + 10,
-                margin: [0, 0, 10, 0]
-              },
+              photoColumn,
               // Main information
               {
                 stack: [
@@ -662,12 +735,7 @@ if (socialLinks.length > 0) {
                 width: '*'
               },
               // QR code (reduced size)
-              {
-                image: qrCodeData,
-                width: 40, // Reduced size
-                alignment: 'right',
-                margin: [0, 0, 0, 0]
-              }
+              qrColumn
             ],
             margin: [0, 0, 0, 3] // Ultra-minimal margin after header
           },
@@ -685,12 +753,20 @@ if (socialLinks.length > 0) {
           },
           
           // MAIN RESUME CONTENT - NO PAGEBREAK!
-          
+
+          // Key Technologies — first
+          { text: skillsTitle, style: 'sectionHeader', margin: [0, 0, 0, 5], keepWithNext: true },
+          {
+            stack: skillItems,
+            margin: [0, 0, 0, 10]
+          },
+
           // Experience
           { 
             text: experienceTitle, 
             style: 'sectionHeader', 
-            margin: [0, 0, 0, 5] // Removed pageBreak!
+            margin: [0, 0, 0, 5],
+            keepWithNext: true
           },
           
           // Wrapper container for all experience items
@@ -704,7 +780,7 @@ if (socialLinks.length > 0) {
           },
           
           // Projects
-          { text: projectsTitle, style: 'sectionHeader', margin: [0, 0, 0, 5] },
+          { text: projectsTitle, style: 'sectionHeader', margin: [0, 0, 0, 5], keepWithNext: true },
           
           // Wrapper container for all projects
           {
@@ -716,73 +792,58 @@ if (socialLinks.length > 0) {
             margin: [0, 0, 0, 10]
           },
           
-          // Two-column block - Skills and Education
+          // Two-column block - Education only (Skills moved to top)
           {
-            columns: [
-              {
-                width: '48%',
-                stack: [
-                  { text: skillsTitle, style: 'sectionHeader', margin: [0, 0, 0, 5] },
-                  // Wrapper container for skills
-                  {
-                    stack: skillItems,
-                    pageBreakInside: 'avoid'
-                  }
-                ]
-              },
-              {
-                width: '48%',
-                stack: [
-                  { text: educationTitle, style: 'sectionHeader', margin: [0, 0, 0, 5] },
-                  // Wrapper container for education
-                  {
-                    stack: educationEntries.map(entry => ({
-                      stack: [entry],
-                      pageBreakInside: 'avoid'
-                    }))
-                  }
-                ],
-                margin: [15, 0, 0, 0]
-              }
-            ],
-            columnGap: 10,
+            table: {
+              widths: ['100%'],
+              dontBreakRows: true,
+              body: [[
+                {
+                  stack: [
+                    { text: educationTitle, style: 'sectionHeader', margin: [0, 0, 0, 5], keepWithNext: true },
+                    {
+                      stack: educationEntries.map(entry => ({
+                        stack: [entry],
+                        pageBreakInside: 'avoid'
+                      }))
+                    }
+                  ],
+                  border: [false, false, false, false]
+                }
+              ]]
+            },
+            layout: 'noBorders',
             margin: [0, 0, 0, 10]
           },
           
-          // Two-column block - Languages and Certificates/Hobbies
+          // Two-column block - Languages and Hobbies (table keeps rows together on print)
           {
-            columns: [
-              {
-                width: '48%',
-                stack: [
-                  { text: languagesTitle, style: 'sectionHeader', margin: [0, 0, 0, 5] },
-                  // Wrapper container for languages
-                  {
-                    stack: languageEntries,
-                    pageBreakInside: 'avoid'
-                  }
-                ]
-              },
-              {
-                width: '48%',
-                stack: [
-                  { text: certificatesTitle, style: 'sectionHeader', margin: [0, 0, 0, 5] },
-                  // Wrapper container for certificates
-                  {
-                    stack: certificateEntries,
-                    pageBreakInside: 'avoid'
-                  },
-                  { text: hobbiesTitle, style: 'sectionHeader', margin: [0, 10, 0, 5] },
-                  // Wrapper container for hobbies
-                  {
-                    stack: hobbyEntries,
-                    pageBreakInside: 'avoid'
-                  }
-                ],
-                margin: [15, 0, 0, 0]
-              }
-            ],
-            columnGap: 10
+            table: {
+              widths: ['48%', '4%', '48%'],
+              dontBreakRows: true,
+              body: [[
+                {
+                  stack: [
+                    { text: languagesTitle, style: 'sectionHeader', margin: [0, 0, 0, 5], keepWithNext: true },
+                    { stack: languageEntries }
+                  ],
+                  border: [false, false, false, false]
+                },
+                { text: '', border: [false, false, false, false] },
+                {
+                  stack: [
+                    ...(certificateEntries.length > 0 ? [
+                      { text: certificatesTitle, style: 'sectionHeader', margin: [0, 0, 0, 5], keepWithNext: true },
+                      { stack: certificateEntries }
+                    ] : []),
+                    { text: hobbiesTitle, style: 'sectionHeader', margin: [0, certificateEntries.length > 0 ? 10 : 0, 0, 5], keepWithNext: true },
+                    { stack: hobbyEntries }
+                  ],
+                  border: [false, false, false, false]
+                }
+              ]]
+            },
+            layout: 'noBorders'
           }
         ],
         
