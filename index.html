@@ -48,6 +48,7 @@
       <div class="skills">
         <p><strong>Programming:</strong> Python, C++, C#, Java, MQL4, MQL5</p>
         <p><strong>AI / ML:</strong> LangChain, Retrieval-Augmented Generation (RAG), StyleGAN2, Computer Vision, EasyOCR</p>
+        <p><strong>Robotics / UAV:</strong> ArduPilot SITL, DroneKit, Visual Odometry (VO), Mission Planning, Control Systems, Telemetry, GPS-Denied Navigation, Autonomous Flight</p>
         <p><strong>Backend:</strong> FastAPI, PostgREST, REST APIs, Webhooks, API integrations (Telegram Bot API, MetaTrader API, Electronic Court of Ukraine API, Cryptocurrency Exchange APIs: Binance, Bybit, OKX)</p>
         <p><strong>Frontend:</strong> React, Tailwind CSS</p>
         <p><strong>Databases:</strong> PostgreSQL, Redis, SQLite, Elasticsearch</p>
@@ -58,6 +59,28 @@
 
     <details onclick="toggleDetails(this)">
       <summary><h2>Досвід</h2></summary>
+      <div class="job">
+        <h3>Drone Software Developer</h3>
+        <p>Drone Software Company</p>
+        <p>📅 04/2026 – 05/2026 &nbsp;&nbsp; 📍 Україна</p>
+        <p>Розробка систем автономного керування польотом БПЛА з фокусом на Visual Odometry навігацію, якість коду та управління дроном.</p>
+
+        <h4>Ключові обов'язки та досягнення:</h4>
+        <ul>
+          <li>Розробляв та підтримував систему автономного керування польотом, використовуючи ArduPilot SITL (Software In The Loop) симулятор для повного контролю дрона від точки А до точки Б.</li>
+          <li>Реалізував 8-стану скінченний автомат (FSM) для планування місій та виконання автономних завдань (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE).</li>
+          <li>Активно працював з системами <strong>Visual Odometry (VO)</strong> для навігації без GPS, забезпечуючи автономний політ без доступності GPS сигналу.</li>
+          <li>Розробляв PI/P контролери для регулювання висоти, курсу та руху в сторони з алгоритмами компенсації вітру.</li>
+          <li>Реструктуризував кодову базу на модульні компоненти для покращення підтримуваності, масштабованості та переиспользуваності коду.</li>
+          <li>Створював комплексну документацію коду та вбудовані коментарі для передачі знань та майбутнього обслуговування.</li>
+          <li>Проводив розширене тестування різних режимів автопілота, поведінки польоту та продуктивності Visual Odometry за різних умов.</li>
+          <li>Інтегрував DroneKit для комунікації з апаратом, управління телеметрією та безпечного виконання RC команд.</li>
+          <li>Розробляв та управляв системами загального керування дроном та механізмами безпеки, включаючи виявлення втрати GPS та плавні послідовності переривання.</li>
+          <li>Створював автоматизований набір тестів з використанням PyTest для перевірки місій та валідації контролера польоту.</li>
+        </ul>
+
+        <p><strong>Технології:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, Mission Planning, Control Systems (PI/P Controllers), Visual Odometry (VO), PyTest, Telemetry</p>
+      </div>
       <div class="job">
         <h3>Team Lead / Senior Backend Developer</h3>
         <p>Anunciata</p>
@@ -165,6 +188,33 @@
 
     <details>
       <summary><h2>Проєкти</h2></summary>
+      <div class="project">
+        <h3>Autopilot — Система автономного керування польотом з Visual Odometry</h3>
+        <p>
+          Повнофункціональна система автономного керування польотом для квадрокоптерів з використанням ArduPilot SITL симуляції. Реалізує планування місій Stage 3 з повним контролем від зльоту через автономну навігацію по вайпойнтам до посадки, включаючи підтримку Visual Odometry (VO) для середовищ без GPS. Система виконує повністю автономні завдання, використовуючи комунікацію DroneKit, спеціальні PI/P алгоритми керування та комплексні механізми безпеки.
+        </p>
+
+        <h4>Ключові можливості</h4>
+        <ul>
+          <li>8-стану скінченний автомат для виконання автономних місій (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE)</li>
+          <li>Інтеграція Visual Odometry (VO) для автономної навігації та локалізації без GPS</li>
+          <li>PI та P контролери для регулювання висоти та руху в сторони з компенсацією вітру</li>
+          <li>Інтеграція DroneKit для телеметрії апарату та управління RC командами</li>
+          <li>Географічні розрахунки для навігації по вайпойнтам (дистанція, азимут, керування курсом)</li>
+          <li>Модульна, добре задокументована кодова база з комплексною вбудованою документацією</li>
+          <li>Механізми безпеки, включаючи виявлення втрати GPS, таймаути станів та плавні послідовності переривання</li>
+          <li>Комплексне логування та телеметрія для моніторингу та налагодження місій</li>
+          <li>Розширене тестування покриття для режимів автопілота, поведінки польоту та продуктивності VO</li>
+          <li>Автоматизований набір тестів з використанням PyTest для перевірки місій</li>
+        </ul>
+
+        <h4>Технології</h4>
+        <p>Python, ArduPilot SITL, DroneKit, PyMAVLink, Mission Planning, PI/P Controllers, Visual Odometry (VO), PyTest</p>
+
+        <h4>Посилання на проєкт</h4>
+        <p><a href="https://github.com/andrijmix/Autopilot" target="_blank">GitHub Repository</a></p>
+      </div>
+
       <div class="project">
         <h3>SuperAgent — Інтелектуальний чат-агент на основі RAG</h3>
       

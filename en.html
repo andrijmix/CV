@@ -48,6 +48,7 @@
       <div class="skills">
         <p><strong>Programming:</strong> Python, C++, C#, Java, MQL4, MQL5</p>
         <p><strong>AI / ML:</strong> LangChain, Retrieval-Augmented Generation (RAG), StyleGAN2, Computer Vision, EasyOCR</p>
+        <p><strong>Robotics / UAV:</strong> ArduPilot SITL, DroneKit, Visual Odometry (VO), Mission Planning, Control Systems, Telemetry, GPS-Denied Navigation, Autonomous Flight</p>
         <p><strong>Backend:</strong> FastAPI, PostgREST, REST APIs, Webhooks, API integrations (Telegram Bot API, MetaTrader API, Electronic Court of Ukraine API, Cryptocurrency Exchange APIs: Binance, Bybit, OKX)</p>
         <p><strong>Frontend:</strong> React, Tailwind CSS</p>
         <p><strong>Databases:</strong> PostgreSQL, Redis, SQLite, Elasticsearch</p>
@@ -58,6 +59,28 @@
 
     <details onclick="toggleDetails(this)">
       <summary><h2>Experience</h2></summary>
+      <div class="job">
+        <h3>Drone Software Developer</h3>
+        <p>Drone Software Company</p>
+        <p>📅 04/2026 – 05/2026 &nbsp;&nbsp; 📍 Ukraine</p>
+        <p>Development of autonomous flight control systems for UAVs with focus on Visual Odometry-based navigation, code quality, and drone management.</p>
+
+        <h4>Key Responsibilities and Achievements:</h4>
+        <ul>
+          <li>Developed and maintained autonomous flight control system using ArduPilot SITL (Software In The Loop) simulator for fully controlled drone flight from Point A to Point B.</li>
+          <li>Implemented 8-state finite state machine (FSM) for mission planning and autonomous mission execution (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE).</li>
+          <li>Worked extensively with <strong>Visual Odometry (VO)</strong> systems for GPS-denied navigation, enabling autonomous flight without GPS signal availability.</li>
+          <li>Designed and implemented PI/P control systems for altitude, heading, and lateral movement compensation with wind correction algorithms.</li>
+          <li>Refactored codebase into modular components for improved maintainability, scalability, and code reusability.</li>
+          <li>Created comprehensive code documentation and inline comments for knowledge transfer and future maintenance.</li>
+          <li>Conducted extensive testing of various autopilot modes, flight behaviors, and Visual Odometry performance under different conditions.</li>
+          <li>Integrated DroneKit for vehicle communication, telemetry management, and RC Override for safe command execution.</li>
+          <li>Developed and managed overall drone control systems and failsafe mechanisms including GPS-loss detection and graceful abort sequences.</li>
+          <li>Created automated test suite using PyTest for mission validation and flight controller verification.</li>
+        </ul>
+
+        <p><strong>Technologies:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, Mission Planning, Control Systems (PI/P Controllers), Visual Odometry (VO), PyTest, Telemetry</p>
+      </div>
       <div class="job">
         <h3>Team Lead / Senior Backend Developer</h3>
         <p>Anunciata</p>
@@ -165,6 +188,33 @@
 
     <details>
       <summary><h2>Projects</h2></summary>
+      <div class="project">
+        <h3>Autopilot — Autonomous Flight Control System with Visual Odometry</h3>
+        <p>
+          A complete autonomous flight control system for quadcopters using ArduPilot SITL simulation. Implements Stage 3 mission planning with full control from takeoff through autonomous waypoint navigation to landing, including Visual Odometry (VO) support for GPS-denied environments. The system executes fully autonomous missions using DroneKit vehicle communication, custom PI/P control algorithms, and comprehensive failsafe mechanisms.
+        </p>
+
+        <h4>Key Features</h4>
+        <ul>
+          <li>8-state finite state machine for autonomous mission execution (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE)</li>
+          <li>Visual Odometry (VO) integration for GPS-denied autonomous navigation and localization</li>
+          <li>PI and P control systems for altitude regulation and lateral movement with wind compensation</li>
+          <li>DroneKit integration for vehicle telemetry and RC command override</li>
+          <li>Geographic calculations for waypoint navigation (distance, bearing, heading control)</li>
+          <li>Modular, well-documented codebase with comprehensive inline documentation</li>
+          <li>Failsafe mechanisms including GPS-loss detection, state timeouts, and graceful abort sequences</li>
+          <li>Comprehensive logging and telemetry for mission monitoring and debugging</li>
+          <li>Extensive testing coverage for autopilot modes, flight behaviors, and VO performance</li>
+          <li>Automated test suite using PyTest for mission validation</li>
+        </ul>
+
+        <h4>Technologies</h4>
+        <p>Python, ArduPilot SITL, DroneKit, PyMAVLink, Mission Planning, PI/P Controllers, Visual Odometry (VO), PyTest</p>
+
+        <h4>Project Link</h4>
+        <p><a href="https://github.com/andrijmix/Autopilot" target="_blank">GitHub Repository</a></p>
+      </div>
+
       <div class="project">
         <h3>SuperAgent — Intelligent RAG-based Chat Agent</h3>
       
