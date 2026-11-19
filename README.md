@@ -3,12 +3,12 @@
 Це персональний сайт-резюме, створений за допомогою HTML, CSS та JavaScript, з публікацією через **GitHub Pages**.
 
 ## 🌐 Онлайн-версія
-Сайт доступний за адресою: [andrijmix.github.io](https://andrijmix.github.io)
+Сайт доступний за адресою: [andrijmix.github.io/CV](https://andrijmix.github.io/CV/)
 
 ## 📄 Сторінки
 
-- [🇺🇦 Українська версія](https://andrijmix.github.io/index.html)
-- [🇬🇧 English version (основна, для міжнародного ринку)](https://andrijmix.github.io/en.html)
+- [🇺🇦 Українська версія](https://andrijmix.github.io/CV/index.html)
+- [🇬🇧 English version (основна, для міжнародного ринку)](https://andrijmix.github.io/CV/en.html)
 
 ## 📦 Структура проєкту
 
