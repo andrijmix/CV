@@ -1,402 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" type="image/png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Open Graph (for social platforms) -->
-<meta property="og:title" content="Andrii Mikhnevych | Software Developer">
-<meta property="og:description" content="My personal portfolio site: experience, projects, PDF resume, and contacts.">
-<meta property="og:image" content="https://andrijmix.github.io/photo.jpg">
-<meta property="og:url" content="https://andrijmix.github.io/en.html">
-<meta property="og:type" content="website">
+  <meta property="og:title" content="Andrii Mikhnevych | AI Engineer">
+  <meta property="og:description" content="AI Engineer building LLM agents, RAG systems and autonomous software. Projects, experience, and PDF resume.">
+  <meta property="og:image" content="https://andrijmix.github.io/photo.jpg">
+  <meta property="og:url" content="https://andrijmix.github.io/en.html">
+  <meta property="og:type" content="website">
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Andrii Mikhnevych | Software Developer">
-<meta name="twitter:description" content="Portfolio with experience, projects, skills, and downloadable PDF resume.">
-<meta name="twitter:image" content="https://andrijmix.github.io/photo.jpg">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Andrii Mikhnevych | AI Engineer">
+  <meta name="twitter:description" content="LLM agents, RAG, voice AI and autonomous systems. Portfolio with projects, experience and downloadable PDF resume.">
+  <meta name="twitter:image" content="https://andrijmix.github.io/photo.jpg">
 
-
-  <title>Andrii Mikhnevych | Software Developer</title>
+  <title>Andrii Mikhnevych | AI Engineer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="alternate" hreflang="en" href="https://andrijmix.github.io/en.html">
+  <link rel="alternate" hreflang="uk" href="https://andrijmix.github.io/index.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Andrii Mikhnevych",
+    "jobTitle": "AI Engineer",
+    "description": "AI Engineer building LLM agents, RAG systems and autonomous software.",
+    "url": "https://andrijmix.github.io/en.html",
+    "image": "https://andrijmix.github.io/photo.jpg",
+    "email": "mailto:andrijmix@gmail.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/andrii-miknevych-866428202/",
+      "https://github.com/andrijmix",
+      "https://t.me/amenws"
+    ],
+    "knowsAbout": ["LLM agents", "Retrieval-Augmented Generation (RAG)", "Tool calling", "Model Context Protocol (MCP)", "Prompt engineering", "LLM evaluation", "Voice AI", "Python", "FastAPI", "TypeScript", "React"],
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "National University of Water and Environmental Engineering (NUWM)" }
+  }
+  </script>
 </head>
 <body>
-  <header>
+  <nav class="topnav">
+    <a class="brand" href="#top">AM</a>
+    <div class="links">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#stack">Stack</a>
+      <a href="#contact">Contact</a>
+    </div>
     <div class="controls">
-      <button onclick="toggleDarkMode()">🌗</button>
+      <button onclick="toggleDarkMode()" aria-label="Toggle theme">🌗</button>
       <a href="index.html">UA</a>
       <button onclick="generatePDF()">PDF</button>
     </div>
+  </nav>
+
+  <header id="top" class="hero">
     <img src="photo.jpg" alt="Photo of Andrii Mikhnevych" />
-    <p>Andrii Mikhnevych</p>
-    <p>Software Developer</p>
-    <p style="font-style: italic; max-width: 700px; margin: 0.5rem auto 1rem; font-size: 1.1rem;">
-      Over 7 years of experience in developing complex algorithmic solutions, data analytics, and automation.
-    </p>
+    <h1 class="name">Andrii Mikhnevych</h1>
+    <p class="headline">AI Engineer · LLM Agents · RAG · Autonomous Systems</p>
+    <p class="hook">I build LLM agents and RAG systems that replace manual work, and I ship the automation around them. Court-filing throughput went from ~500 applications in 7 days to ~3000 in 12 hours.</p>
     <div class="social-links">
-    <a href="https://www.linkedin.com/in/andrii-miknevych-866428202/" target="_blank">LinkedIn</a>
-    <a href="https://t.me/amenws" target="_blank">Telegram</a>
-    <a href="viber://pa?chatURI=+380507660522" target="_blank">Viber</a>
-  </div>
-    <p><a href="mailto:andrijmix@gmail.com" style="color: #60a5fa">andrijmix@gmail.com</a> | +380507660522</p>
+      <a href="https://www.linkedin.com/in/andrii-miknevych-866428202/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/andrijmix" target="_blank">GitHub</a>
+      <a href="https://t.me/amenws" target="_blank">Telegram</a>
+    </div>
+    <p class="contact"><a href="mailto:andrijmix@gmail.com">andrijmix@gmail.com</a></p>
   </header>
-  <section id="content">
-    <details>
-      <summary><h2>Key Technologies</h2></summary>
-      <div class="skills">
-        <p><strong>Programming:</strong> Python, C++, C#, Java, MQL4, MQL5</p>
-        <p><strong>AI / ML:</strong> LangChain, Retrieval-Augmented Generation (RAG), StyleGAN2, Computer Vision, EasyOCR</p>
-        <p><strong>Robotics / UAV:</strong> ArduPilot SITL, DroneKit, Visual Odometry (VO), Mission Planning, Control Systems, Telemetry, GPS-Denied Navigation, Autonomous Flight</p>
-        <p><strong>Backend:</strong> FastAPI, PostgREST, REST APIs, Webhooks, API integrations (Telegram Bot API, MetaTrader API, Electronic Court of Ukraine API, Cryptocurrency Exchange APIs: Binance, Bybit, OKX)</p>
-        <p><strong>Frontend:</strong> React, Tailwind CSS</p>
-        <p><strong>Databases:</strong> PostgreSQL, Redis, SQLite, Elasticsearch</p>
-        <p><strong>Tools:</strong> Git, Docker (basic), Linux, VS Code</p>
-        <p><strong>Data Processing:</strong> PDF processing, LibreOffice automation</p>
+
+  <main id="content">
+    <section class="impact" data-pdf="impact" aria-label="Impact">
+      <div class="impact-grid">
+        <div class="stat reveal"><span class="num" data-count="3000">3000</span><span class="label">court applications in 12 hours (was ~500 in 7 days)</span></div>
+        <div class="stat reveal"><span class="num" data-count="2">2</span><span class="label">CRM systems shipped from scratch in 6 months</span></div>
+        <div class="stat reveal"><span class="num" data-count="1">1</span><span class="label">first in-house AI agent at VeraData: live in beta, shown at the company Town Hall</span></div>
+        <div class="stat reveal"><span class="num" data-count="7" data-suffix="+">7+</span><span class="label">years building production software</span></div>
       </div>
-    </details>
+    </section>
 
-    <details onclick="toggleDetails(this)">
-      <summary><h2>Experience</h2></summary>
-      <div class="job">
-        <h3>Drone Software Developer</h3>
-        <p>Drone Software Company</p>
-        <p>📅 04/2026 – 05/2026 &nbsp;&nbsp; 📍 Ukraine</p>
-        <p>Development of autonomous flight control systems for UAVs with focus on Visual Odometry-based navigation, code quality, and drone management.</p>
+    <section id="projects" data-pdf="projects">
+      <h2>AI Projects</h2>
 
-        <h4>Key Responsibilities and Achievements:</h4>
+      <div class="project reveal">
+        <h3 class="title">Voice AI Agent for a Call Center</h3>
+        <p class="summary">Answers client calls automatically using the company FAQ. Built at Anunciata.</p>
         <ul>
-          <li>Developed and maintained autonomous flight control system using ArduPilot SITL (Software In The Loop) simulator for fully controlled drone flight from Point A to Point B.</li>
-          <li>Implemented 8-state finite state machine (FSM) for mission planning and autonomous mission execution (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE).</li>
-          <li>Worked extensively with <strong>Visual Odometry (VO)</strong> systems for GPS-denied navigation, enabling autonomous flight without GPS signal availability.</li>
-          <li>Designed and implemented PI/P control systems for altitude, heading, and lateral movement compensation with wind correction algorithms.</li>
-          <li>Refactored codebase into modular components for improved maintainability, scalability, and code reusability.</li>
-          <li>Created comprehensive code documentation and inline comments for knowledge transfer and future maintenance.</li>
-          <li>Conducted extensive testing of various autopilot modes, flight behaviors, and Visual Odometry performance under different conditions.</li>
-          <li>Integrated DroneKit for vehicle communication, telemetry management, and RC Override for safe command execution.</li>
-          <li>Developed and managed overall drone control systems and failsafe mechanisms including GPS-loss detection and graceful abort sequences.</li>
-          <li>Created automated test suite using PyTest for mission validation and flight controller verification.</li>
+          <li><strong>Problem:</strong> operators spent their time on repetitive FAQ calls.</li>
+          <li><strong>Solution:</strong> speech-to-speech agent on OpenAI <code>gpt-4o-realtime</code>: the model takes call audio directly and answers in voice with no separate STT or TTS step. Answers are grounded in the company FAQ through a LangChain RAG layer, and tool calling lets the model run safe database queries after authorization.</li>
+          <li><strong>Result:</strong> handles ~100 calls/day.</li>
         </ul>
-
-        <p><strong>Technologies:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, Mission Planning, Control Systems (PI/P Controllers), Visual Odometry (VO), PyTest, Telemetry</p>
+        <p class="tech"><strong>Stack:</strong> Python, OpenAI Realtime API (gpt-4o-realtime), LangChain, RAG, tool calling, speech-to-speech</p>
       </div>
-      <div class="job">
-        <h3>Team Lead / Senior Backend Developer</h3>
-        <p>Anunciata</p>
-        <p>📅 06/2025 – 03/2026 &nbsp;&nbsp; 📍 Ukraine</p>
-        <p><strong>Team Lead / Senior Backend Developer</strong> (08/2025 – 03/2026)</p>
 
-        <h4>Key Responsibilities and Achievements:</h4>
+      <div class="project reveal">
+        <h3 class="title">Legal Document RAG Agent</h3>
+        <p class="summary">LLM agent that answers questions over legal PDFs. Initiated and architected independently.</p>
         <ul>
-          <li>Led a team of 4 developers (2 backend, 1 automation engineer, 1 full-stack).</li>
-          <li>Responsible for system architecture, task assignment, hiring developers, and communication with investors.</li>
-          <li>Organized team workflow via Azure Planner, distributed tasks, and mentored developers.</li>
-          <li>Within 6 months, the team deployed two CRM systems from scratch for different business divisions of the company.</li>
-          <li>Developed a legal CRM for managing court cases with integration with the Electronic Court of Ukraine API.</li>
-          <li>Through automation, increased court submission throughput from ~500 applications in 7 days (10 lawyers) to ~3000 applications in 12 hours.</li>
-          <li>Led development of a CRM for a Ukrainian clothing brand with marketplace integrations (product and order synchronization).</li>
-          <li>Designed backend architecture of systems in Python (Django, FastAPI) using PostgreSQL and MS SQL.</li>
-          <li>CRM was used by approximately 50 users in the legal division and 10 in e-commerce.</li>
+          <li><strong>Problem:</strong> lawyers reviewed legal PDFs by hand.</li>
+          <li><strong>Solution:</strong> RAG system and LangChain agent for automatic question answering over legal documents.</li>
+          <li><strong>Result:</strong> fully removed the human factor from document review. Processed hundreds of documents, with answer quality evaluated automatically against a lawyers' reference spreadsheet, with ~90% agreement.</li>
         </ul>
+        <p class="tech"><strong>Stack:</strong> Python, LangChain, RAG, PDF processing</p>
+      </div>
 
-        <p><strong>Senior Software Developer</strong> (06/2025 – 08/2025)</p>
+      <div class="project reveal">
+        <h3 class="title">SuperAgent: Multi-Agent RAG Chatbot</h3>
+        <p class="summary">A modular chat agent that routes each question to the right specialist agent.</p>
         <ul>
-          <li>Developed an AI agent for a call center that automatically processed voice calls using voice-to-text → LLM → text-to-speech pipeline and answered client questions based on the company FAQ.</li>
-          <li>Built a RAG system for PDF document analysis, enabling automatic question answering based on legal documents.</li>
-          <li>Independently initiated and designed the architecture of an LLM agent for legal PDF analysis, fully eliminating the human factor in document review.</li>
-          <li>Implemented agents using LangChain and the RAG approach.</li>
-          <li>Developed backend services and integrations with internal company systems.</li>
+          <li><strong>Problem:</strong> one prompt cannot answer FAQ, ambiguous and open-web questions equally well.</li>
+          <li><strong>Solution:</strong> a message router dispatches to a FAQ Agent, Clarification Agent or Web Search Agent, orchestrated with LangChain / LangGraph, with Elasticsearch vector search for retrieval and chat session storage.</li>
+          <li><strong>Result:</strong> working MVP on FastAPI with a lightweight web interface. I designed the architecture, built the agents, router and RAG utilities, and wrote the docs.</li>
         </ul>
-
-        <p><strong>Technologies:</strong> Python, Django, FastAPI, React, PostgreSQL, MS SQL, LangChain, RAG, REST API, Azure Planner</p>
+        <p class="tech"><strong>Stack:</strong> Python 3.10+, FastAPI, LangChain / LangGraph, Elasticsearch, OpenAI API</p>
       </div>
-      <div class="job">
-        <h3>Middle C++ Developer</h3>
-        <p>Algo Equities Technology Ltd</p>
-        <p>📅 07/2023 – 04/2025 &nbsp;&nbsp; 📍 Kyiv</p>
-        <p>Development of software solutions for asset management, algorithmic trading, and market analysis.</p>
 
-  <h4>Key Responsibilities and Achievements:</h4>
-  <ul>
-    <li>Development and implementation of trading platforms and strategy automation tools using <strong>C++, C#, Python, MQL4/5</strong> and various APIs (Stellar, Telegram, Binance, OKX, Bybit, Quantower).</li>
-    <li>Development of proprietary trading strategies based on technical indicators and their integration into automated systems.</li>
-    <li>Creation of cross-platform bridges for connecting multiple trading terminals and data sources.</li>
-    <li>Development of custom indicators in Python for system performance monitoring and user notification via Telegram bots.</li>
-    <li>Development of a high-performance <strong>Telegram bot</strong> in C++ using direct server connection, avoiding <code>getUpdates()</code> and significantly improving performance.</li>
-    <li>Integration of a news aggregator with a high-frequency trading system to capitalize on price fluctuations caused by news events.</li>
-    <li>Creation of a <strong>multi-threaded funding rate arbitrage aggregator</strong> in C# that utilized API data from leading cryptocurrency exchanges to profit from funding rate discrepancies.</li>
-  </ul>
-
-  <p><strong>Technologies:</strong> C++, C#, Python, MQL4, MQL5, Stellar API, Telegram API, Binance API, OKX API, Bybit API, Quantower API</p>
-</div>
- <div class="job">
-  <h3>C++ Freelancer</h3>
-  <p>Freelance</p>
-  <p>📅 02/2018 – 09/2023 &nbsp;&nbsp; 📍 Remote</p>
-  <p>Working on C++ solutions for financial systems.</p>
-  
-  <h4>Key Responsibilities and Achievements:</h4>
-  <ul>
-    <li>Primarily worked alone, but later brought a manager to the team to handle client communication, technical requirement coordination, and payment and tax management.</li>
-    <li>Creation of indicator status monitoring dashboards. As a result, these dashboards have been facilitating the work of clients from Germany for over 6 years. I maintain contact with them, occasionally implementing improvements and indicator replacements.</li>
-    <li>Working with large volumes of data and processing them to obtain pricing information using custom scripts, which helped identify defects and evaluate quality from suppliers.</li>
-    <li>Optimization and search for optimal settings, which allowed for significant capital gains as an investment company.</li>
-    <li>Created a Bitcoin key generator, which enabled calculating the stress metric of a Bitcoin wallet.</li>
-    <li>Development of an admin panel and admin bot, which allowed connecting over 200 active subscriptions.</li>
-    <li>Development of optimization algorithms and forward testing.</li>
-    <li>Publication of client products on marketplaces.</li>
-  </ul>
-
-  <p><strong>Technologies:</strong> C++, Python, MQL4/5, Telegram API, Binance API</p>
-</div>
-
-<div class="job">
-  <h3>Business Analyst</h3>
-  <p>AM Lingwista</p>
-  <p>📅 10/2017 – 12/2019 &nbsp;&nbsp; 📍 Rivne</p>
-  <p>Recruitment company that ceased operations after the start of the COVID-19 pandemic.</p>
-  
-  <h4>Key Responsibilities and Achievements:</h4>
-  <ul>
-    <li>Collection and analysis of data to optimize business processes.</li>
-    <li>Management of recruitment processes and reporting.</li>
-    <li>Creation of a simple CRM system using Google Sheets, which helped adapt managers to a more complex paid CRM.</li>
-    <li>Development of an automatic online reward dashboard that allowed managers to understand their daily efficiency and expected bonuses, nearly doubling the company's productivity through healthy competition.</li>
-  </ul>
-
-  <p><strong>Technologies:</strong> Excel, Google Sheets, Google Apps Script</p>
-</div>
-
-<div class="job">
-  <h3>Medical Process Digitalization Specialist</h3>
-  <p>Dubno City Hospital</p>
-  <p>📅 01/2020 – 02/2022 &nbsp;&nbsp; 📍 Dubno</p>
-  
-  <h4>Key Responsibilities and Achievements:</h4>
-  <ul>
-    <li>Automated part of medical documentation by creating Excel tools for data processing and structuring, reducing document preparation time.</li>
-    <li>Optimized department workflows by digitizing a portion of paper-based procedures.</li>
-    <li>Performed configuration and technical support of medical equipment and software.</li>
-    <li>Trained medical staff in basic computer skills and medical information systems.</li>
-    <li>Participated in the implementation and maintenance of digital tools for medical record management.</li>
-  </ul>
-
-  <p><strong>Technologies:</strong> Excel, medical information systems, digital data processing</p>
-</div>
-    </details>
-
-    <details>
-      <summary><h2>Projects</h2></summary>
-      <div class="project">
-        <h3>Autopilot — Autonomous Flight Control System with Visual Odometry</h3>
-        <p>
-          A complete autonomous flight control system for quadcopters using ArduPilot SITL simulation. Implements Stage 3 mission planning with full control from takeoff through autonomous waypoint navigation to landing, including Visual Odometry (VO) support for GPS-denied environments. The system executes fully autonomous missions using DroneKit vehicle communication, custom PI/P control algorithms, and comprehensive failsafe mechanisms.
-        </p>
-
-        <h4>Key Features</h4>
+      <div class="project reveal">
+        <h3 class="title">UnderTalk: CRM, Payroll &amp; AI Configurator (MCP)</h3>
+        <p class="summary">Production CRM / accounting / payroll platform for a call-center business. Part-time AI Engineer role in a 3-developer team, 04/2026 – 11/2026.</p>
         <ul>
-          <li>8-state finite state machine for autonomous mission execution (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE)</li>
-          <li>Visual Odometry (VO) integration for GPS-denied autonomous navigation and localization</li>
-          <li>PI and P control systems for altitude regulation and lateral movement with wind compensation</li>
-          <li>DroneKit integration for vehicle telemetry and RC command override</li>
-          <li>Geographic calculations for waypoint navigation (distance, bearing, heading control)</li>
-          <li>Modular, well-documented codebase with comprehensive inline documentation</li>
-          <li>Failsafe mechanisms including GPS-loss detection, state timeouts, and graceful abort sequences</li>
-          <li>Comprehensive logging and telemetry for mission monitoring and debugging</li>
-          <li>Extensive testing coverage for autopilot modes, flight behaviors, and VO performance</li>
-          <li>Automated test suite using PyTest for mission validation</li>
+          <li><strong>AI:</strong> built a remote MCP server that lets Claude design and test payroll configurations (draft → validate → simulate → compare → save), plus "SQL screens": admin- or AI-defined metrics as read-only SQL behind a 3-layer guard (text rules, Postgres <code>EXPLAIN</code> allow-list, short-lived read-only connection with timeouts). A security review caught a sensitive table within reach; fixed before release.</li>
+          <li><strong>Payroll &amp; billing:</strong> payroll rule engine (rates, percents, fixed, per-variable) with drill-down of every number to its source; client-billing module reconciled against operator analytics to the kopeck.</li>
+          <li><strong>Integrations:</strong> bank APIs (Monobank, A-Bank) and PDF/XLSX statement import with a check against the bank's printed totals, so a lost row is flagged before import.</li>
+          <li><strong>Reliability:</strong> CI-gated blue/green deploys with rollback, health endpoints, structured logs with correlation id. Fixed a production DB pool exhaustion and verified it with prod-shaped Locust load tests; a Redis cache cut a salary view from 25.8 s cold to 3 s warm (dev).</li>
+          <li><strong>Result:</strong> ~500 merged PRs in ~6 months across 5 repos, delivered with an AI-assisted workflow (Claude Code, Cursor) and real-time Playwright E2E walkthroughs as the definition of done.</li>
         </ul>
-
-        <h4>Technologies</h4>
-        <p>Python, ArduPilot SITL, DroneKit, PyMAVLink, Mission Planning, PI/P Controllers, Visual Odometry (VO), PyTest</p>
-
-        <h4>Project Link</h4>
-        <p><a href="https://github.com/andrijmix/Autopilot" target="_blank">GitHub Repository</a></p>
+        <p class="tech"><strong>Stack:</strong> Python, FastAPI, SQLAlchemy, PostgreSQL, Celery, RabbitMQ, Redis, Vue 3, MCP, Playwright, GitHub Actions</p>
       </div>
 
-      <div class="project">
-        <h3>SuperAgent — Intelligent RAG-based Chat Agent</h3>
-      
-        <h4>Project Overview</h4>
-        <p>
-          SuperAgent is an intelligent chatbot that leverages Large Language Models (LLMs) with
-          Retrieval-Augmented Generation (RAG) and Elasticsearch to provide accurate, context-aware answers.
-          The system routes user queries to specialized agents (FAQ Agent, Clarification Agent, Web Search Agent)
-          to ensure high-quality responses.
-        </p>
-      
-        <h4>Project Goals</h4>
+      <div class="project reveal">
+        <h3 class="title">Autopilot: Autonomous Flight with Visual Odometry</h3>
+        <p class="summary">Real-time autonomy: a quadcopter flies a full mission from takeoff to landing, including without GPS.</p>
         <ul>
-          <li>Provide reliable answers to frequently asked questions (FAQ).</li>
-          <li>Enhance responses with RAG using Elasticsearch for semantic retrieval.</li>
-          <li>Route messages to the appropriate specialized agents.</li>
-          <li>Build a modular and scalable architecture for AI assistants.</li>
+          <li><strong>Problem:</strong> fly autonomously from point A to point B where GPS is unavailable.</li>
+          <li><strong>Solution:</strong> 8-state mission FSM, a switchable GPS / odometry navigation source (Visual Odometry integration for GPS-denied flight), PI/P controllers with wind compensation, DroneKit telemetry and failsafes (GPS-loss detection, state timeouts, graceful abort).</li>
+          <li><strong>Result:</strong> fully autonomous missions in ArduPilot SITL, verified with an automated PyTest suite.</li>
         </ul>
-      
-        <h4>Architecture</h4>
-        <ul>
-          <li><strong>Backend:</strong> FastAPI for web routing and service orchestration.</li>
-          <li><strong>LLM Integration:</strong> LangChain / LangGraph for agent design and orchestration.</li>
-          <li><strong>Knowledge Base:</strong> Elasticsearch (vector search) for semantic retrieval.</li>
-          <li><strong>Agents:</strong> FAQ Agent, Clarification Agent, Web Search Agent, and a Message Router.</li>
-          <li><strong>Core Components:</strong> <code>superAgent.py</code>, <code>qa_agent.py</code>, <code>rag_utils.py</code>, <code>elastic_utils/</code>.</li>
-        </ul>
-      
-        <h4>Technologies</h4>
-        <p>Python 3.10+, FastAPI, LangChain / LangGraph, Elasticsearch (Cloud), OpenAI API</p>
-      
-        <h4>My Contribution</h4>
-        <ul>
-          <li>Designed the overall project architecture (<code>architecture.txt</code>).</li>
-          <li>Developed specialized agents (FAQ Agent, Message Router) and RAG utilities.</li>
-          <li>Integrated Elasticsearch for semantic search and chat session storage.</li>
-          <li>Built a lightweight web interface/routers for FAQ queries.</li>
-          <li>Authored project documentation (<code>README.md</code>).</li>
-        </ul>
-      
-        <h4>Result</h4>
-        <p>
-          A fully functional MVP chatbot with FAQ and RAG support capable of handling user queries in a modular
-          and scalable way. The project demonstrates practical experience with LLM orchestration, vector search,
-          and modern AI application design.
-        </p>
+        <p class="tech"><strong>Stack:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, Visual Odometry, PyTest</p>
+        <a class="link" href="https://github.com/andrijmix/Autopilot" target="_blank">GitHub repository →</a>
       </div>
-      
-      <div class="project">
-        <h3>Olympics Results Analysis Program</h3>
-        <p>
-          Using artificial intelligence for automated analysis of programming competition results and identifying patterns in participants' responses.
-        </p>
-      </div>
-      <div class="project">
-        <h3>Indicator-based Algorithmic Trading Strategy</h3>
-        <p>
-          Development of an algorithmic module that performed automated monitoring of market indicators and executed financial operations based on them.
-        </p>
-      </div>
-      <div class="project">
-        <h3>Hospital Website</h3>
-        <p>
-          Development of the official hospital website <a href="https://dubnohospital.com.ua/" target="_blank">dubnohospital.com.ua</a> with informative content, contact information, and a user-friendly interface for patients.
-        </p>
-      </div>
-      <div class="project">
-        <h3>AI-based Photo Analyzer</h3>
-        <p>
-          AI system that analyzes images and performs actions based on them — for example, autonomous poker playing with decision-making based on screenshot processing.
-        </p>
-      </div>
-    </details>
 
-    <details>
-      <summary><h2>Education</h2></summary>
-      <div class="education">
+      <p class="more-line reveal">Also: an AI photo analyzer that acts on screenshots (e.g. an autonomous poker player), and an AI analysis of programming-olympiad results.</p>
+    </section>
+
+    <section id="experience" data-pdf="experience">
+      <h2>Experience</h2>
+
+      <div class="job reveal">
+        <h3 class="title">AI Product Engineer</h3>
+        <p class="company">VeraData</p>
+        <p class="meta">📅 05/2026 – present &nbsp;&nbsp; 📍 Remote</p>
+        <ul>
+          <li>Built the company's first in-house AI agent, which automates order entry for data requests. Live in beta since 11/2026 and presented at the company-wide Town Hall.</li>
+          <li>Shipped LLM-powered internal web apps end to end (FastAPI + React/TypeScript): 224 merged PRs in about 6 months.</li>
+          <li>Designed agent workflows on Claude (tool use, structured JSON-schema output, Batch API, prompt caching) with a fallback to self-hosted open-weight models (vLLM, Ollama) on GPU infrastructure.</li>
+          <li>Built MCP servers and CLI tooling that give AI assistants access to project-management data, and automated meeting/video transcription and summarization with Gemini.</li>
+          <li>Created a bilingual (EN/UK) RAG evaluation dataset of 400+ Q&amp;A items to measure LLM answer quality.</li>
+          <li>Test-first engineering: pytest and Vitest, strict typing and linting, CI/CD on GitHub Actions.</li>
+        </ul>
+        <p class="tech"><strong>Technologies:</strong> Python, FastAPI, TypeScript, React, MS SQL, Claude API, vLLM / Ollama, Gemini, MCP (FastMCP), GitHub Actions, pytest</p>
+      </div>
+
+      <div class="job reveal">
+        <h3 class="title">AI Engineer (part-time)</h3>
+        <p class="company">UnderTalk</p>
+        <p class="meta">📅 04/2026 – 11/2026 &nbsp;&nbsp; 📍 Ukraine</p>
+        <ul>
+          <li>Built a remote MCP server that lets Claude design, validate, simulate and save payroll configurations, plus admin- and AI-defined "SQL screens" behind a 3-layer read-only guard.</li>
+          <li>Owned features end to end (DB migration → FastAPI → Vue 3 → E2E → deploy) in a 3-developer team: payroll engine, client billing, bank-statement import.</li>
+          <li>Shipped ~500 merged PRs in ~6 months with an AI-assisted workflow (Claude Code, Cursor), using Playwright E2E walkthroughs as the definition of done.</li>
+          <li>Fixed a production DB pool exhaustion, verified with prod-shaped Locust load tests; set up CI-gated blue/green deploys with rollback.</li>
+        </ul>
+        <p class="tech"><strong>Technologies:</strong> Python, FastAPI, PostgreSQL, Celery, RabbitMQ, Redis, Vue 3, MCP, Claude Code, Playwright, GitHub Actions</p>
+      </div>
+
+      <div class="job reveal">
+        <h3 class="title">Drone Software Developer</h3>
+        <p class="company">Drone Software Company</p>
+        <p class="meta">📅 04/2026 – 05/2026 &nbsp;&nbsp; 📍 Ukraine</p>
+        <ul>
+          <li>Built an autonomous flight control system on ArduPilot SITL that flies a drone from point A to point B with no manual input.</li>
+          <li>Implemented an 8-state FSM for mission execution (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE).</li>
+          <li>Wrote the Visual Odometry integration and an odometry navigation mode (EKF local position) for GPS-denied flight, plus failsafes: GPS-loss detection and graceful abort.</li>
+          <li>Designed PI/P controllers for altitude, heading and lateral movement with wind correction; integrated DroneKit telemetry and RC override.</li>
+          <li>Refactored the codebase into modules, documented it, and wrote an automated PyTest suite for mission validation.</li>
+        </ul>
+        <p class="tech"><strong>Technologies:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, Visual Odometry, PyTest</p>
+      </div>
+
+      <div class="job reveal">
+        <h3 class="title">Team Lead / Senior AI &amp; Backend Engineer</h3>
+        <p class="company">Anunciata</p>
+        <p class="meta">📅 06/2025 – 03/2026 &nbsp;&nbsp; 📍 Ukraine</p>
+        <ul>
+          <li>Built a speech-to-speech voice AI agent for a call center on OpenAI <code>gpt-4o-realtime</code> with LangChain RAG over the company FAQ and tool calling for safe, authorized database queries (~100 calls/day).</li>
+          <li>Independently initiated and architected an LLM agent with RAG (LangChain) for legal PDF analysis, removing the human factor from document review.</li>
+          <li>Led a team of 4 (2 backend, 1 automation, 1 full-stack): architecture, task assignment, hiring, mentoring and communication with investors.</li>
+          <li>Shipped two CRM systems from scratch in 6 months, a legal CRM (~50 users) and an e-commerce CRM for a clothing brand (~10 users) with marketplace sync.</li>
+          <li>Integrated the Electronic Court of Ukraine API and automated filing: ~500 applications in 7 days (10 lawyers) became ~3000 in 12 hours.</li>
+        </ul>
+        <p class="tech"><strong>Technologies:</strong> Python, Django, FastAPI, LangChain, RAG, React, PostgreSQL, MS SQL, REST API</p>
+      </div>
+
+      <div class="job reveal">
+        <h3 class="title">Middle C++ Developer</h3>
+        <p class="company">Algo Equities Technology Ltd</p>
+        <p class="meta">📅 07/2023 – 04/2025 &nbsp;&nbsp; 📍 Kyiv</p>
+        <ul>
+          <li>Built trading platforms and strategy-automation tools in C++, C#, Python and MQL4/5 on top of exchange and broker APIs (Binance, OKX, Bybit, Quantower).</li>
+          <li>Wrote a high-performance Telegram bot in C++ over a direct server connection, avoiding <code>getUpdates()</code> polling.</li>
+          <li>Built a multi-threaded funding-rate arbitrage aggregator in C# over several crypto-exchange APIs.</li>
+          <li>Connected a news aggregator to a high-frequency trading system to react to news-driven price moves.</li>
+        </ul>
+        <p class="tech"><strong>Technologies:</strong> C++, C#, Python, MQL4/5, Binance / OKX / Bybit / Quantower / Telegram APIs</p>
+      </div>
+
+      <div class="job reveal">
+        <h3 class="title">C++ Freelancer</h3>
+        <p class="company">Freelance</p>
+        <p class="meta">📅 02/2018 – 09/2023 &nbsp;&nbsp; 📍 Remote</p>
+        <ul>
+          <li>Built indicator-monitoring dashboards that German clients have relied on for over 6 years; I still maintain them.</li>
+          <li>Processed large datasets with custom scripts to surface supplier defects, and built optimization and forward-testing algorithms for an investment company.</li>
+          <li>Built an admin panel and bot that handled 200+ active subscriptions.</li>
+        </ul>
+        <p class="tech"><strong>Technologies:</strong> C++, Python, MQL4/5, Telegram API, Binance API</p>
+      </div>
+
+      <div class="job earlier reveal">
+        <h3 class="title">Earlier experience</h3>
+        <ul>
+          <li><strong>Medical Process Digitalization Specialist</strong>, Dubno City Hospital (01/2020 – 02/2022): Excel automation of medical documentation, hospital website <a href="https://dubnohospital.com.ua/" target="_blank">dubnohospital.com.ua</a>, staff training.</li>
+          <li><strong>Business Analyst</strong>, AM Lingwista (10/2017 – 12/2019): Google Sheets CRM and a live bonus dashboard that nearly doubled team productivity.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="stack" data-pdf="skills">
+      <h2>AI Engineer Stack</h2>
+      <div class="skills reveal">
+        <p><strong>LLMs &amp; Agents</strong> Anthropic Claude API (tool use, structured output, prompt caching, Batch API), OpenAI API, Gemini, LangChain, LangGraph, RAG, MCP servers, AI agents, multi-agent routing, prompt engineering, automated LLM evaluation, self-hosted LLMs (vLLM, Ollama), Claude Code</p>
+        <p><strong>Retrieval</strong> Elasticsearch (vector search), embeddings, semantic search, PDF processing</p>
+        <p><strong>Voice</strong> Speech-to-speech agents (OpenAI Realtime API, gpt-4o-realtime)</p>
+        <p><strong>Computer Vision / ML</strong> StyleGAN2, EasyOCR, Visual Odometry</p>
+        <p><strong>Backend &amp; Data</strong> FastAPI, Django, Pydantic, SQLAlchemy, REST APIs, PostgreSQL, MS SQL, Redis, Celery, RabbitMQ, SQLite, Docker, GitHub Actions CI/CD, Linux, Git</p>
+        <p><strong>Languages</strong> Python, TypeScript, C++, C#, Java, MQL4/5</p>
+        <p><strong>Robotics / UAV</strong> ArduPilot SITL, DroneKit, PyMAVLink, GPS-denied navigation</p>
+        <p><strong>Frontend</strong> Vue 3, React, TypeScript, Tailwind CSS, Playwright (E2E)</p>
+      </div>
+    </section>
+
+    <section data-pdf="education">
+      <h2>Education</h2>
+      <div class="education reveal">
         <h3>Master’s in Computer Engineering – NUWM</h3>
         <span>2021 – 2023</span>
       </div>
-      <div class="education">
+      <div class="education reveal">
         <h3>Bachelor’s in Computer Engineering – NUWM</h3>
         <span>2018 – 2021</span>
       </div>
-      <div class="education">
+      <div class="education reveal">
         <h3>Medical Education – Dubno Medical College</h3>
         <span>2015 – 2018</span>
       </div>
-    </details>
+    </section>
 
-
-
-    <details>
-      <summary><h2>Languages</h2></summary>
-      <div class="language-chart">
-        <div class="language">
-          <div>
-            <strong>Ukrainian</strong><br>
-            <span>Native</span>
-          </div>
-          <div class="dots">
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-          </div>
-        </div>
-        <div class="language">
-          <div>
-            <strong>Russian</strong><br>
-            <span>Fluent</span>
-          </div>
-          <div class="dots">
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-          </div>
-        </div>
-        <div class="language">
-          <div>
-            <strong>English</strong><br>
-            <span>Proficient</span>
-          </div>
-          <div class="dots">
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot empty"></span>
-            <span class="dot empty"></span>
-          </div>
-        </div>
-        <div class="language">
-          <div>
-            <strong>French</strong><br>
-            <span>Basic</span>
-          </div>
-          <div class="dots">
-            <span class="dot full"></span>
-            <span class="dot empty"></span>
-            <span class="dot empty"></span>
-            <span class="dot empty"></span>
-            <span class="dot empty"></span>
-          </div>
-        </div>
+    <section id="courses" data-pdf="certificates">
+      <h2>Courses &amp; Certifications</h2>
+      <div class="certificates">
+        <div class="certificate reveal"><h3>Claude Code in Action</h3><p>Anthropic Academy · completion badge</p><span>09/2026</span></div>
+        <div class="certificate reveal"><h3>Introduction to Model Context Protocol</h3><p>Anthropic Academy · completion badge</p><span>08/2026</span></div>
+        <div class="certificate reveal"><h3>Claude Platform 101</h3><p>Anthropic Academy · completion badge</p><span>08/2026</span></div>
+        <div class="certificate reveal"><h3>Introduction to Subagents</h3><p>Anthropic Academy</p><span>07/2026</span></div>
+        <div class="certificate reveal"><h3>Introduction to Agent Skills</h3><p>Anthropic Academy</p><span>07/2026</span></div>
+        <div class="certificate reveal"><h3>Claude Code 101</h3><p>Anthropic Academy · completion badge</p><span>07/2026</span></div>
+        <div class="certificate reveal"><h3>Generative AI for Beginners</h3><p>Microsoft (open course, completed)</p></div>
       </div>
-    </details>
+    </section>
 
-    <details>
-      <summary><h2>Interests</h2></summary>
-      <ul>
-        <li>Chess — second place at the regional level, development of strategic thinking</li>
-        <li>AI projects — development of intelligent solutions in free time, including automated systems</li>
-        <li>Travel — exploring cultures, adaptability, and expanding worldview</li>
-        <li>Outdoor activities — hiking, enjoying nature, and traveling</li>
-        <li>Gym — maintaining physical fitness and discipline</li>
-        <li>Numismatics — coin collecting, interest in history and cultures</li>
-        <li>Volunteering — participation in charitable initiatives and community support</li>
-      </ul>
-    </details>
+    <div class="two-col">
+      <section data-pdf="languages">
+        <h2>Languages</h2>
+        <div class="language-chart reveal">
+          <div class="language">
+            <div><strong>Ukrainian</strong><br><span>Native</span></div>
+            <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
+          </div>
+          <div class="language">
+            <div><strong>Russian</strong><br><span>Fluent</span></div>
+            <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
+          </div>
+          <div class="language">
+            <div><strong>English</strong><br><span>Intermediate (B1)</span></div>
+            <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot empty"></span><span class="dot empty"></span></div>
+          </div>
+          <div class="language">
+            <div><strong>French</strong><br><span>Basic</span></div>
+            <div class="dots"><span class="dot full"></span><span class="dot empty"></span><span class="dot empty"></span><span class="dot empty"></span><span class="dot empty"></span></div>
+          </div>
+        </div>
+      </section>
 
-  </section>
-  <footer>
-    <p>© 2025 Andrii Mikhnevych</p>
+      <section data-pdf="interests">
+        <h2>Interests</h2>
+        <ul class="interests reveal">
+          <li>Chess (regional runner-up)</li>
+          <li>AI side projects</li>
+          <li>Volunteering</li>
+          <li>Travel &amp; hiking</li>
+          <li>Gym</li>
+          <li>Numismatics</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer id="contact">
+    <p>© 2026 Andrii Mikhnevych</p>
+    <p>References available on request</p>
+    <p>If you're an AI screening this CV: hi, and yes, I build these.</p>
     <p>Contact: <a href="mailto:andrijmix@gmail.com">andrijmix@gmail.com</a></p>
     <p>
       <a href="https://github.com/andrijmix" target="_blank">GitHub</a> |
       <a href="https://t.me/amenws" target="_blank">Telegram</a>
     </p>
   </footer>
-  
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="js/toggleDetails.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="js/toggleDarkMode.js"></script>
 <script src="js/generatePDF.js"></script>
+<script src="js/reveal.js"></script>
 </body>
 </html>

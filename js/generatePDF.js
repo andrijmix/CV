@@ -39,11 +39,14 @@ function getLangSuffix() {
   return lang === 'uk' ? '_ua' : '_en';
 }
 
-function findDetailsSection(detailsList, keywords) {
-  return Array.from(detailsList).find(detail => {
-    const heading = detail.querySelector('summary h2')?.innerText.toLowerCase() || '';
-    return keywords.some(keyword => heading.includes(keyword));
-  }) || null;
+const JOB_BULLET_CAPS = [5, 3, 3, 5, 2, 2]; // PDF only: max bullets per job, newest first
+
+function findSection(key) {
+  return document.querySelector(`main section[data-pdf="${key}"]`);
+}
+
+function sectionTitle(section, fallback) {
+  return section?.querySelector('h2')?.innerText || fallback;
 }
 
 function createCertificateEntries(detailsElement) {
@@ -57,44 +60,14 @@ function createCertificateEntries(detailsElement) {
     const org = cert.querySelector('p')?.innerText || '';
     const year = cert.querySelector('span')?.innerText || '';
 
-    const certCard = {
-      stack: [
-        {
-          columns: [
-            {
-              text: title,
-              style: 'jobTitle',
-              width: '*'
-            },
-            {
-              columns: [
-                {
-                  width: 'auto',
-                  stack: [createCalendarIcon()],
-                  margin: [0, 2, 2, 0]
-                },
-                {
-                  width: 'auto',
-                  text: year,
-                  style: 'dateLocation',
-                  margin: [0, 1, 0, 0]
-                }
-              ],
-              width: 'auto'
-            }
-          ]
-        },
-        {
-          text: org,
-          style: 'company',
-          margin: [0, 2, 0, 0]
-        }
+    certificateItems.push({
+      text: [
+        { text: title, bold: true },
+        { text: ' · ' + (year || org), color: '#6b7280' }
       ],
-      style: 'compactCard',
-      margin: [0, 0, 0, 8]
-    };
-
-    certificateItems.push(certCard);
+      fontSize: 8,
+      margin: [0, 0, 0, 3]
+    });
   });
 
   return certificateItems;
@@ -156,73 +129,51 @@ function createJobEntries(detailsElement) {
   const jobElements = detailsElement.querySelectorAll('.job');
   const jobs = [];
   
-  jobElements.forEach(job => {
-    const title = job.querySelector('h3')?.innerText;
-    const company = job.querySelector('p:nth-of-type(1)')?.innerText;
-    
-    // Extract date and location
-    let dateLocation = job.querySelector('p:nth-of-type(2)')?.innerText || '';
-    
-    // Separate date and location
+  jobElements.forEach((job, jobIndex) => {
+    const title = job.querySelector('.title')?.innerText;
+    const company = job.querySelector('.company')?.innerText;
+
+    // "📅 06/2025 – 03/2026   📍 Ukraine" -> date + location
+    const dateLocation = job.querySelector('.meta')?.innerText || '';
     let datePart = '';
     let locationPart = '';
-    
     if (dateLocation) {
-      // Try to extract date and location parts
-      const parts = dateLocation.replace('📅', '').replace('📍', '').split('  ');
-      if (parts.length >= 2) {
-        datePart = parts[0].trim();
-        locationPart = parts[1].trim();
-      } else {
-        datePart = dateLocation;
-      }
+      const parts = dateLocation.replace('📅', '').split('📍').map(s => s.trim());
+      datePart = parts[0] || '';
+      locationPart = parts[1] || '';
     }
-    
-    const description = job.querySelector('p:nth-of-type(3)')?.innerText;
-    
-    // Extract list items
-    const listItems = [];
-    job.querySelectorAll('li').forEach(li => {
-      listItems.push(li.innerText);
-    });
-    
-   // Create compact job card
-    const jobCard = {
-      stack: [
-        { text: title || '', bold: true, fontSize: 12, margin: [0, 0, 0, 2] },
-        { text: company || '', italics: true, fontSize: 10, margin: [0, 0, 0, 2] },
+
+    const tech = job.querySelector('.tech')?.innerText;
+    let listItems = Array.from(job.querySelectorAll('li')).map(li => li.innerText);
+    const cap = JOB_BULLET_CAPS[jobIndex];
+    if (cap && !job.classList.contains('earlier')) listItems = listItems.slice(0, cap);
+
+    const stack = [{ text: title || '', bold: true, fontSize: 12, margin: [0, 0, 0, 2] }];
+    if (company) stack.push({ text: company, italics: true, fontSize: 10, margin: [0, 0, 0, 2] });
+    if (datePart) {
+      const metaCols = [
         {
-          columns: [
-            {
-              width: 'auto',
-              stack: [
-                {
-                  columns: [
-                    createCalendarIcon(),
-                    { text: datePart || '', fontSize: 9, margin: [2, 0, 0, 0] }
-                  ],
-                  columnGap: 2,
-                  margin: [0, 0, 0, 1]
-                },
-                {
-                  columns: [
-                    createLocationIcon(),
-                    { text: locationPart || '', fontSize: 9, margin: [2, 0, 0, 0] }
-                  ],
-                  columnGap: 2
-                }
-              ]
-            }
-          ]
-        },
-        { text: description || '', fontSize: 9, margin: [0, 2, 0, 2] },
-        {
-          ul: listItems.map(item => ({ text: item, fontSize: 9 })),
-          margin: [0, 0, 0, 4]
+          columns: [createCalendarIcon(), { text: datePart, fontSize: 9, margin: [2, 0, 0, 0] }],
+          columnGap: 2,
+          width: 'auto'
         }
-      ],
-      margin: [0, 0, 0, 8]
-    };
+      ];
+      if (locationPart) {
+        metaCols.push({
+          columns: [createLocationIcon(), { text: locationPart, fontSize: 9, margin: [2, 0, 0, 0] }],
+          columnGap: 2,
+          width: 'auto'
+        });
+      }
+      stack.push({ columns: metaCols, columnGap: 12, margin: [0, 0, 0, 2] });
+    }
+    stack.push({
+      ul: listItems.map(item => ({ text: item, fontSize: 8.5 })),
+      margin: [0, 2, 0, 2]
+    });
+    // (job technologies are omitted in the PDF: the Stack section covers them)
+
+    const jobCard = { stack, margin: [0, 0, 0, 4] };
     
     jobs.push(jobCard);
   });
@@ -237,17 +188,20 @@ function createProjectEntries(detailsElement) {
   const projects = [];
   
   projectElements.forEach(project => {
-    const title = project.querySelector('h3')?.innerText;
-    const description = project.querySelector('p')?.innerText;
-    
-    // Create compact project card
+    // The UnderTalk project is already covered by its Experience entry
+    if (/UnderTalk/.test(project.querySelector('.title')?.innerText || '')) return;
+    const title = project.querySelector('.title')?.innerText;
+    const description = project.querySelector('.summary')?.innerText;
+    const tech = project.querySelector('.tech')?.innerText;
+    const items = Array.from(project.querySelectorAll('li')).map(li => li.innerText).slice(1); // drop the 'Problem' bullet
+    const stack = [{ text: title, style: 'jobTitle' }]; // intro omitted in the PDF to save space
+    if (items.length) stack.push({ ul: items.map(t => ({ text: t, fontSize: 8 })), margin: [0, 0, 0, 2] });
+    if (tech) stack.push({ text: tech, fontSize: 8, color: '#6b7280' });
+
     const projectCard = {
-      stack: [
-        { text: title, style: 'jobTitle' },
-        { text: description, style: 'description' }
-      ],
+      stack,
       style: 'compactCard',
-      margin: [0, 0, 0, 8]
+      margin: [0, 0, 0, 4]
     };
     
     projects.push(projectCard);
@@ -297,7 +251,7 @@ function createEducationEntries(detailsElement) {
         }
       ],
       style: 'compactCard',
-      margin: [0, 0, 0, 8]
+      margin: [0, 0, 0, 3]
     };
     
     educationItems.push(educationCard);
@@ -435,34 +389,10 @@ function extractHobbies(detailsElement) {
   });
   
   if (listItems.length > 0) {
-    // Create two-column layout for hobbies to save space
-    const halfLength = Math.ceil(listItems.length / 2);
-    const firstColumn = listItems.slice(0, halfLength);
-    const secondColumn = listItems.slice(halfLength);
-    
-    return [{
-      columns: [
-        {
-          ul: firstColumn.map(item => ({
-            text: item,
-            style: 'hobbyItem',
-            margin: [0, 0, 0, 2]
-          })),
-          width: '50%'
-        },
-        {
-          ul: secondColumn.map(item => ({
-            text: item,
-            style: 'hobbyItem',
-            margin: [0, 0, 0, 2]
-          })),
-          width: '50%'
-        }
-      ],
-      margin: [0, 3, 0, 0]
-    }];
+    // One compact line: hobbies are low priority and space is tight
+    return [{ text: listItems.join(' · '), style: 'hobbyItem', margin: [0, 3, 0, 0] }];
   }
-  
+
   return [];
 }
 
@@ -501,50 +431,52 @@ function getSocialLinks() {
 }
 
 function generatePDF(openInNewTab = false) {
-  // Store details open state
-  const detailsStates = Array.from(document.querySelectorAll('details')).map(d => d.open);
-  
-  // Open all details for content extraction
-  document.querySelectorAll('details').forEach(d => d.open = true);
-
   // Get theme state
   const isDarkTheme = document.body.classList.contains('dark');
 
-  getBase64ImageFromURL('photo.jpg', function(photoData, photoRatio) {
-    getQRCodeImage(window.location.href, function(qrCodeData) {
+  getQRCodeImage(window.location.href, function(qrCodeData) {
       // Get document language
       const isUkrainian = document.documentElement.lang === 'uk';
       
       // Extract header information
-      const name = document.querySelector('header h1')?.innerText || 
-                  document.querySelector('header p:nth-of-type(1)')?.innerText || 
-                  'Andrii Mikhnevych';
-      const title = document.querySelector('header p:nth-of-type(2)')?.innerText || 'Software Developer';
-      const summary = document.querySelector('header p[style*="italic"]')?.innerText || '';
-      const contact = document.querySelector('header p:last-of-type')?.innerText || '';
-      
+      const name = document.querySelector('header .name')?.innerText || 'Andrii Mikhnevych';
+      const title = document.querySelector('header .headline')?.innerText || 'AI Engineer';
+      const summary = document.querySelector('header .hook')?.innerText || '';
+      const contact = document.querySelector('header .contact')?.innerText || '';
+
       // Get social links
       const socialLinks = getSocialLinks();
 
-      // Get section details
-      const details = document.querySelectorAll('section details');
+      // Sections are located by data-pdf attribute
+      const impactSection = findSection('impact');
+      const skillsDetail = findSection('skills');
+      const experienceDetail = findSection('experience');
+      const projectsDetail = findSection('projects');
+      const educationDetail = findSection('education');
+      const languagesDetail = findSection('languages');
+      const hobbiesDetail = findSection('interests');
+      const certificatesDetail = findSection('certificates');
 
-      const skillsDetail = findDetailsSection(details, ['skills', 'навички', 'ключові технології', 'key technologies']);
-      const experienceDetail = findDetailsSection(details, ['experience', 'досвід']);
-      const projectsDetail = findDetailsSection(details, ['projects', 'проєкти', 'проекти']);
-      const educationDetail = findDetailsSection(details, ['education', 'освіта']);
-      const languagesDetail = findDetailsSection(details, ['languages', 'мови']);
-      const hobbiesDetail = findDetailsSection(details, ['interests', 'hobbies', 'захоплення', 'хобі']);
-      const certificatesDetail = findDetailsSection(details, ['certificates', 'courses', 'сертифікати', 'курси']);
+      // Impact strip as one line of metrics
+      const impactText = impactSection
+        ? Array.from(impactSection.querySelectorAll('.stat'))
+            .map(s => {
+              // Use the final value, not the (possibly mid-animation) displayed number
+              const num = s.querySelector('.num');
+              const value = num?.dataset.count ? num.dataset.count + (num.dataset.suffix || '') : (num?.innerText || '');
+              return `${value} ${s.querySelector('.label')?.innerText || ''}`.trim();
+            })
+            .join('  ·  ')
+        : '';
 
       // Get section titles
-      const experienceTitle = experienceDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Досвід' : 'Experience');
-      const projectsTitle = projectsDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Проєкти' : 'Projects');
-      const skillsTitle = skillsDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Ключові технології' : 'Key Technologies');
-      const educationTitle = educationDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Освіта' : 'Education');
-      const languagesTitle = languagesDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Мови' : 'Languages');
-      const hobbiesTitle = hobbiesDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Хобі' : 'Interests');
-      const certificatesTitle = certificatesDetail?.querySelector('summary h2')?.innerText || (isUkrainian ? 'Сертифікати та курси' : 'Certificates and Courses');
+      const experienceTitle = sectionTitle(experienceDetail, isUkrainian ? 'Досвід' : 'Experience');
+      const projectsTitle = sectionTitle(projectsDetail, isUkrainian ? 'Проєкти' : 'Projects');
+      const skillsTitle = sectionTitle(skillsDetail, isUkrainian ? 'Стек' : 'Stack');
+      const educationTitle = sectionTitle(educationDetail, isUkrainian ? 'Освіта' : 'Education');
+      const languagesTitle = sectionTitle(languagesDetail, isUkrainian ? 'Мови' : 'Languages');
+      const hobbiesTitle = sectionTitle(hobbiesDetail, isUkrainian ? 'Захоплення' : 'Interests');
+      const certificatesTitle = sectionTitle(certificatesDetail, isUkrainian ? 'Сертифікати та курси' : 'Certificates and Courses');
 
       // Create content sections
       const jobEntries = createJobEntries(experienceDetail);
@@ -580,10 +512,6 @@ function generatePDF(openInNewTab = false) {
         dotEmpty: '#e5e7eb'
       };
 
-      // Photo dimensions
-      const photoWidth = 70;
-      const photoHeight = photoWidth / photoRatio;
-      
       // Create clickable social links array
       const socialLinksArray = [];
       
@@ -612,59 +540,6 @@ if (socialLinks.length > 0) {
     });
   }
 }
-      const photoColumn = photoData
-        ? {
-            stack: [
-              {
-                canvas: [
-                  {
-                    type: 'rect',
-                    x: 0, y: 0,
-                    w: photoWidth + 4,
-                    h: photoHeight + 4,
-                    r: 3,
-                    lineWidth: 1.5,
-                    lineColor: themeColors.primary
-                  }
-                ]
-              },
-              {
-                image: photoData,
-                width: photoWidth,
-                height: photoHeight,
-                margin: [2, -photoHeight - 2, 0, 0]
-              }
-            ],
-            width: photoWidth + 10,
-            margin: [0, 0, 10, 0]
-          }
-        : {
-            width: photoWidth + 10,
-            stack: [
-              {
-                canvas: [
-                  {
-                    type: 'rect',
-                    x: 0, y: 0,
-                    w: photoWidth + 4,
-                    h: photoHeight + 4,
-                    r: 3,
-                    lineWidth: 1.5,
-                    lineColor: themeColors.border
-                  }
-                ]
-              },
-              {
-                text: isUkrainian ? 'Фото недоступне' : 'Photo unavailable',
-                fontSize: 8,
-                color: themeColors.muted,
-                alignment: 'center',
-                margin: [0, -photoHeight / 2, 0, 0]
-              }
-            ],
-            margin: [0, 0, 10, 0]
-          };
-
       const qrColumn = qrCodeData
         ? {
             image: qrCodeData,
@@ -698,7 +573,6 @@ if (socialLinks.length > 0) {
           // Ultra-compact header
           {
             columns: [
-              photoColumn,
               // Main information
               {
                 stack: [
@@ -754,44 +628,49 @@ if (socialLinks.length > 0) {
           
           // MAIN RESUME CONTENT - NO PAGEBREAK!
 
-          // Key Technologies — first
-          { text: skillsTitle, style: 'sectionHeader', margin: [0, 0, 0, 5], keepWithNext: true },
-          {
-            stack: skillItems,
-            margin: [0, 0, 0, 10]
-          },
+          // Impact strip
+          ...(impactText ? [{
+            text: impactText,
+            fontSize: 9,
+            bold: true,
+            color: themeColors.primary,
+            margin: [0, 0, 0, 8]
+          }] : []),
 
-          // Experience
-          { 
-            text: experienceTitle, 
-            style: 'sectionHeader', 
-            margin: [0, 0, 0, 5],
-            keepWithNext: true
-          },
-          
-          // Wrapper container for all experience items
-          {
-            stack: jobEntries.map((job, index) => ({
-              stack: [job],
-              pageBreakInside: 'avoid',
-              margin: [0, 0, 0, (index === jobEntries.length - 1) ? 10 : 3]
-            })),
-            margin: [0, 0, 0, 10]
-          },
-          
-          // Projects
+          // Projects first: AI work leads
           { text: projectsTitle, style: 'sectionHeader', margin: [0, 0, 0, 5], keepWithNext: true },
-          
-          // Wrapper container for all projects
           {
             stack: projectEntries.map((project, index) => ({
               stack: [project],
               pageBreakInside: 'avoid',
-              margin: [0, 0, 0, (index === projectEntries.length - 1) ? 10 : 3]
+              margin: [0, 0, 0, (index === projectEntries.length - 1) ? 0 : 3]
             })),
-            margin: [0, 0, 0, 10]
+            margin: [0, 0, 0, 6]
           },
-          
+
+          // Experience
+          {
+            text: experienceTitle,
+            style: 'sectionHeader',
+            margin: [0, 0, 0, 5],
+            keepWithNext: true
+          },
+          {
+            stack: jobEntries.map((job, index) => ({
+              stack: [job],
+              pageBreakInside: 'avoid',
+              margin: [0, 0, 0, (index === jobEntries.length - 1) ? 0 : 3]
+            })),
+            margin: [0, 0, 0, 6]
+          },
+
+          // Stack
+          { text: skillsTitle, style: 'sectionHeader', margin: [0, 0, 0, 5], keepWithNext: true },
+          {
+            stack: skillItems,
+            margin: [0, 0, 0, 6]
+          },
+
           // Two-column block - Education only (Skills moved to top)
           {
             table: {
@@ -813,7 +692,7 @@ if (socialLinks.length > 0) {
               ]]
             },
             layout: 'noBorders',
-            margin: [0, 0, 0, 10]
+            margin: [0, 0, 0, 6]
           },
           
           // Two-column block - Languages and Hobbies (table keeps rows together on print)
@@ -825,7 +704,9 @@ if (socialLinks.length > 0) {
                 {
                   stack: [
                     { text: languagesTitle, style: 'sectionHeader', margin: [0, 0, 0, 5], keepWithNext: true },
-                    { stack: languageEntries }
+                    { stack: languageEntries },
+                    { text: hobbiesTitle, style: 'sectionHeader', margin: [0, 10, 0, 5], keepWithNext: true },
+                    { stack: hobbyEntries }
                   ],
                   border: [false, false, false, false]
                 },
@@ -835,9 +716,7 @@ if (socialLinks.length > 0) {
                     ...(certificateEntries.length > 0 ? [
                       { text: certificatesTitle, style: 'sectionHeader', margin: [0, 0, 0, 5], keepWithNext: true },
                       { stack: certificateEntries }
-                    ] : []),
-                    { text: hobbiesTitle, style: 'sectionHeader', margin: [0, certificateEntries.length > 0 ? 10 : 0, 0, 5], keepWithNext: true },
-                    { stack: hobbyEntries }
+                    ] : [])
                   ],
                   border: [false, false, false, false]
                 }
@@ -961,12 +840,5 @@ if (socialLinks.length > 0) {
         pdfDoc.download(fileName);
       }
       
-      // Restore details state
-      document.querySelectorAll('details').forEach((detail, index) => {
-        if (index < detailsStates.length) {
-          detail.open = detailsStates[index];
-        }
-      });
-    });
   });
 }

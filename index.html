@@ -1,400 +1,340 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" type="image/png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Open Graph (for social platforms) -->
-<meta property="og:title" content="Андрій Міхневич | Розробник програмного забезпечення">
-<meta property="og:description" content="Мій особистий сайт-портфоліо: досвід, проєкти, PDF резюме та контакти.">
-<meta property="og:image" content="https://andrijmix.github.io/photo.jpg">
-<meta property="og:url" content="https://andrijmix.github.io/index.html">
-<meta property="og:type" content="website">
+  <meta property="og:title" content="Андрій Міхневич | AI Engineer">
+  <meta property="og:description" content="AI Engineer: LLM-агенти, RAG-системи та автономне ПЗ. Проєкти, досвід і PDF резюме.">
+  <meta property="og:image" content="https://andrijmix.github.io/photo.jpg">
+  <meta property="og:url" content="https://andrijmix.github.io/index.html">
+  <meta property="og:type" content="website">
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Андрій Міхневич | Розробник програмного забезпечення">
-<meta name="twitter:description" content="Портфоліо з досвідом, проєктами, навичками та PDF резюме для завантаження.">
-<meta name="twitter:image" content="https://andrijmix.github.io/photo.jpg">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Андрій Міхневич | AI Engineer">
+  <meta name="twitter:description" content="LLM-агенти, RAG, голосовий AI та автономні системи. Портфоліо з проєктами, досвідом і PDF резюме.">
+  <meta name="twitter:image" content="https://andrijmix.github.io/photo.jpg">
 
-
-  <title>Андрій Міхневич | Розробник програмного забезпечення</title>
+  <title>Андрій Міхневич | AI Engineer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="alternate" hreflang="en" href="https://andrijmix.github.io/en.html">
+  <link rel="alternate" hreflang="uk" href="https://andrijmix.github.io/index.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Андрій Міхневич",
+    "alternateName": "Andrii Mikhnevych",
+    "jobTitle": "AI Engineer",
+    "description": "AI Engineer: LLM-агенти, RAG-системи та автономне програмне забезпечення.",
+    "url": "https://andrijmix.github.io/index.html",
+    "image": "https://andrijmix.github.io/photo.jpg",
+    "email": "mailto:andrijmix@gmail.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/andrii-miknevych-866428202/",
+      "https://github.com/andrijmix",
+      "https://t.me/amenws"
+    ],
+    "knowsAbout": ["LLM-агенти", "Retrieval-Augmented Generation (RAG)", "Tool calling", "Model Context Protocol (MCP)", "Prompt engineering", "Оцінка якості LLM", "Voice AI", "Python", "FastAPI", "TypeScript", "React"],
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Національний університет водного господарства та природокористування (НУВГП)" }
+  }
+  </script>
 </head>
 <body>
-  <header>
+  <nav class="topnav">
+    <a class="brand" href="#top">АМ</a>
+    <div class="links">
+      <a href="#projects">Проєкти</a>
+      <a href="#experience">Досвід</a>
+      <a href="#stack">Стек</a>
+      <a href="#contact">Контакти</a>
+    </div>
     <div class="controls">
-      <button onclick="toggleDarkMode()">🌗</button>
+      <button onclick="toggleDarkMode()" aria-label="Змінити тему">🌗</button>
       <a href="en.html">EN</a>
       <button onclick="generatePDF()">PDF</button>
     </div>
+  </nav>
+
+  <header id="top" class="hero">
     <img src="photo.jpg" alt="Фото Андрія Міхневича" />
-    <p>Андрій Міхневич</p>
-    <p>Розробник програмного забезпечення</p>
-    <p style="font-style: italic; max-width: 700px; margin: 0.5rem auto 1rem; font-size: 1.1rem;">
-      Понад 7 років досвіду в розробці складних алгоритмічних рішень, аналітиці даних та автоматизації.
-    </p>
+    <h1 class="name">Андрій Міхневич</h1>
+    <p class="headline">AI Engineer · LLM-агенти · RAG · Автономні системи</p>
+    <p class="hook">Створюю LLM-агентів і RAG-системи, які замінюють ручну роботу, і доводжу автоматизацію навколо них до продакшену. Пропускна здатність подання заяв до суду зросла з ~500 заяв за 7 днів до ~3000 за 12 годин.</p>
     <div class="social-links">
-    <a href="https://www.linkedin.com/in/andrii-miknevych-866428202/" target="_blank">LinkedIn</a>
-    <a href="https://t.me/amenws" target="_blank">Telegram</a>
-    <a href="viber://pa?chatURI=+380507660522" target="_blank">Viber</a>
-  </div>
-    <p><a href="mailto:andrijmix@gmail.com" style="color: #60a5fa">andrijmix@gmail.com</a> | +380507660522</p>
+      <a href="https://www.linkedin.com/in/andrii-miknevych-866428202/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/andrijmix" target="_blank">GitHub</a>
+      <a href="https://t.me/amenws" target="_blank">Telegram</a>
+    </div>
+    <p class="contact"><a href="mailto:andrijmix@gmail.com">andrijmix@gmail.com</a></p>
   </header>
-  <section id="content">
-    <details>
-      <summary><h2>Ключові технології</h2></summary>
-      <div class="skills">
-        <p><strong>Programming:</strong> Python, C++, C#, Java, MQL4, MQL5</p>
-        <p><strong>AI / ML:</strong> LangChain, Retrieval-Augmented Generation (RAG), StyleGAN2, Computer Vision, EasyOCR</p>
-        <p><strong>Robotics / UAV:</strong> ArduPilot SITL, DroneKit, Visual Odometry (VO), Mission Planning, Control Systems, Telemetry, GPS-Denied Navigation, Autonomous Flight</p>
-        <p><strong>Backend:</strong> FastAPI, PostgREST, REST APIs, Webhooks, API integrations (Telegram Bot API, MetaTrader API, Electronic Court of Ukraine API, Cryptocurrency Exchange APIs: Binance, Bybit, OKX)</p>
-        <p><strong>Frontend:</strong> React, Tailwind CSS</p>
-        <p><strong>Databases:</strong> PostgreSQL, Redis, SQLite, Elasticsearch</p>
-        <p><strong>Tools:</strong> Git, Docker (basic), Linux, VS Code</p>
-        <p><strong>Data Processing:</strong> PDF processing, LibreOffice automation</p>
+
+  <main id="content">
+    <section class="impact" data-pdf="impact" aria-label="Результати">
+      <div class="impact-grid">
+        <div class="stat reveal"><span class="num" data-count="3000">3000</span><span class="label">заяв до суду за 12 годин (було ~500 за 7 днів)</span></div>
+        <div class="stat reveal"><span class="num" data-count="2">2</span><span class="label">CRM-системи з нуля за 6 місяців</span></div>
+        <div class="stat reveal"><span class="num" data-count="1">1</span><span class="label">перший власний AI-агент у VeraData: бета, показаний на Town Hall компанії</span></div>
+        <div class="stat reveal"><span class="num" data-count="7" data-suffix="+">7+</span><span class="label">років розробки продакшн-ПЗ</span></div>
       </div>
-    </details>
+    </section>
 
-    <details onclick="toggleDetails(this)">
-      <summary><h2>Досвід</h2></summary>
-      <div class="job">
-        <h3>Drone Software Developer</h3>
-        <p>Drone Software Company</p>
-        <p>📅 04/2026 – 05/2026 &nbsp;&nbsp; 📍 Україна</p>
-        <p>Розробка систем автономного керування польотом БПЛА з фокусом на Visual Odometry навігацію, якість коду та управління дроном.</p>
+    <section id="projects" data-pdf="projects">
+      <h2>AI-проєкти</h2>
 
-        <h4>Ключові обов'язки та досягнення:</h4>
+      <div class="project reveal">
+        <h3 class="title">Голосовий AI-агент для колл-центру</h3>
+        <p class="summary">Автоматично відповідає на дзвінки клієнтів за FAQ компанії. Створений в Anunciata.</p>
         <ul>
-          <li>Розробляв та підтримував систему автономного керування польотом, використовуючи ArduPilot SITL (Software In The Loop) симулятор для повного контролю дрона від точки А до точки Б.</li>
-          <li>Реалізував 8-стану скінченний автомат (FSM) для планування місій та виконання автономних завдань (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE).</li>
-          <li>Активно працював з системами <strong>Visual Odometry (VO)</strong> для навігації без GPS, забезпечуючи автономний політ без доступності GPS сигналу.</li>
-          <li>Розробляв PI/P контролери для регулювання висоти, курсу та руху в сторони з алгоритмами компенсації вітру.</li>
-          <li>Реструктуризував кодову базу на модульні компоненти для покращення підтримуваності, масштабованості та переиспользуваності коду.</li>
-          <li>Створював комплексну документацію коду та вбудовані коментарі для передачі знань та майбутнього обслуговування.</li>
-          <li>Проводив розширене тестування різних режимів автопілота, поведінки польоту та продуктивності Visual Odometry за різних умов.</li>
-          <li>Інтегрував DroneKit для комунікації з апаратом, управління телеметрією та безпечного виконання RC команд.</li>
-          <li>Розробляв та управляв системами загального керування дроном та механізмами безпеки, включаючи виявлення втрати GPS та плавні послідовності переривання.</li>
-          <li>Створював автоматизований набір тестів з використанням PyTest для перевірки місій та валідації контролера польоту.</li>
+          <li><strong>Проблема:</strong> оператори витрачали час на повторювані FAQ-дзвінки.</li>
+          <li><strong>Рішення:</strong> speech-to-speech агент на OpenAI <code>gpt-4o-realtime</code>: модель приймає аудіо дзвінка напряму й відповідає голосом, без окремого кроку STT чи TTS. Відповіді спираються на FAQ компанії через RAG на LangChain, а tool calling дає моделі виконувати безпечні запити до бази після авторизації.</li>
+          <li><strong>Результат:</strong> обробляє ~100 дзвінків на день.</li>
         </ul>
-
-        <p><strong>Технології:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, Mission Planning, Control Systems (PI/P Controllers), Visual Odometry (VO), PyTest, Telemetry</p>
+        <p class="tech"><strong>Стек:</strong> Python, OpenAI Realtime API (gpt-4o-realtime), LangChain, RAG, tool calling, speech-to-speech</p>
       </div>
-      <div class="job">
-        <h3>Team Lead / Senior Backend Developer</h3>
-        <p>Anunciata</p>
-        <p>📅 06/2025 – 03/2026 &nbsp;&nbsp; 📍 Україна</p>
-        <p><strong>Team Lead / Senior Backend Developer</strong> (08/2025 – 03/2026)</p>
 
-        <h4>Ключові обов'язки та досягнення:</h4>
+      <div class="project reveal">
+        <h3 class="title">RAG-агент для юридичних документів</h3>
+        <p class="summary">LLM-агент, що відповідає на запитання за юридичними PDF. Ініційований і спроєктований самостійно.</p>
         <ul>
-          <li>Керував командою з 4 розробників (2 backend, 1 automation engineer, 1 full-stack).</li>
-          <li>Відповідав за архітектуру систем, постановку задач, найм розробників та комунікацію з інвесторами.</li>
-          <li>Організував роботу команди через Azure Planner, розподіляв задачі та менторив розробників.</li>
-          <li>За 6 місяців команда розгорнула дві CRM-системи з нуля для різних бізнес-напрямків компанії.</li>
-          <li>Розробив юридичну CRM для управління судовими справами з інтеграцією з API Електронного суду України.</li>
-          <li>Завдяки автоматизації вдалося збільшити пропускну здатність роботи з судом: з приблизно 500 заяв за 7 днів (10 юристів) до приблизно 3000 заяв за 12 годин.</li>
-          <li>Керував розробкою CRM для бренду українського одягу з інтеграціями маркетплейсів (синхронізація товарів та замовлень).</li>
-          <li>Проєктував backend-архітектуру систем на Python (Django, FastAPI) з використанням PostgreSQL та MS SQL.</li>
-          <li>CRM використовували приблизно 50 користувачів у юридичному напрямку та 10 у e-commerce.</li>
+          <li><strong>Проблема:</strong> юристи переглядали юридичні PDF вручну.</li>
+          <li><strong>Рішення:</strong> RAG-система та LangChain-агент для автоматичних відповідей на запитання за юридичними документами.</li>
+          <li><strong>Результат:</strong> повністю прибрано людський фактор з перевірки документів. Оброблено сотні документів, якість відповідей оцінювалась автоматично за еталонною таблицею юристів, збіг ~90%.</li>
         </ul>
+        <p class="tech"><strong>Стек:</strong> Python, LangChain, RAG, обробка PDF</p>
+      </div>
 
-        <p><strong>Senior Software Developer</strong> (06/2025 – 08/2025)</p>
+      <div class="project reveal">
+        <h3 class="title">SuperAgent: мультиагентний RAG-чатбот</h3>
+        <p class="summary">Модульний чат-агент, що спрямовує кожне запитання до потрібного спеціалізованого агента.</p>
         <ul>
-          <li>Розробив AI-агента для кол-центру, який автоматично обробляв голосові дзвінки за схемою voice-to-text → LLM → text-to-speech та відповідав на запитання клієнтів на основі FAQ компанії.</li>
-          <li>Побудував RAG-систему для аналізу PDF-документів, що дозволяла автоматично відповідати на запитання на основі юридичних документів.</li>
-          <li>Самостійно ініціював і спроєктував архітектуру LLM-агента для аналізу юридичних PDF, що дозволило повністю прибрати людський фактор при аналізі документів.</li>
-          <li>Реалізував агентів з використанням LangChain та RAG-підходу.</li>
-          <li>Розробляв backend-сервіси та інтеграції з внутрішніми системами компанії.</li>
+          <li><strong>Проблема:</strong> один промпт не однаково добре відповідає на FAQ, неоднозначні та веб-запитання.</li>
+          <li><strong>Рішення:</strong> маршрутизатор повідомлень розподіляє запити між FAQ Agent, Clarification Agent і Web Search Agent на LangChain / LangGraph; Elasticsearch (векторний пошук) для семантичного retrieval і збереження сесій чату.</li>
+          <li><strong>Результат:</strong> робочий MVP на FastAPI з легким веб-інтерфейсом. Я спроєктував архітектуру, створив агентів, маршрутизатор і RAG-утиліти та написав документацію.</li>
         </ul>
-
-        <p><strong>Технології:</strong> Python, Django, FastAPI, React, PostgreSQL, MS SQL, LangChain, RAG, REST API, Azure Planner</p>
+        <p class="tech"><strong>Стек:</strong> Python 3.10+, FastAPI, LangChain / LangGraph, Elasticsearch, OpenAI API</p>
       </div>
-      <div class="job">
-        <h3>Middle C++ Developer</h3>
-        <p>Algo Equities Technology Ltd</p>
-        <p>📅 07/2023 – 04/2025 &nbsp;&nbsp; 📍 Київ</p>
-<p>Розробка програмних рішень для управління активами, алгоритмічної торгівлі та аналізу ринку.</p>
 
-  <h4>Ключові обов'язки та досягнення:</h4>
-  <ul>
-    <li>Розробка та впровадження торгових платформ та інструментів автоматизації стратегій з використанням <strong>C++, C#, Python, MQL4/5</strong> та різних API (Stellar, Telegram, Binance, OKX, Bybit, Quantower).</li>
-    <li>Розробка власних торгових стратегій на основі технічних індикаторів та їх інтеграція в автоматизовані системи.</li>
-    <li>Створення крос-платформних мостів для з'єднання кількох торгових терміналів та джерел даних.</li>
-    <li>Розробка власних індикаторів на Python для моніторингу продуктивності системи та сповіщення користувачів через Telegram ботів.</li>
-    <li>Розробка високопродуктивного <strong>Telegram бота</strong> на C++ з використанням прямого з'єднання з сервером, уникаючи <code>getUpdates()</code> і значно покращуючи продуктивність.</li>
-    <li>Інтеграція агрегатора новин з високочастотною торговою системою для використання цінових коливань, викликаних новинними подіями.</li>
-    <li>Створення <strong>багатопотокового агрегатора арбітражу ставок фінансування</strong> на C#, який використовував дані API провідних криптовалютних бірж для отримання прибутку від розбіжностей у ставках фінансування.</li>
-  </ul>
-
-  <p><strong>Технології:</strong> C++, C#, Python, MQL4, MQL5, Stellar API, Telegram API, Binance API, OKX API, Bybit API, Quantower API</p>
-</div>
- <div class="job">
-  <h3>C++ Фрілансер</h3>
-  <p>Фріланс</p>
-  <p>📅 02/2018 – 09/2023 &nbsp;&nbsp; 📍 Віддалено</p>
-  <p>Робота над C++ рішеннями для фінансових систем.</p>
-  
-  <h4>Ключові обов'язки та досягнення:</h4>
-  <ul>
-    <li>В основному працював сам, але пізніше взяв в команду менеджера для зв'язку з клієнтами, узгодження технічних завдань та контролю оплати і податків.</li>
-    <li>Створення дашбордів моніторингу стану індикаторів. Внаслідок цього вже понад 6 років ці дашборди полегшують роботу замовникам з Німеччини. Перебуваю в контакті з ними, час від часу виконую покращення та заміну індикаторів.</li>
-    <li>Робота з великими обсягами даних та їх обробка для отримання цінової інформації за допомогою самописних скриптів, які дозволили виявити дефекти та оцінити якість від постачальників.</li>
-    <li>Оптимізація та пошук оптимальних налаштувань, що дозволило отримати значний капітал в якості інвестиційної компанії.</li>
-    <li>Створений генератор ключів для Bitcoin, що дозволило розрахувати метрику стресостійкості біткоїн-гаманця.</li>
-    <li>Розробка адмін-панелі та адмін-бота, що дозволило підключити понад 200 активних підписок.</li>
-    <li>Розробка алгоритмів оптимізації та форвард-тестування.</li>
-    <li>Публікація продуктів клієнтів на маркетах.</li>
-  </ul>
-
-  <p><strong>Технології:</strong> C++, Python, MQL4/5, Telegram API, Binance API</p>
-</div>
-
-<div class="job">
-  <h3>Бізнес-аналітик</h3>
-  <p>AM Lingwista</p>
-  <p>📅 10/2017 – 12/2019 &nbsp;&nbsp; 📍 Рівне</p>
-  <p>Рекрутингова компанія, яка припинила діяльність після початку пандемії COVID-19.</p>
-  
-  <h4>Ключові обов'язки та досягнення:</h4>
-  <ul>
-    <li>Збір та аналіз даних для оптимізації бізнес-процесів.</li>
-    <li>Управління рекрутинговими процесами та звітність.</li>
-    <li>Створення простої CRM-системи з використанням Google Sheets, що дозволило адаптувати менеджерів до більш складної платної CRM.</li>
-    <li>Розробка автоматичного онлайн-дашборда винагород, що дозволило менеджерам розуміти свою щоденну ефективність та очікувану премію, підвищивши продуктивність компанії майже вдвічі через здорову конкуренцію.</li>
-  </ul>
-
-  <p><strong>Технології:</strong> Excel, Google Sheets, Google Apps Script</p>
-</div>
-
-<div class="job">
-  <h3>Фахівець з цифровізації медичних процесів</h3>
-  <p>Дубенська міська лікарня</p>
-  <p>📅 01/2020 – 02/2022 &nbsp;&nbsp; 📍 Дубно</p>
-  
-  <h4>Ключові обов'язки та досягнення:</h4>
-  <ul>
-    <li>Автоматизував частину медичної документації, створивши Excel-інструменти для обробки та структурування даних, що зменшило час підготовки документів.</li>
-    <li>Оптимізував робочі процеси відділення шляхом цифровізації частини паперових процедур.</li>
-    <li>Виконував налаштування та технічну підтримку медичного обладнання та програмного забезпечення.</li>
-    <li>Навчав медичний персонал базовим навичкам роботи з комп'ютерами та медичними інформаційними системами.</li>
-    <li>Брав участь у впровадженні та підтримці цифрових інструментів для ведення медичної документації.</li>
-  </ul>
-
-  <p><strong>Технології:</strong> Excel, медичні інформаційні системи, цифрова обробка даних</p>
-</div>
-    </details>
-
-    <details>
-      <summary><h2>Проєкти</h2></summary>
-      <div class="project">
-        <h3>Autopilot — Система автономного керування польотом з Visual Odometry</h3>
-        <p>
-          Повнофункціональна система автономного керування польотом для квадрокоптерів з використанням ArduPilot SITL симуляції. Реалізує планування місій Stage 3 з повним контролем від зльоту через автономну навігацію по вайпойнтам до посадки, включаючи підтримку Visual Odometry (VO) для середовищ без GPS. Система виконує повністю автономні завдання, використовуючи комунікацію DroneKit, спеціальні PI/P алгоритми керування та комплексні механізми безпеки.
-        </p>
-
-        <h4>Ключові можливості</h4>
+      <div class="project reveal">
+        <h3 class="title">UnderTalk: CRM, зарплати та AI-конфігуратор (MCP)</h3>
+        <p class="summary">Продакшн-платформа CRM / обліку / зарплат для колл-центру. Робота AI Engineer за сумісництвом у команді з 3 розробників, 04/2026 – 11/2026.</p>
         <ul>
-          <li>8-стану скінченний автомат для виконання автономних місій (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE)</li>
-          <li>Інтеграція Visual Odometry (VO) для автономної навігації та локалізації без GPS</li>
-          <li>PI та P контролери для регулювання висоти та руху в сторони з компенсацією вітру</li>
-          <li>Інтеграція DroneKit для телеметрії апарату та управління RC командами</li>
-          <li>Географічні розрахунки для навігації по вайпойнтам (дистанція, азимут, керування курсом)</li>
-          <li>Модульна, добре задокументована кодова база з комплексною вбудованою документацією</li>
-          <li>Механізми безпеки, включаючи виявлення втрати GPS, таймаути станів та плавні послідовності переривання</li>
-          <li>Комплексне логування та телеметрія для моніторингу та налагодження місій</li>
-          <li>Розширене тестування покриття для режимів автопілота, поведінки польоту та продуктивності VO</li>
-          <li>Автоматизований набір тестів з використанням PyTest для перевірки місій</li>
+          <li><strong>AI:</strong> створив віддалений MCP-сервер, через який Claude проєктує й тестує конфігурації зарплат (чернетка → валідація → симуляція → порівняння → збереження), та «SQL-екрани»: метрики, які задають адміни чи AI, як read-only SQL під 3-шаровим захистом (текстові правила, allow-list за планом Postgres <code>EXPLAIN</code>, короткоживуче read-only з'єднання з таймаутами). Security-рев'ю виявило доступну чутливу таблицю; виправлено до релізу.</li>
+          <li><strong>Зарплати та білінг:</strong> рушій правил нарахування (ставки, відсотки, фіксовані, за змінною) з деталізацією кожного числа до джерела; модуль білінгу клієнтів, звірений з аналітикою операторів до копійки.</li>
+          <li><strong>Інтеграції:</strong> банківські API (Monobank, A-Bank) та імпорт PDF/XLSX-виписок з перевіркою за підсумками банку, тож загублений рядок видно ще до імпорту.</li>
+          <li><strong>Надійність:</strong> blue/green-деплой з відкатом під CI-гейтом, health-ендпоінти, структуровані логи з correlation id. Виправив вичерпання пулу з'єднань БД у продакшені та підтвердив Locust-тестами за профілем продакшену; кеш у Redis скоротив екран зарплат з 25,8 с (холодний) до 3 с (прогрітий, dev).</li>
+          <li><strong>Результат:</strong> ~500 змерджених PR за ~6 місяців у 5 репозиторіях, зроблених з AI-асистованим процесом (Claude Code, Cursor) та Playwright E2E-прогонами в реальному часі як критерієм готовності.</li>
         </ul>
-
-        <h4>Технології</h4>
-        <p>Python, ArduPilot SITL, DroneKit, PyMAVLink, Mission Planning, PI/P Controllers, Visual Odometry (VO), PyTest</p>
-
-        <h4>Посилання на проєкт</h4>
-        <p><a href="https://github.com/andrijmix/Autopilot" target="_blank">GitHub Repository</a></p>
+        <p class="tech"><strong>Стек:</strong> Python, FastAPI, SQLAlchemy, PostgreSQL, Celery, RabbitMQ, Redis, Vue 3, MCP, Playwright, GitHub Actions</p>
       </div>
 
-      <div class="project">
-        <h3>SuperAgent — Інтелектуальний чат-агент на основі RAG</h3>
-      
-        <h4>Огляд проєкту</h4>
-        <p>
-          SuperAgent — це інтелектуальний чат-агент, який використовує великі мовні моделі (LLM) 
-          разом із Retrieval-Augmented Generation (RAG) та Elasticsearch для надання точних і 
-          контекстно-залежних відповідей. Система маршрутизує запити користувачів до спеціалізованих 
-          агентів (FAQ-агент, агент уточнень, агент пошуку в Інтернеті), забезпечуючи якісні результати.
-        </p>
-      
-        <h4>Цілі проєкту</h4>
+      <div class="project reveal">
+        <h3 class="title">Autopilot: автономний політ на Visual Odometry</h3>
+        <p class="summary">Автономність у реальному часі: квадрокоптер виконує повну місію від зльоту до посадки, зокрема без GPS.</p>
         <ul>
-          <li>Надавати надійні відповіді на поширені питання (FAQ).</li>
-          <li>Покращувати відповіді за допомогою RAG та семантичного пошуку в Elasticsearch.</li>
-          <li>Маршрутизувати повідомлення до відповідних спеціалізованих агентів.</li>
-          <li>Побудувати модульну та масштабовану архітектуру для AI-асистентів.</li>
+          <li><strong>Проблема:</strong> автономно пролетіти з точки А в точку Б там, де GPS недоступний.</li>
+          <li><strong>Рішення:</strong> 8-станова FSM місії, перемикане джерело навігації GPS / одометрія (інтеграція Visual Odometry для польоту без GPS), PI/P-регулятори з компенсацією вітру, телеметрія DroneKit і failsafe-механізми (виявлення втрати GPS, таймаути станів, безпечне переривання).</li>
+          <li><strong>Результат:</strong> повністю автономні місії в ArduPilot SITL, перевірені автоматизованим набором тестів PyTest.</li>
         </ul>
-      
-        <h4>Архітектура</h4>
-        <ul>
-          <li><strong>Backend:</strong> FastAPI для веб-маршрутизації та оркестрації сервісів.</li>
-          <li><strong>Інтеграція LLM:</strong> LangChain / LangGraph для побудови та оркестрації агентів.</li>
-          <li><strong>База знань:</strong> Elasticsearch (векторний пошук) для семантичного відбору.</li>
-          <li><strong>Агенти:</strong> FAQ-агент, агент уточнень, агент пошуку та маршрутизатор повідомлень.</li>
-          <li><strong>Основні компоненти:</strong> <code>superAgent.py</code>, <code>qa_agent.py</code>, <code>rag_utils.py</code>, <code>elastic_utils/</code>.</li>
-        </ul>
-      
-        <h4>Технології</h4>
-        <p>Python 3.10+, FastAPI, LangChain / LangGraph, Elasticsearch (Cloud), OpenAI API</p>
-      
-        <h4>Мій внесок</h4>
-        <ul>
-          <li>Розробив загальну архітектуру проєкту (<code>architecture.txt</code>).</li>
-          <li>Реалізував спеціалізованих агентів (FAQ-агент, маршрутизатор повідомлень) та RAG-утиліти.</li>
-          <li>Інтегрував Elasticsearch для семантичного пошуку та зберігання сесій чату.</li>
-          <li>Створив легкий веб-інтерфейс/роутери для обробки FAQ-запитів.</li>
-          <li>Написав документацію проєкту (<code>README.md</code>).</li>
-        </ul>
-      
-        <h4>Результат</h4>
-        <p>
-          Повноцінний MVP чат-агента з підтримкою FAQ та RAG, здатний обробляти користувацькі запити 
-          у модульний і масштабований спосіб. Проєкт демонструє практичний досвід побудови систем 
-          оркестрації LLM, векторного пошуку та сучасних AI-рішень.
-        </p>
+        <p class="tech"><strong>Стек:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, Visual Odometry, PyTest</p>
+        <a class="link" href="https://github.com/andrijmix/Autopilot" target="_blank">Репозиторій на GitHub →</a>
       </div>
-      
-      <div class="project">
-        <h3>Програма аналізу результатів олімпіад</h3>
-        <p>
-          Використання штучного інтелекту для автоматизованого аналізу результатів програмістських змагань та виявлення закономірностей у відповідях учасників.
-        </p>
-      </div>
-      <div class="project">
-        <h3>Алгоритмічна торгова стратегія на основі індикаторів</h3>
-        <p>
-          Розробка алгоритмічного модуля, який виконував автоматизований моніторинг ринкових індикаторів та здійснював фінансові операції на їх основі.
-        </p>
-      </div>
-      <div class="project">
-        <h3>Веб-сайт лікарні</h3>
-        <p>
-          Розробка офіційного сайту лікарні <a href="https://dubnohospital.com.ua/" target="_blank">dubnohospital.com.ua</a> з інформативним контентом, контактними даними та зручним інтерфейсом для пацієнтів.
-        </p>
-      </div>
-      <div class="project">
-        <h3>Візуальний аналізатор фотографій на основі ШІ</h3>
-        <p>
-          Система ШІ, яка аналізує зображення та виконує дії на їх основі — наприклад, автономна гра в покер з прийняттям рішень на основі обробки скріншотів.
-        </p>
-      </div>
-    </details>
 
-    <details>
-      <summary><h2>Освіта</h2></summary>
-      <div class="education">
+      <p class="more-line reveal">Також: AI-аналізатор фото, що діє за скриншотами (наприклад, автономний покерний гравець), та AI-аналіз результатів олімпіад з програмування.</p>
+    </section>
+
+    <section id="experience" data-pdf="experience">
+      <h2>Досвід</h2>
+
+      <div class="job reveal">
+        <h3 class="title">AI Product Engineer</h3>
+        <p class="company">VeraData</p>
+        <p class="meta">📅 05/2026 – дотепер &nbsp;&nbsp; 📍 Віддалено</p>
+        <ul>
+          <li>Створив першого внутрішнього AI-агента компанії, що автоматизує введення замовлень на запити даних. У бета-версії з 11/2026, представлений на загальнокомпанійському Town Hall.</li>
+          <li>Випустив LLM-застосунки для внутрішнього використання від початку до кінця (FastAPI + React/TypeScript): 224 змерджені PR приблизно за 6 місяців.</li>
+          <li>Спроєктував агентні воркфлоу на Claude (tool use, структурований вивід за JSON-схемою, Batch API, prompt caching) з резервним переходом на self-hosted open-weight моделі (vLLM, Ollama) на GPU-інфраструктурі.</li>
+          <li>Створив MCP-сервери та CLI-інструменти, що дають AI-асистентам доступ до даних системи управління проєктами, і автоматизував транскрипцію та підсумки зустрічей/відео на Gemini.</li>
+          <li>Підготував двомовний (EN/UK) датасет для оцінки RAG із 400+ пар «питання – відповідь» для вимірювання якості відповідей LLM.</li>
+          <li>Test-first розробка: pytest і Vitest, сувора типізація та лінтинг, CI/CD на GitHub Actions.</li>
+        </ul>
+        <p class="tech"><strong>Технології:</strong> Python, FastAPI, TypeScript, React, MS SQL, Claude API, vLLM / Ollama, Gemini, MCP (FastMCP), GitHub Actions, pytest</p>
+      </div>
+
+      <div class="job reveal">
+        <h3 class="title">AI Engineer (за сумісництвом)</h3>
+        <p class="company">UnderTalk</p>
+        <p class="meta">📅 04/2026 – 11/2026 &nbsp;&nbsp; 📍 Україна</p>
+        <ul>
+          <li>Створив віддалений MCP-сервер, через який Claude проєктує, валідує, симулює й зберігає конфігурації зарплат, а також «SQL-екрани», що задають адміни чи AI, під 3-шаровим read-only захистом.</li>
+          <li>Вів фічі від початку до кінця (міграція БД → FastAPI → Vue 3 → E2E → деплой) у команді з 3 розробників: рушій зарплат, білінг клієнтів, імпорт банківських виписок.</li>
+          <li>Зробив ~500 змерджених PR за ~6 місяців з AI-асистованим процесом (Claude Code, Cursor), де Playwright E2E-прогони в реальному часі були критерієм готовності.</li>
+          <li>Виправив вичерпання пулу з'єднань БД у продакшені, підтвердивши Locust-тестами за профілем продакшену; налаштував blue/green-деплой з відкатом під CI-гейтом.</li>
+        </ul>
+        <p class="tech"><strong>Технології:</strong> Python, FastAPI, PostgreSQL, Celery, RabbitMQ, Redis, Vue 3, MCP, Claude Code, Playwright, GitHub Actions</p>
+      </div>
+
+      <div class="job reveal">
+        <h3 class="title">Drone Software Developer</h3>
+        <p class="company">Drone Software Company</p>
+        <p class="meta">📅 04/2026 – 05/2026 &nbsp;&nbsp; 📍 Україна</p>
+        <ul>
+          <li>Створив систему автономного керування польотом на ArduPilot SITL, що веде дрон з точки А в точку Б без ручного керування.</li>
+          <li>Реалізував 8-станову FSM для виконання місії (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE).</li>
+          <li>Написав інтеграцію Visual Odometry та режим навігації за одометрією (локальна позиція EKF) для польоту без GPS, а також failsafe-механізми: виявлення втрати GPS і безпечне переривання.</li>
+          <li>Спроєктував PI/P-регулятори висоти, курсу та бокового руху з корекцією вітру; інтегрував телеметрію DroneKit і RC override.</li>
+          <li>Рефакторив код у модулі, задокументував його та написав автоматизований набір тестів PyTest для валідації місій.</li>
+        </ul>
+        <p class="tech"><strong>Технології:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, Visual Odometry, PyTest</p>
+      </div>
+
+      <div class="job reveal">
+        <h3 class="title">Team Lead / Senior AI &amp; Backend Engineer</h3>
+        <p class="company">Anunciata</p>
+        <p class="meta">📅 06/2025 – 03/2026 &nbsp;&nbsp; 📍 Україна</p>
+        <ul>
+          <li>Створив speech-to-speech голосового AI-агента для колл-центру на OpenAI <code>gpt-4o-realtime</code>, з RAG на LangChain за FAQ компанії та tool calling для безпечних запитів до бази після авторизації (~100 дзвінків на день).</li>
+          <li>Самостійно ініціював і спроєктував LLM-агента з RAG (LangChain) для аналізу юридичних PDF, прибравши людський фактор з перевірки документів.</li>
+          <li>Керував командою з 4 розробників (2 backend, 1 automation, 1 full-stack): архітектура, розподіл завдань, найм, менторство та комунікація з інвесторами.</li>
+          <li>За 6 місяців запустив дві CRM-системи з нуля: юридичну (~50 користувачів) та e-commerce для українського бренду одягу (~10 користувачів) із синхронізацією з маркетплейсами.</li>
+          <li>Інтегрував API Електронного суду України та автоматизував подання: з ~500 заяв за 7 днів (10 юристів) до ~3000 за 12 годин.</li>
+        </ul>
+        <p class="tech"><strong>Технології:</strong> Python, Django, FastAPI, LangChain, RAG, React, PostgreSQL, MS SQL, REST API</p>
+      </div>
+
+      <div class="job reveal">
+        <h3 class="title">Middle C++ Developer</h3>
+        <p class="company">Algo Equities Technology Ltd</p>
+        <p class="meta">📅 07/2023 – 04/2025 &nbsp;&nbsp; 📍 Київ</p>
+        <ul>
+          <li>Створював торгові платформи та інструменти автоматизації стратегій на C++, C#, Python і MQL4/5 поверх API бірж і брокерів (Binance, OKX, Bybit, Quantower).</li>
+          <li>Написав високопродуктивний Telegram-бот на C++ з прямим підключенням до сервера, без опитування <code>getUpdates()</code>.</li>
+          <li>Створив багатопотоковий агрегатор арбітражу ставок фінансування на C# поверх API кількох криптобірж.</li>
+          <li>Підключив агрегатор новин до високочастотної торгової системи для реакції на цінові рухи через новини.</li>
+        </ul>
+        <p class="tech"><strong>Технології:</strong> C++, C#, Python, MQL4/5, API Binance / OKX / Bybit / Quantower / Telegram</p>
+      </div>
+
+      <div class="job reveal">
+        <h3 class="title">C++ Freelancer</h3>
+        <p class="company">Фріланс</p>
+        <p class="meta">📅 02/2018 – 09/2023 &nbsp;&nbsp; 📍 Віддалено</p>
+        <ul>
+          <li>Створив дашборди моніторингу індикаторів, якими клієнти з Німеччини користуються понад 6 років; досі їх підтримую.</li>
+          <li>Обробляв великі масиви даних власними скриптами для виявлення дефектів постачальників, створював алгоритми оптимізації та forward-тестування для інвестиційної компанії.</li>
+          <li>Створив адмін-панель і бота, що обслуговували понад 200 активних підписок.</li>
+        </ul>
+        <p class="tech"><strong>Технології:</strong> C++, Python, MQL4/5, Telegram API, Binance API</p>
+      </div>
+
+      <div class="job earlier reveal">
+        <h3 class="title">Ранній досвід</h3>
+        <ul>
+          <li><strong>Спеціаліст з цифровізації медичних процесів</strong>, Дубенська міська лікарня (01/2020 – 02/2022): автоматизація медичної документації в Excel, сайт лікарні <a href="https://dubnohospital.com.ua/" target="_blank">dubnohospital.com.ua</a>, навчання персоналу.</li>
+          <li><strong>Бізнес-аналітик</strong>, AM Lingwista (10/2017 – 12/2019): CRM у Google Sheets і живий дашборд бонусів, що майже вдвічі підвищив продуктивність команди.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="stack" data-pdf="skills">
+      <h2>Стек AI Engineer</h2>
+      <div class="skills reveal">
+        <p><strong>LLM та агенти</strong> Anthropic Claude API (tool use, структурований вивід, prompt caching, Batch API), OpenAI API, Gemini, LangChain, LangGraph, RAG, MCP-сервери, AI-агенти, мультиагентна маршрутизація, prompt engineering, автоматична оцінка якості LLM, self-hosted LLM (vLLM, Ollama), Claude Code</p>
+        <p><strong>Retrieval</strong> Elasticsearch (векторний пошук), embeddings, семантичний пошук, обробка PDF</p>
+        <p><strong>Голос</strong> Speech-to-speech агенти (OpenAI Realtime API, gpt-4o-realtime)</p>
+        <p><strong>Computer Vision / ML</strong> StyleGAN2, EasyOCR, Visual Odometry</p>
+        <p><strong>Backend та дані</strong> FastAPI, Django, Pydantic, SQLAlchemy, REST API, PostgreSQL, MS SQL, Redis, Celery, RabbitMQ, SQLite, Docker, GitHub Actions CI/CD, Linux, Git</p>
+        <p><strong>Мови програмування</strong> Python, TypeScript, C++, C#, Java, MQL4/5</p>
+        <p><strong>Робототехніка / БПЛА</strong> ArduPilot SITL, DroneKit, PyMAVLink, навігація без GPS</p>
+        <p><strong>Frontend</strong> Vue 3, React, TypeScript, Tailwind CSS, Playwright (E2E)</p>
+      </div>
+    </section>
+
+    <section data-pdf="education">
+      <h2>Освіта</h2>
+      <div class="education reveal">
         <h3>Магістр комп'ютерної інженерії – НУВГП</h3>
         <span>2021 – 2023</span>
       </div>
-      <div class="education">
+      <div class="education reveal">
         <h3>Бакалавр комп'ютерної інженерії – НУВГП</h3>
         <span>2018 – 2021</span>
       </div>
-      <div class="education">
+      <div class="education reveal">
         <h3>Медична освіта – Дубенський медичний коледж</h3>
         <span>2015 – 2018</span>
       </div>
-    </details>
+    </section>
 
-    <details>
-      <summary><h2>Мови</h2></summary>
-      <div class="language-chart">
-        <div class="language">
-          <div>
-            <strong>Українська</strong><br>
-            <span>Рідна</span>
-          </div>
-          <div class="dots">
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-          </div>
-        </div>
-        <div class="language">
-          <div>
-            <strong>Російська</strong><br>
-            <span>Вільно</span>
-          </div>
-          <div class="dots">
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-          </div>
-        </div>
-        <div class="language">
-          <div>
-            <strong>Англійська</strong><br>
-            <span>Досконало</span>
-          </div>
-          <div class="dots">
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot full"></span>
-            <span class="dot empty"></span>
-            <span class="dot empty"></span>
-          </div>
-        </div>
-        <div class="language">
-          <div>
-            <strong>Французька</strong><br>
-            <span>Початковий</span>
-          </div>
-          <div class="dots">
-            <span class="dot full"></span>
-            <span class="dot empty"></span>
-            <span class="dot empty"></span>
-            <span class="dot empty"></span>
-            <span class="dot empty"></span>
-          </div>
-        </div>
+    <section id="courses" data-pdf="certificates">
+      <h2>Курси та сертифікати</h2>
+      <div class="certificates">
+        <div class="certificate reveal"><h3>Claude Code in Action</h3><p>Anthropic Academy · значок про завершення</p><span>09/2026</span></div>
+        <div class="certificate reveal"><h3>Introduction to Model Context Protocol</h3><p>Anthropic Academy · значок про завершення</p><span>08/2026</span></div>
+        <div class="certificate reveal"><h3>Claude Platform 101</h3><p>Anthropic Academy · значок про завершення</p><span>08/2026</span></div>
+        <div class="certificate reveal"><h3>Introduction to Subagents</h3><p>Anthropic Academy</p><span>07/2026</span></div>
+        <div class="certificate reveal"><h3>Introduction to Agent Skills</h3><p>Anthropic Academy</p><span>07/2026</span></div>
+        <div class="certificate reveal"><h3>Claude Code 101</h3><p>Anthropic Academy · значок про завершення</p><span>07/2026</span></div>
+        <div class="certificate reveal"><h3>Generative AI for Beginners</h3><p>Microsoft (відкритий курс, пройдено)</p></div>
       </div>
-    </details>
+    </section>
 
-    <details>
-      <summary><h2>Захоплення</h2></summary>
-      <ul>
-        <li>Гра в шахи — друге місце на обласному рівні, розвиток стратегічного мислення</li>
-        <li>ШІ-проєкти — розробка інтелектуальних рішень у вільний час, включаючи автоматизовані системи</li>
-        <li>Подорожі — вивчення культур, адаптивність та розширення світогляду</li>
-        <li>Активний відпочинок на природі — піші прогулянки, насолода природою та подорожі</li>
-        <li>Спортзал — підтримка фізичної форми та дисципліни</li>
-        <li>Нумізматика — колекціонування монет, інтерес до історії та культур</li>
-        <li>Волонтерство — участь у благодійних ініціативах та підтримка громади</li>
-      </ul>
-    </details>
+    <div class="two-col">
+      <section data-pdf="languages">
+        <h2>Мови</h2>
+        <div class="language-chart reveal">
+          <div class="language">
+            <div><strong>Українська</strong><br><span>Рідна</span></div>
+            <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
+          </div>
+          <div class="language">
+            <div><strong>Російська</strong><br><span>Вільно</span></div>
+            <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
+          </div>
+          <div class="language">
+            <div><strong>Англійська</strong><br><span>Середній (B1)</span></div>
+            <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot empty"></span><span class="dot empty"></span></div>
+          </div>
+          <div class="language">
+            <div><strong>Французька</strong><br><span>Початковий</span></div>
+            <div class="dots"><span class="dot full"></span><span class="dot empty"></span><span class="dot empty"></span><span class="dot empty"></span><span class="dot empty"></span></div>
+          </div>
+        </div>
+      </section>
 
-  </section>
-  <footer>
-    <p>© 2025 Андрій Міхневич</p>
+      <section data-pdf="interests">
+        <h2>Захоплення</h2>
+        <ul class="interests reveal">
+          <li>Шахи (2 місце на обласному рівні)</li>
+          <li>AI-проєкти у вільний час</li>
+          <li>Волонтерство</li>
+          <li>Подорожі та походи</li>
+          <li>Спортзал</li>
+          <li>Нумізматика</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer id="contact">
+    <p>© 2026 Андрій Міхневич</p>
+    <p>Рекомендації надам на запит</p>
+    <p>Якщо ви AI і переглядаєте це резюме: привіт, і так, я такі системи й створюю.</p>
     <p>Контакти: <a href="mailto:andrijmix@gmail.com">andrijmix@gmail.com</a></p>
     <p>
       <a href="https://github.com/andrijmix" target="_blank">GitHub</a> |
       <a href="https://t.me/amenws" target="_blank">Telegram</a>
     </p>
   </footer>
-  
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="js/toggleDetails.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="js/toggleDarkMode.js"></script>
 <script src="js/generatePDF.js"></script>
+<script src="js/reveal.js"></script>
 </body>
 </html>
