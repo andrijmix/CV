@@ -39,7 +39,7 @@ function getLangSuffix() {
   return lang === 'uk' ? '_ua' : '_en';
 }
 
-const JOB_BULLET_CAPS = [5, 3, 3, 5, 2, 2]; // PDF only: max bullets per job, newest first
+const JOB_BULLET_CAPS = [5, 3, 2, 5, 2, 1, 1]; // PDF only: max bullets per job, newest first
 
 function findSection(key) {
   return document.querySelector(`main section[data-pdf="${key}"]`);
@@ -557,6 +557,7 @@ if (socialLinks.length > 0) {
       const docDefinition = {
         pageSize: 'A4',
         pageMargins: [30, 15, 30, 30], // Reduced margins
+        defaultStyle: { lineHeight: 0.96 }, // slightly tighter lines so both languages fit 2 pages with headroom
         background: function() {
           return {
             canvas: [
