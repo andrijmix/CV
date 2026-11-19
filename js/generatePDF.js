@@ -138,7 +138,7 @@ function createJobEntries(detailsElement) {
     let datePart = '';
     let locationPart = '';
     if (dateLocation) {
-      const parts = dateLocation.replace('📅', '').split('📍').map(s => s.trim());
+      const parts = dateLocation.split('·').map(s => s.trim());
       datePart = parts[0] || '';
       locationPart = parts[1] || '';
     }
@@ -463,7 +463,7 @@ function generatePDF(openInNewTab = false) {
             .map(s => {
               // Use the final value, not the (possibly mid-animation) displayed number
               const num = s.querySelector('.num');
-              const value = num?.dataset.count ? num.dataset.count + (num.dataset.suffix || '') : (num?.innerText || '');
+              const value = num?.dataset.count ? (num.dataset.prefix || '') + num.dataset.count + (num.dataset.suffix || '') : (num?.innerText || '');
               return `${value} ${s.querySelector('.label')?.innerText || ''}`.trim();
             })
             .join('  ·  ')

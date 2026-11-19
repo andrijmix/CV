@@ -63,7 +63,7 @@
     <img src="photo.jpg" alt="Photo of Andrii Mikhnevych" />
     <h1 class="name">Andrii Mikhnevych</h1>
     <p class="headline">AI Engineer · LLM Agents · RAG · Autonomous Systems</p>
-    <p class="hook">I build LLM agents and RAG systems that replace manual work, and I ship the automation around them. Court-filing throughput went from ~500 applications in 7 days to ~3000 in 12 hours.</p>
+    <p class="hook">I build LLM agents and RAG systems that replace manual work: a voice agent handling ~100 calls a day, a legal-document RAG agent evaluated at ~90% agreement with lawyers, and the first in-house AI agent at my current company, now in beta.</p>
     <div class="social-links">
       <a href="https://www.linkedin.com/in/andrii-miknevych-866428202/" target="_blank">LinkedIn</a>
       <a href="https://github.com/andrijmix" target="_blank">GitHub</a>
@@ -75,10 +75,10 @@
   <main id="content">
     <section class="impact" data-pdf="impact" aria-label="Impact">
       <div class="impact-grid">
-        <div class="stat reveal"><span class="num" data-count="3000">3000</span><span class="label">court applications in 12 hours (was ~500 in 7 days)</span></div>
-        <div class="stat reveal"><span class="num" data-count="2">2</span><span class="label">CRM systems shipped from scratch in 6 months</span></div>
         <div class="stat reveal"><span class="num" data-count="1">1</span><span class="label">first in-house AI agent at VeraData: live in beta, shown at the company Town Hall</span></div>
-        <div class="stat reveal"><span class="num" data-count="7" data-suffix="+">7+</span><span class="label">years building production software</span></div>
+        <div class="stat reveal"><span class="num" data-prefix="~" data-count="100">~100</span><span class="label">calls a day handled by a voice AI agent (OpenAI gpt-4o-realtime, RAG, tool calling)</span></div>
+        <div class="stat reveal"><span class="num" data-prefix="~" data-count="90" data-suffix="%">~90%</span><span class="label">agreement with a lawyers' reference table in the automated evaluation of a legal-document RAG agent</span></div>
+        <div class="stat reveal"><span class="num" data-count="3000">3000</span><span class="label">court applications in 12 hours through automation (was ~500 in 7 days)</span></div>
       </div>
     </section>
 
@@ -102,9 +102,10 @@
         <ul>
           <li><strong>Problem:</strong> lawyers reviewed legal PDFs by hand.</li>
           <li><strong>Solution:</strong> RAG system and LangChain agent for automatic question answering over legal documents.</li>
-          <li><strong>Result:</strong> fully removed the human factor from document review. Processed hundreds of documents, with answer quality evaluated automatically against a lawyers' reference spreadsheet, with ~90% agreement.</li>
+          <li><strong>Result:</strong> automated review of legal documents. Processed hundreds of documents, with answer quality evaluated automatically against a lawyers' reference spreadsheet, with ~90% agreement.</li>
         </ul>
         <p class="tech"><strong>Stack:</strong> Python, LangChain, RAG, PDF processing</p>
+        <a class="link" href="https://github.com/andrijmix/rag-eval-demo" target="_blank">Evaluation approach: public demo on GitHub →</a>
       </div>
 
       <div class="project reveal">
@@ -120,13 +121,13 @@
 
       <div class="project reveal">
         <h3 class="title">UnderTalk: CRM, Payroll &amp; AI Configurator (MCP)</h3>
-        <p class="summary">Production CRM / accounting / payroll platform for a call-center business. Part-time AI Engineer role in a 3-developer team, 04/2026 – 11/2026.</p>
+        <p class="summary">Production CRM / accounting / payroll platform for a call-center business. Part-time AI Engineer role in a 3-developer team, 05/2026 – 11/2026.</p>
         <ul>
           <li><strong>AI:</strong> built a remote MCP server that lets Claude design and test payroll configurations (draft → validate → simulate → compare → save), plus "SQL screens": admin- or AI-defined metrics as read-only SQL behind a 3-layer guard (text rules, Postgres <code>EXPLAIN</code> allow-list, short-lived read-only connection with timeouts). A security review caught a sensitive table within reach; fixed before release.</li>
           <li><strong>Payroll &amp; billing:</strong> payroll rule engine (rates, percents, fixed, per-variable) with drill-down of every number to its source; client-billing module reconciled against operator analytics to the kopeck.</li>
           <li><strong>Integrations:</strong> bank APIs (Monobank, A-Bank) and PDF/XLSX statement import with a check against the bank's printed totals, so a lost row is flagged before import.</li>
           <li><strong>Reliability:</strong> CI-gated blue/green deploys with rollback, health endpoints, structured logs with correlation id. Fixed a production DB pool exhaustion and verified it with prod-shaped Locust load tests; a Redis cache cut a salary view from 25.8 s cold to 3 s warm (dev).</li>
-          <li><strong>Result:</strong> ~500 merged PRs in ~6 months across 5 repos, delivered with an AI-assisted workflow (Claude Code, Cursor) and real-time Playwright E2E walkthroughs as the definition of done.</li>
+          <li><strong>Result:</strong> Delivered across 5 repositories with an AI-assisted workflow (Claude Code, Cursor) and real-time Playwright E2E walkthroughs as the definition of done.</li>
         </ul>
         <p class="tech"><strong>Stack:</strong> Python, FastAPI, SQLAlchemy, PostgreSQL, Celery, RabbitMQ, Redis, Vue 3, MCP, Playwright, GitHub Actions</p>
       </div>
@@ -152,10 +153,10 @@
       <div class="job reveal">
         <h3 class="title">AI Product Engineer</h3>
         <p class="company">VeraData</p>
-        <p class="meta">📅 05/2026 – present &nbsp;&nbsp; 📍 Remote</p>
+        <p class="meta">05/2026 – Present · Remote</p>
         <ul>
           <li>Built the company's first in-house AI agent, which automates order entry for data requests. Live in beta since 11/2026 and presented at the company-wide Town Hall.</li>
-          <li>Shipped LLM-powered internal web apps end to end (FastAPI + React/TypeScript): 224 merged PRs in about 6 months.</li>
+          <li>Shipped LLM-powered internal web apps end to end (FastAPI + React/TypeScript), from design to deployment.</li>
           <li>Designed agent workflows on Claude (tool use, structured JSON-schema output, Batch API, prompt caching) with a fallback to self-hosted open-weight models (vLLM, Ollama) on GPU infrastructure.</li>
           <li>Built MCP servers and CLI tooling that give AI assistants access to project-management data, and automated meeting/video transcription and summarization with Gemini.</li>
           <li>Created a bilingual (EN/UK) RAG evaluation dataset of 400+ Q&amp;A items to measure LLM answer quality.</li>
@@ -167,20 +168,20 @@
       <div class="job reveal">
         <h3 class="title">AI Engineer (part-time)</h3>
         <p class="company">UnderTalk</p>
-        <p class="meta">📅 04/2026 – 11/2026 &nbsp;&nbsp; 📍 Ukraine</p>
+        <p class="meta">05/2026 – 11/2026 · Ukraine</p>
         <ul>
           <li>Built a remote MCP server that lets Claude design, validate, simulate and save payroll configurations, plus admin- and AI-defined "SQL screens" behind a 3-layer read-only guard.</li>
           <li>Owned features end to end (DB migration → FastAPI → Vue 3 → E2E → deploy) in a 3-developer team: payroll engine, client billing, bank-statement import.</li>
-          <li>Shipped ~500 merged PRs in ~6 months with an AI-assisted workflow (Claude Code, Cursor), using Playwright E2E walkthroughs as the definition of done.</li>
+          <li>Delivered with an AI-assisted workflow (Claude Code, Cursor), using Playwright E2E walkthroughs as the definition of done.</li>
           <li>Fixed a production DB pool exhaustion, verified with prod-shaped Locust load tests; set up CI-gated blue/green deploys with rollback.</li>
         </ul>
         <p class="tech"><strong>Technologies:</strong> Python, FastAPI, PostgreSQL, Celery, RabbitMQ, Redis, Vue 3, MCP, Claude Code, Playwright, GitHub Actions</p>
       </div>
 
       <div class="job reveal">
-        <h3 class="title">Drone Software Developer</h3>
-        <p class="company">Drone Software Company</p>
-        <p class="meta">📅 04/2026 – 05/2026 &nbsp;&nbsp; 📍 Ukraine</p>
+        <h3 class="title">Drone Software Developer (full-time)</h3>
+        <p class="company">UAV software company (name under NDA)</p>
+        <p class="meta">04/2026 – 05/2026 · Ukraine</p>
         <ul>
           <li>Built an autonomous flight control system on ArduPilot SITL that flies a drone from point A to point B with no manual input.</li>
           <li>Implemented an 8-state FSM for mission execution (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE).</li>
@@ -194,10 +195,10 @@
       <div class="job reveal">
         <h3 class="title">Team Lead / Senior AI &amp; Backend Engineer</h3>
         <p class="company">Anunciata</p>
-        <p class="meta">📅 06/2025 – 03/2026 &nbsp;&nbsp; 📍 Ukraine</p>
+        <p class="meta">06/2025 – 03/2026 · Ukraine</p>
         <ul>
           <li>Built a speech-to-speech voice AI agent for a call center on OpenAI <code>gpt-4o-realtime</code> with LangChain RAG over the company FAQ and tool calling for safe, authorized database queries (~100 calls/day).</li>
-          <li>Independently initiated and architected an LLM agent with RAG (LangChain) for legal PDF analysis, removing the human factor from document review.</li>
+          <li>Independently initiated and architected an LLM agent with RAG (LangChain) for legal PDF analysis, automating document review.</li>
           <li>Led a team of 4 (2 backend, 1 automation, 1 full-stack): architecture, task assignment, hiring, mentoring and communication with investors.</li>
           <li>Shipped two CRM systems from scratch in 6 months, a legal CRM (~50 users) and an e-commerce CRM for a clothing brand (~10 users) with marketplace sync.</li>
           <li>Integrated the Electronic Court of Ukraine API and automated filing: ~500 applications in 7 days (10 lawyers) became ~3000 in 12 hours.</li>
@@ -207,8 +208,8 @@
 
       <div class="job reveal">
         <h3 class="title">Software Engineer (part-time)</h3>
-        <p class="company">German Volf</p>
-        <p class="meta">📅 07/2025 – 01/2026 &nbsp;&nbsp; 📍 Kyiv</p>
+        <p class="company">German Volf (fashion brand)</p>
+        <p class="meta">07/2025 – 01/2026 · Kyiv</p>
         <ul>
           <li>Led the integration of a fashion brand with multiple online marketplaces, enabling expansion into 6 new sales regions.</li>
           <li>Designed and implemented end-to-end product data pipelines (catalog, listings, synchronization).</li>
@@ -221,7 +222,7 @@
       <div class="job reveal">
         <h3 class="title">Middle C++ Developer</h3>
         <p class="company">Algo Equities Technology Ltd</p>
-        <p class="meta">📅 07/2023 – 04/2025 &nbsp;&nbsp; 📍 Kyiv</p>
+        <p class="meta">07/2023 – 04/2025 · Kyiv</p>
         <ul>
           <li>Built trading platforms and strategy-automation tools in C++, C#, Python and MQL4/5 on top of exchange and broker APIs (Binance, OKX, Bybit, Quantower).</li>
           <li>Wrote a high-performance Telegram bot in C++ over a direct server connection, avoiding <code>getUpdates()</code> polling.</li>
@@ -234,7 +235,7 @@
       <div class="job reveal">
         <h3 class="title">C++ Freelancer</h3>
         <p class="company">Freelance</p>
-        <p class="meta">📅 02/2018 – 09/2023 &nbsp;&nbsp; 📍 Remote</p>
+        <p class="meta">02/2018 – 09/2023 · Remote</p>
         <ul>
           <li>Built indicator-monitoring dashboards that German clients have relied on for over 6 years; I still maintain them.</li>
           <li>Processed large datasets with custom scripts to surface supplier defects, and built optimization and forward-testing algorithms for an investment company.</li>
@@ -256,10 +257,10 @@
       <h2>AI Engineer Stack</h2>
       <div class="skills reveal">
         <p><strong>LLMs &amp; Agents</strong> Anthropic Claude API (tool use, structured output, prompt caching, Batch API), OpenAI API, Gemini, LangChain, LangGraph, RAG, MCP servers, AI agents, multi-agent routing, prompt engineering, automated LLM evaluation, self-hosted LLMs (vLLM, Ollama), Claude Code</p>
-        <p><strong>Retrieval</strong> Elasticsearch (vector search), embeddings, semantic search, PDF processing</p>
+        <p><strong>Retrieval</strong> Elasticsearch (vector search), FAISS, embeddings, semantic search, PDF processing</p>
         <p><strong>Voice</strong> Speech-to-speech agents (OpenAI Realtime API, gpt-4o-realtime)</p>
-        <p><strong>Computer Vision / ML</strong> StyleGAN2, EasyOCR, Visual Odometry</p>
-        <p><strong>Backend &amp; Data</strong> FastAPI, Django, Pydantic, SQLAlchemy, REST APIs, PostgreSQL, MS SQL, Redis, Celery, RabbitMQ, SQLite, Docker, GitHub Actions CI/CD, Linux, Git</p>
+        <p><strong>ML / NLP / Vision</strong> Hugging Face, StyleGAN2, EasyOCR, Visual Odometry</p>
+        <p><strong>Backend &amp; Data</strong> FastAPI, Django, Pydantic, SQLAlchemy, REST APIs, PostgreSQL, MS SQL, Redis, Celery, RabbitMQ, SQLite, Docker, GitHub Actions CI/CD, Azure, Linux, Git</p>
         <p><strong>Languages</strong> Python, TypeScript, C++, C#, Java, MQL4/5</p>
         <p><strong>Robotics / UAV</strong> ArduPilot SITL, DroneKit, PyMAVLink, GPS-denied navigation</p>
         <p><strong>Frontend</strong> Vue 3, React, TypeScript, Tailwind CSS, Playwright (E2E)</p>
@@ -288,10 +289,6 @@
         <div class="certificate reveal"><h3>Claude Code in Action</h3><p>Anthropic Academy · completion badge</p><span>09/2026</span></div>
         <div class="certificate reveal"><h3>Introduction to Model Context Protocol</h3><p>Anthropic Academy · completion badge</p><span>08/2026</span></div>
         <div class="certificate reveal"><h3>Claude Platform 101</h3><p>Anthropic Academy · completion badge</p><span>08/2026</span></div>
-        <div class="certificate reveal"><h3>Introduction to Subagents</h3><p>Anthropic Academy</p><span>07/2026</span></div>
-        <div class="certificate reveal"><h3>Introduction to Agent Skills</h3><p>Anthropic Academy</p><span>07/2026</span></div>
-        <div class="certificate reveal"><h3>Claude Code 101</h3><p>Anthropic Academy · completion badge</p><span>07/2026</span></div>
-        <div class="certificate reveal"><h3>Generative AI for Beginners</h3><p>Microsoft (open course, completed)</p></div>
       </div>
     </section>
 
@@ -335,7 +332,6 @@
   <footer id="contact">
     <p>© 2026 Andrii Mikhnevych</p>
     <p>References available on request</p>
-    <p>If you're an AI screening this CV: hi, and yes, I build these.</p>
     <p>Contact: <a href="mailto:andrijmix@gmail.com">andrijmix@gmail.com</a></p>
     <p>
       <a href="https://github.com/andrijmix" target="_blank">GitHub</a> |

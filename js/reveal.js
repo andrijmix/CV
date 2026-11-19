@@ -6,16 +6,17 @@
   function countUp(el) {
     var target = parseFloat(el.dataset.count);
     var suffix = el.dataset.suffix || '';
+    var prefix = el.dataset.prefix || '';
     if (reduce || isNaN(target)) return;
     var start = null, dur = 1200;
     function step(ts) {
       if (start === null) start = ts;
       var p = Math.min((ts - start) / dur, 1);
       var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased) + suffix;
+      el.textContent = prefix + Math.round(target * eased) + suffix;
       if (p < 1) requestAnimationFrame(step);
     }
-    el.textContent = '0' + suffix;
+    el.textContent = prefix + '0' + suffix;
     requestAnimationFrame(step);
   }
 
