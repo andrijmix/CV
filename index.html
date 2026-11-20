@@ -64,7 +64,7 @@
     <img src="photo.jpg" alt="Фото Андрія Міхневича" />
     <h1 class="name">Андрій Міхневич</h1>
     <p class="headline">AI Engineer · LLM-агенти · RAG · Автономні системи</p>
-    <p class="hook">Створюю LLM-агентів і RAG-системи, які замінюють ручну роботу: голосового агента, що обробляє ~100 дзвінків на день, RAG-агента для юридичних документів із ~90% збігом з юристами та першого власного AI-агента в моїй поточній компанії, зараз у бета-версії.</p>
+    <p class="hook">Створюю LLM-агентів та AI-інструменти для продакшену: першого власного AI-агента у VeraData (бета), MCP-сервер для конфігурації зарплат під керуванням Claude із 3-шаровим read-only SQL-захистом і голосового speech-to-speech агента, що обробляє ~100 дзвінків на день.</p>
     <div class="social-links">
       <a href="https://www.linkedin.com/in/andrii-miknevych-866428202/" target="_blank">LinkedIn</a>
       <a href="https://github.com/andrijmix" target="_blank">GitHub</a>
@@ -77,9 +77,9 @@
     <section class="impact" data-pdf="impact" aria-label="Результати">
       <div class="impact-grid">
         <div class="stat reveal"><span class="num" data-count="1">1</span><span class="label">перший власний AI-агент у VeraData: бета, показаний на Town Hall компанії</span></div>
+        <div class="stat reveal"><span class="num" data-count="400" data-suffix="+">400+</span><span class="label">пар «питання – відповідь» у двомовному (EN/UK) датасеті для оцінки якості відповідей LLM</span></div>
+        <div class="stat reveal"><span class="num" data-count="3">3</span><span class="label">шари read-only SQL-захисту в MCP-сервері зарплат під керуванням Claude; security-рев'ю виявило чутливу таблицю до релізу</span></div>
         <div class="stat reveal"><span class="num" data-prefix="~" data-count="100">~100</span><span class="label">дзвінків на день обробляє голосовий AI-агент (OpenAI gpt-4o-realtime, RAG, tool calling)</span></div>
-        <div class="stat reveal"><span class="num" data-prefix="~" data-count="90" data-suffix="%">~90%</span><span class="label">збіг з еталонною таблицею юристів в автоматичній оцінці RAG-агента для юридичних документів</span></div>
-        <div class="stat reveal"><span class="num" data-count="3000">3000</span><span class="label">заяв до суду за 12 годин завдяки автоматизації (було ~500 за 7 днів)</span></div>
       </div>
     </section>
 
@@ -87,12 +87,25 @@
       <h2>AI-проєкти</h2>
 
       <div class="project reveal">
+        <h3 class="title">UnderTalk: CRM, зарплати та AI-конфігуратор (MCP)</h3>
+        <p class="summary">Продакшн-платформа CRM / обліку / зарплат для колл-центру. Робота AI Engineer за сумісництвом у команді з 3 розробників, 05/2026 – 11/2026.</p>
+        <ul>
+          <li><strong>AI:</strong> створив віддалений MCP-сервер, через який Claude проєктує й тестує конфігурації зарплат (чернетка → валідація → симуляція → порівняння → збереження), та «SQL-екрани»: метрики, які задають адміни чи AI, як read-only SQL під 3-шаровим захистом (текстові правила, allow-list за планом Postgres <code>EXPLAIN</code>, короткоживуче read-only з'єднання з таймаутами). Security-рев'ю виявило доступну чутливу таблицю; виправлено до релізу.</li>
+          <li><strong>Зарплати та білінг:</strong> рушій правил нарахування (ставки, відсотки, фіксовані, за змінною) з деталізацією кожного числа до джерела; модуль білінгу клієнтів, звірений з аналітикою операторів до копійки.</li>
+          <li><strong>Інтеграції:</strong> банківські API (Monobank, A-Bank) та імпорт PDF/XLSX-виписок з перевіркою за підсумками банку, тож загублений рядок видно ще до імпорту.</li>
+          <li><strong>Надійність:</strong> blue/green-деплой з відкатом під CI-гейтом, health-ендпоінти, структуровані логи з correlation id. Виправив вичерпання пулу з'єднань БД у продакшені та підтвердив Locust-тестами за профілем продакшену; кеш у Redis скоротив екран зарплат з 25,8 с (холодний) до 3 с (прогрітий, dev).</li>
+          <li><strong>Результат:</strong> Реалізовано в 5 репозиторіях з AI-асистованим процесом (Claude Code, Cursor) та Playwright E2E-прогонами в реальному часі як критерієм готовності.</li>
+        </ul>
+        <p class="tech"><strong>Стек:</strong> Python, FastAPI, SQLAlchemy, PostgreSQL, Celery, RabbitMQ, Redis, Vue 3, MCP, Playwright, GitHub Actions</p>
+      </div>
+
+      <div class="project reveal">
         <h3 class="title">Голосовий AI-агент для колл-центру</h3>
         <p class="summary">Автоматично відповідає на дзвінки клієнтів за FAQ компанії. Створений в Anunciata.</p>
         <ul>
           <li><strong>Проблема:</strong> оператори витрачали час на повторювані FAQ-дзвінки.</li>
           <li><strong>Рішення:</strong> speech-to-speech агент на OpenAI <code>gpt-4o-realtime</code>: модель приймає аудіо дзвінка напряму й відповідає голосом, без окремого кроку STT чи TTS. Відповіді спираються на FAQ компанії через RAG на LangChain, а tool calling дає моделі виконувати безпечні запити до бази після авторизації.</li>
-          <li><strong>Результат:</strong> обробляє ~100 дзвінків на день.</li>
+          <li><strong>Результат:</strong> обробляє ~100 дзвінків на день; більшість розмов закривалась без передачі оператору.</li>
         </ul>
         <p class="tech"><strong>Стек:</strong> Python, OpenAI Realtime API (gpt-4o-realtime), LangChain, RAG, tool calling, speech-to-speech</p>
       </div>
@@ -103,7 +116,7 @@
         <ul>
           <li><strong>Проблема:</strong> юристи переглядали юридичні PDF вручну.</li>
           <li><strong>Рішення:</strong> RAG-система та LangChain-агент для автоматичних відповідей на запитання за юридичними документами.</li>
-          <li><strong>Результат:</strong> автоматизовано перевірку юридичних документів. Оброблено сотні документів, якість відповідей оцінювалась автоматично за еталонною таблицею юристів, збіг ~90%.</li>
+          <li><strong>Результат:</strong> автоматизовано перевірку юридичних документів. Оцінено на сотнях документів (~10 питань на документ) порівнянням таблиці агента з ручною таблицею юристів поле за полем: ~90% збігу.</li>
         </ul>
         <p class="tech"><strong>Стек:</strong> Python, LangChain, RAG, обробка PDF</p>
         <a class="link" href="https://github.com/andrijmix/rag-eval-demo" target="_blank">Підхід до оцінки: публічне демо на GitHub →</a>
@@ -121,27 +134,14 @@
       </div>
 
       <div class="project reveal">
-        <h3 class="title">UnderTalk: CRM, зарплати та AI-конфігуратор (MCP)</h3>
-        <p class="summary">Продакшн-платформа CRM / обліку / зарплат для колл-центру. Робота AI Engineer за сумісництвом у команді з 3 розробників, 05/2026 – 11/2026.</p>
-        <ul>
-          <li><strong>AI:</strong> створив віддалений MCP-сервер, через який Claude проєктує й тестує конфігурації зарплат (чернетка → валідація → симуляція → порівняння → збереження), та «SQL-екрани»: метрики, які задають адміни чи AI, як read-only SQL під 3-шаровим захистом (текстові правила, allow-list за планом Postgres <code>EXPLAIN</code>, короткоживуче read-only з'єднання з таймаутами). Security-рев'ю виявило доступну чутливу таблицю; виправлено до релізу.</li>
-          <li><strong>Зарплати та білінг:</strong> рушій правил нарахування (ставки, відсотки, фіксовані, за змінною) з деталізацією кожного числа до джерела; модуль білінгу клієнтів, звірений з аналітикою операторів до копійки.</li>
-          <li><strong>Інтеграції:</strong> банківські API (Monobank, A-Bank) та імпорт PDF/XLSX-виписок з перевіркою за підсумками банку, тож загублений рядок видно ще до імпорту.</li>
-          <li><strong>Надійність:</strong> blue/green-деплой з відкатом під CI-гейтом, health-ендпоінти, структуровані логи з correlation id. Виправив вичерпання пулу з'єднань БД у продакшені та підтвердив Locust-тестами за профілем продакшену; кеш у Redis скоротив екран зарплат з 25,8 с (холодний) до 3 с (прогрітий, dev).</li>
-          <li><strong>Результат:</strong> Реалізовано в 5 репозиторіях з AI-асистованим процесом (Claude Code, Cursor) та Playwright E2E-прогонами в реальному часі як критерієм готовності.</li>
-        </ul>
-        <p class="tech"><strong>Стек:</strong> Python, FastAPI, SQLAlchemy, PostgreSQL, Celery, RabbitMQ, Redis, Vue 3, MCP, Playwright, GitHub Actions</p>
-      </div>
-
-      <div class="project reveal">
         <h3 class="title">Autopilot: автономний політ на Visual Odometry</h3>
-        <p class="summary">Автономність у реальному часі: квадрокоптер виконує повну місію від зльоту до посадки, зокрема без GPS.</p>
+        <p class="summary">Тестове завдання при наймі в компанію з ПЗ для БПЛА, виконане в ArduPilot SITL: квадрокоптер виконує повну місію від зльоту до посадки, з режимом одометрії для польоту без GPS.</p>
         <ul>
           <li><strong>Проблема:</strong> автономно пролетіти з точки А в точку Б там, де GPS недоступний.</li>
-          <li><strong>Рішення:</strong> 8-станова FSM місії, перемикане джерело навігації GPS / одометрія (інтеграція Visual Odometry для польоту без GPS), PI/P-регулятори з компенсацією вітру, телеметрія DroneKit і failsafe-механізми (виявлення втрати GPS, таймаути станів, безпечне переривання).</li>
+          <li><strong>Рішення:</strong> 8-станова FSM місії, перемикане джерело навігації GPS / одометрія (локальна позиція EKF, розраховане на зовнішнє джерело Visual Odometry), PI/P-регулятори з компенсацією вітру, телеметрія DroneKit і failsafe-механізми (виявлення втрати GPS, таймаути станів, безпечне переривання).</li>
           <li><strong>Результат:</strong> повністю автономні місії в ArduPilot SITL, перевірені автоматизованим набором тестів PyTest.</li>
         </ul>
-        <p class="tech"><strong>Стек:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, Visual Odometry, PyTest</p>
+        <p class="tech"><strong>Стек:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, PyTest</p>
         <a class="link" href="https://github.com/andrijmix/Autopilot" target="_blank">Репозиторій на GitHub →</a>
       </div>
 
@@ -152,7 +152,7 @@
       <h2>Досвід</h2>
 
       <div class="job reveal">
-        <h3 class="title">AI Product Engineer</h3>
+        <h3 class="title">AI Product Engineer (контракт)</h3>
         <p class="company">VeraData</p>
         <p class="meta">05/2026 – дотепер · Віддалено</p>
         <ul>
@@ -184,13 +184,9 @@
         <p class="company">Компанія з розробки ПЗ для БПЛА (назва під NDA)</p>
         <p class="meta">04/2026 – 05/2026 · Україна</p>
         <ul>
-          <li>Створив систему автономного керування польотом на ArduPilot SITL, що веде дрон з точки А в точку Б без ручного керування.</li>
-          <li>Реалізував 8-станову FSM для виконання місії (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE).</li>
-          <li>Написав інтеграцію Visual Odometry та режим навігації за одометрією (локальна позиція EKF) для польоту без GPS, а також failsafe-механізми: виявлення втрати GPS і безпечне переривання.</li>
-          <li>Спроєктував PI/P-регулятори висоти, курсу та бокового руху з корекцією вітру; інтегрував телеметрію DroneKit і RC override.</li>
-          <li>Рефакторив код у модулі, задокументував його та написав автоматизований набір тестів PyTest для валідації місій.</li>
+          <li>Вивчив прод-код системи керування польотом БПЛА-продукту та написав до нього технічну документацію.</li>
+          <li>Покращив систему утримання позиції (зависання) дрона в повітрі, зокрема інтеграцію Visual Odometry.</li>
         </ul>
-        <p class="tech"><strong>Технології:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, Visual Odometry, PyTest</p>
       </div>
 
       <div class="job reveal">
@@ -234,7 +230,7 @@
       </div>
 
       <div class="job reveal">
-        <h3 class="title">C++ Freelancer</h3>
+        <h3 class="title">C++ Freelancer (паралельно з іншими ролями)</h3>
         <p class="company">Фріланс</p>
         <p class="meta">02/2018 – 06/2025 · Віддалено</p>
         <ul>
@@ -282,14 +278,9 @@
         <h3>Медична освіта – Дубенський медичний коледж</h3>
         <span>2015 – 2018</span>
       </div>
-    </section>
-
-    <section id="courses" data-pdf="certificates">
-      <h2>Курси та сертифікати</h2>
-      <div class="certificates">
-        <div class="certificate reveal"><h3>Claude Code in Action</h3><p>Anthropic Academy · значок про завершення</p><span>09/2026</span></div>
-        <div class="certificate reveal"><h3>Introduction to Model Context Protocol</h3><p>Anthropic Academy · значок про завершення</p><span>08/2026</span></div>
-        <div class="certificate reveal"><h3>Claude Platform 101</h3><p>Anthropic Academy · значок про завершення</p><span>08/2026</span></div>
+      <div class="education reveal">
+        <h3>Anthropic Academy: Claude Code in Action, Model Context Protocol, Claude Platform 101</h3>
+        <span>2026</span>
       </div>
     </section>
 
@@ -306,7 +297,7 @@
             <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
           </div>
           <div class="language">
-            <div><strong>Англійська</strong><br><span>Середній (B1)</span></div>
+            <div><strong>Англійська</strong><br><span>Середній (B1); щодня на роботі: мітинги та листування</span></div>
             <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot empty"></span><span class="dot empty"></span></div>
           </div>
           <div class="language">

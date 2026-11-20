@@ -63,7 +63,7 @@
     <img src="photo.jpg" alt="Photo of Andrii Mikhnevych" />
     <h1 class="name">Andrii Mikhnevych</h1>
     <p class="headline">AI Engineer · LLM Agents · RAG · Autonomous Systems</p>
-    <p class="hook">I build LLM agents and RAG systems that replace manual work: a voice agent handling ~100 calls a day, a legal-document RAG agent evaluated at ~90% agreement with lawyers, and the first in-house AI agent at my current company, now in beta.</p>
+    <p class="hook">I build LLM agents and AI tooling for production: the first in-house AI agent at VeraData (live in beta), a Claude-driven MCP server for payroll configuration behind a 3-layer read-only SQL guard, and a speech-to-speech voice agent handling ~100 calls a day.</p>
     <div class="social-links">
       <a href="https://www.linkedin.com/in/andrii-miknevych-866428202/" target="_blank">LinkedIn</a>
       <a href="https://github.com/andrijmix" target="_blank">GitHub</a>
@@ -76,9 +76,9 @@
     <section class="impact" data-pdf="impact" aria-label="Impact">
       <div class="impact-grid">
         <div class="stat reveal"><span class="num" data-count="1">1</span><span class="label">first in-house AI agent at VeraData: live in beta, shown at the company Town Hall</span></div>
+        <div class="stat reveal"><span class="num" data-count="400" data-suffix="+">400+</span><span class="label">item bilingual (EN/UK) evaluation dataset built to measure LLM answer quality</span></div>
+        <div class="stat reveal"><span class="num" data-count="3">3</span><span class="label">layers in the read-only SQL guard of a Claude-driven MCP payroll server; a security review caught a sensitive table before release</span></div>
         <div class="stat reveal"><span class="num" data-prefix="~" data-count="100">~100</span><span class="label">calls a day handled by a voice AI agent (OpenAI gpt-4o-realtime, RAG, tool calling)</span></div>
-        <div class="stat reveal"><span class="num" data-prefix="~" data-count="90" data-suffix="%">~90%</span><span class="label">agreement with a lawyers' reference table in the automated evaluation of a legal-document RAG agent</span></div>
-        <div class="stat reveal"><span class="num" data-count="3000">3000</span><span class="label">court applications in 12 hours through automation (was ~500 in 7 days)</span></div>
       </div>
     </section>
 
@@ -86,12 +86,25 @@
       <h2>AI Projects</h2>
 
       <div class="project reveal">
+        <h3 class="title">UnderTalk: CRM, Payroll &amp; AI Configurator (MCP)</h3>
+        <p class="summary">Production CRM / accounting / payroll platform for a call-center business. Part-time AI Engineer role in a 3-developer team, 05/2026 – 11/2026.</p>
+        <ul>
+          <li><strong>AI:</strong> built a remote MCP server that lets Claude design and test payroll configurations (draft → validate → simulate → compare → save), plus "SQL screens": admin- or AI-defined metrics as read-only SQL behind a 3-layer guard (text rules, Postgres <code>EXPLAIN</code> allow-list, short-lived read-only connection with timeouts). A security review caught a sensitive table within reach; fixed before release.</li>
+          <li><strong>Payroll &amp; billing:</strong> payroll rule engine (rates, percents, fixed, per-variable) with drill-down of every number to its source; client-billing module reconciled against operator analytics to the kopeck.</li>
+          <li><strong>Integrations:</strong> bank APIs (Monobank, A-Bank) and PDF/XLSX statement import with a check against the bank's printed totals, so a lost row is flagged before import.</li>
+          <li><strong>Reliability:</strong> CI-gated blue/green deploys with rollback, health endpoints, structured logs with correlation id. Fixed a production DB pool exhaustion and verified it with prod-shaped Locust load tests; a Redis cache cut a salary view from 25.8 s cold to 3 s warm (dev).</li>
+          <li><strong>Result:</strong> Delivered across 5 repositories with an AI-assisted workflow (Claude Code, Cursor) and real-time Playwright E2E walkthroughs as the definition of done.</li>
+        </ul>
+        <p class="tech"><strong>Stack:</strong> Python, FastAPI, SQLAlchemy, PostgreSQL, Celery, RabbitMQ, Redis, Vue 3, MCP, Playwright, GitHub Actions</p>
+      </div>
+
+      <div class="project reveal">
         <h3 class="title">Voice AI Agent for a Call Center</h3>
         <p class="summary">Answers client calls automatically using the company FAQ. Built at Anunciata.</p>
         <ul>
           <li><strong>Problem:</strong> operators spent their time on repetitive FAQ calls.</li>
           <li><strong>Solution:</strong> speech-to-speech agent on OpenAI <code>gpt-4o-realtime</code>: the model takes call audio directly and answers in voice with no separate STT or TTS step. Answers are grounded in the company FAQ through a LangChain RAG layer, and tool calling lets the model run safe database queries after authorization.</li>
-          <li><strong>Result:</strong> handles ~100 calls/day.</li>
+          <li><strong>Result:</strong> handles ~100 calls/day; most calls were resolved without handing off to an operator.</li>
         </ul>
         <p class="tech"><strong>Stack:</strong> Python, OpenAI Realtime API (gpt-4o-realtime), LangChain, RAG, tool calling, speech-to-speech</p>
       </div>
@@ -102,7 +115,7 @@
         <ul>
           <li><strong>Problem:</strong> lawyers reviewed legal PDFs by hand.</li>
           <li><strong>Solution:</strong> RAG system and LangChain agent for automatic question answering over legal documents.</li>
-          <li><strong>Result:</strong> automated review of legal documents. Processed hundreds of documents, with answer quality evaluated automatically against a lawyers' reference spreadsheet, with ~90% agreement.</li>
+          <li><strong>Result:</strong> automated review of legal documents. Evaluated over hundreds of documents (~10 questions each) by comparing the agent's table field by field with the lawyers' manual table: ~90% agreement.</li>
         </ul>
         <p class="tech"><strong>Stack:</strong> Python, LangChain, RAG, PDF processing</p>
         <a class="link" href="https://github.com/andrijmix/rag-eval-demo" target="_blank">Evaluation approach: public demo on GitHub →</a>
@@ -120,27 +133,14 @@
       </div>
 
       <div class="project reveal">
-        <h3 class="title">UnderTalk: CRM, Payroll &amp; AI Configurator (MCP)</h3>
-        <p class="summary">Production CRM / accounting / payroll platform for a call-center business. Part-time AI Engineer role in a 3-developer team, 05/2026 – 11/2026.</p>
-        <ul>
-          <li><strong>AI:</strong> built a remote MCP server that lets Claude design and test payroll configurations (draft → validate → simulate → compare → save), plus "SQL screens": admin- or AI-defined metrics as read-only SQL behind a 3-layer guard (text rules, Postgres <code>EXPLAIN</code> allow-list, short-lived read-only connection with timeouts). A security review caught a sensitive table within reach; fixed before release.</li>
-          <li><strong>Payroll &amp; billing:</strong> payroll rule engine (rates, percents, fixed, per-variable) with drill-down of every number to its source; client-billing module reconciled against operator analytics to the kopeck.</li>
-          <li><strong>Integrations:</strong> bank APIs (Monobank, A-Bank) and PDF/XLSX statement import with a check against the bank's printed totals, so a lost row is flagged before import.</li>
-          <li><strong>Reliability:</strong> CI-gated blue/green deploys with rollback, health endpoints, structured logs with correlation id. Fixed a production DB pool exhaustion and verified it with prod-shaped Locust load tests; a Redis cache cut a salary view from 25.8 s cold to 3 s warm (dev).</li>
-          <li><strong>Result:</strong> Delivered across 5 repositories with an AI-assisted workflow (Claude Code, Cursor) and real-time Playwright E2E walkthroughs as the definition of done.</li>
-        </ul>
-        <p class="tech"><strong>Stack:</strong> Python, FastAPI, SQLAlchemy, PostgreSQL, Celery, RabbitMQ, Redis, Vue 3, MCP, Playwright, GitHub Actions</p>
-      </div>
-
-      <div class="project reveal">
         <h3 class="title">Autopilot: Autonomous Flight with Visual Odometry</h3>
-        <p class="summary">Real-time autonomy: a quadcopter flies a full mission from takeoff to landing, including without GPS.</p>
+        <p class="summary">Hiring test assignment for a UAV software company, built in ArduPilot SITL: a quadcopter flies a full mission from takeoff to landing, with an odometry mode for GPS-denied flight.</p>
         <ul>
           <li><strong>Problem:</strong> fly autonomously from point A to point B where GPS is unavailable.</li>
-          <li><strong>Solution:</strong> 8-state mission FSM, a switchable GPS / odometry navigation source (Visual Odometry integration for GPS-denied flight), PI/P controllers with wind compensation, DroneKit telemetry and failsafes (GPS-loss detection, state timeouts, graceful abort).</li>
+          <li><strong>Solution:</strong> 8-state mission FSM, a switchable GPS / odometry navigation source (EKF local position, built for use with an external Visual Odometry source), PI/P controllers with wind compensation, DroneKit telemetry and failsafes (GPS-loss detection, state timeouts, graceful abort).</li>
           <li><strong>Result:</strong> fully autonomous missions in ArduPilot SITL, verified with an automated PyTest suite.</li>
         </ul>
-        <p class="tech"><strong>Stack:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, Visual Odometry, PyTest</p>
+        <p class="tech"><strong>Stack:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, PyTest</p>
         <a class="link" href="https://github.com/andrijmix/Autopilot" target="_blank">GitHub repository →</a>
       </div>
 
@@ -151,7 +151,7 @@
       <h2>Experience</h2>
 
       <div class="job reveal">
-        <h3 class="title">AI Product Engineer</h3>
+        <h3 class="title">AI Product Engineer (contract)</h3>
         <p class="company">VeraData</p>
         <p class="meta">05/2026 – Present · Remote</p>
         <ul>
@@ -183,13 +183,9 @@
         <p class="company">UAV software company (name under NDA)</p>
         <p class="meta">04/2026 – 05/2026 · Ukraine</p>
         <ul>
-          <li>Built an autonomous flight control system on ArduPilot SITL that flies a drone from point A to point B with no manual input.</li>
-          <li>Implemented an 8-state FSM for mission execution (INIT → READY → TAKEOFF → ENROUTE → APPROACH → LANDING → COMPLETE).</li>
-          <li>Wrote the Visual Odometry integration and an odometry navigation mode (EKF local position) for GPS-denied flight, plus failsafes: GPS-loss detection and graceful abort.</li>
-          <li>Designed PI/P controllers for altitude, heading and lateral movement with wind correction; integrated DroneKit telemetry and RC override.</li>
-          <li>Refactored the codebase into modules, documented it, and wrote an automated PyTest suite for mission validation.</li>
+          <li>Studied the production flight-control codebase of a UAV product and wrote its technical documentation.</li>
+          <li>Improved the position-hold (in-air hover) system of the drone, including a Visual Odometry integration.</li>
         </ul>
-        <p class="tech"><strong>Technologies:</strong> Python, ArduPilot SITL, DroneKit, PyMAVLink, Visual Odometry, PyTest</p>
       </div>
 
       <div class="job reveal">
@@ -233,7 +229,7 @@
       </div>
 
       <div class="job reveal">
-        <h3 class="title">C++ Freelancer</h3>
+        <h3 class="title">C++ Freelancer (concurrent with other roles)</h3>
         <p class="company">Freelance</p>
         <p class="meta">02/2018 – 06/2025 · Remote</p>
         <ul>
@@ -281,14 +277,9 @@
         <h3>Medical Education – Dubno Medical College</h3>
         <span>2015 – 2018</span>
       </div>
-    </section>
-
-    <section id="courses" data-pdf="certificates">
-      <h2>Courses &amp; Certifications</h2>
-      <div class="certificates">
-        <div class="certificate reveal"><h3>Claude Code in Action</h3><p>Anthropic Academy · completion badge</p><span>09/2026</span></div>
-        <div class="certificate reveal"><h3>Introduction to Model Context Protocol</h3><p>Anthropic Academy · completion badge</p><span>08/2026</span></div>
-        <div class="certificate reveal"><h3>Claude Platform 101</h3><p>Anthropic Academy · completion badge</p><span>08/2026</span></div>
+      <div class="education reveal">
+        <h3>Anthropic Academy: Claude Code in Action, Model Context Protocol, Claude Platform 101</h3>
+        <span>2026</span>
       </div>
     </section>
 
@@ -305,7 +296,7 @@
             <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
           </div>
           <div class="language">
-            <div><strong>English</strong><br><span>Intermediate (B1)</span></div>
+            <div><strong>English</strong><br><span>Intermediate (B1); daily work use: meetings and written communication</span></div>
             <div class="dots"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot empty"></span><span class="dot empty"></span></div>
           </div>
           <div class="language">
